@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4> {{'Projects' | translate}}</h4>
+    </div>
+    <div class="p-2">
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'project'"></app-newObjDialog>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProjects()">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="centre tdunder">Type</th>
+            <th class="centre tdunder">Client
+            </th>
+            <th class="centre tdunder">Nom
+              <!-- <i (click)="orderBy('details.name')" *ngIf="search.orderBy  !== 'details.name' && search.orderBy  !== '-details.name'" class="fa fa-arrow-down grey"></i>
+              <i (click)="orderBy('-details.name')" *ngIf="search.orderBy  === 'details.name'" class="fa fa-arrow-down"></i>
+              <i (click)="orderBy('details.name')" *ngIf="search.orderBy  === '-details.name'" class="fa fa-arrow-up"></i> -->
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.name'"></app-sort>
+            </th>
+            <th class="centre tdunder">Date
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
+            </th>
+            <!-- <th class="centre tdunder">Statut</th> -->
+          </tr>
+        </thead>
+        <tbody class="clienttbl">
+          <tr *ngFor="let project of fetchedProjects" [routerLink]="['/project/' + project._id]" routerLinkActive="active">
+            <td class="centre tdunder">
+              <div *ngFor="let categ0Single of project.categorie.categ0">
+                {{categ0Single.name}}
+              </div>
+            </td>
+            <td class="centre tdunder">
+              <div *ngFor="let client of project.clients">
+                {{client.profile.lastName}} {{client.profile.name}}
+              </div>
+            </td>
+            <td class="centre tdunder">
+              {{project.details.name}}
+            </td>
+            <td class="centre tdunder">
+              {{project.createdAt| date:'dd-MM-yyyy' }}
+            </td>
+            <td class="centre tdunder">{{project.details.date}}</td>
+            <!-- <td class="centre tdunder">{{project.status}}</td> -->
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
+    </div>
+  </div>
+</div>

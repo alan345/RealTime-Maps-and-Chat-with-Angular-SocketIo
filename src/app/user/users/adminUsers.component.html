@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4 *ngIf="search.isExternalUser"> {{'Customers' | translate}}</h4>
+      <h4 *ngIf="!search.isExternalUser"> {{'Team' | translate}}</h4>
+    </div>
+    <div class="p-2">
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'user'"></app-newObjDialog>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="centre tdunder">Type</th>
+            <th class="centre tdunder">Titre
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.title'"></app-sort>
+            </th>
+            <th class="centre tdunder">
+              Nom
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.lastName'"></app-sort>
+            </th>
+            <th class="centre tdunder">
+              Société
+            </th>
+            <th class="centre tdunder">Ville
+
+            </th>
+            <th class="centre tdunder">Téléphone
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.phoneNumber'"></app-sort>
+            </th>
+            <th class="centre tdunder">Date
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="clienttbl">
+          <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+            <td class="centre tdunder">
+              {{user.profile.typeClient}}
+              <div *ngFor="let singleType of user.typeUsers">
+                {{singleType}}
+              </div>
+            </td>
+            <td class="centre tdunder">{{user.profile.title}}</td>
+            <td class="centre tdunder">{{user.profile.lastName}} {{user.profile.name}}</td>
+
+
+            <td class="centre tdunder">
+              <div *ngFor="let companie of user.ownerCompanies">
+                {{companie.nameCompanie}}
+              </div>
+            </td>
+            <td class="centre tdunder">
+              <div *ngFor="let singleAddress of user.profile.address">
+
+                {{singleAddress.city}}
+              </div>
+
+            </td>
+            <td class="centre tdunder">{{user.profile.phoneNumber}}</td>
+            <td class="centre tdunder">{{user.createdAt | date:'dd-MM-yyyy' }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
+    </div>
+  </div>
+</div>

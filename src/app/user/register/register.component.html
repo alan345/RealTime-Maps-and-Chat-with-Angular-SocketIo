@@ -1,0 +1,26 @@
+<div class="log-scrn beigeback">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="register-form" novalidate>
+    <h3>Welcome!</h3>
+
+    <!-- <div class="input-group">
+      <input #nameCompanie type="text" formControlName="nameCompanie" placeholder="nameCompanie" class="form-control">
+    </div> -->
+
+    <div class="input-group">
+      <input #userEmail type="text" formControlName="email" placeholder="Add Email" class="form-control">
+    </div>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Please enter a valid email format</div>
+    <span class="help-block"></span>
+    <div class="input-group">
+      <input type="password" formControlName="password" placeholder="Choose a Password" class="form-control">
+    </div>
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password must contain 6 or more characters</div>
+    <br>
+    <div formGroupName="profile">
+      <input #name type="text" formControlName="name" placeholder="First Name" class="form-control">
+      <input #lastName type="text" formControlName="lastName" placeholder="Last Name" class="form-control">
+    </div>
+    <button [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}" type="submit" [disabled]="!myForm.valid">Register</button>
+    <p class="message"><a [routerLink]="'/user/login'">Back to Login screen</a></p>
+  </form>
+</div>

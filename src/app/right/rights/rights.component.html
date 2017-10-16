@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4> {{'Rights' | translate}}</h4>
+    </div>
+    <div class="p-2">
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'right'"></app-newObjDialog>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchRights()">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="centre tdunder">Name</th>
+          </tr>
+        </thead>
+        <tbody class="clienttbl">
+          <tr *ngFor="let right of fetchedRights" [routerLink]="['/right/' + right._id]" routerLinkActive="active">
+            <td class="centre tdunder">{{right.detailRight.nameRight}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div>
+        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
+    </div>
+  </div>
+</div>

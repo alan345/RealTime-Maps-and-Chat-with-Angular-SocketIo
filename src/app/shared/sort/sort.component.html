@@ -1,0 +1,3 @@
+<i (click)="orderByEvent(filedToOrder)" *ngIf="search.orderBy  !== filedToOrder && search.orderBy  !== '-' + filedToOrder" class="fa fa-arrow-down grey"></i>
+<i (click)="orderByEvent('-' + filedToOrder)" *ngIf="search.orderBy  === filedToOrder" class="fa fa-arrow-down"></i>
+<i (click)="orderByEvent(filedToOrder)" *ngIf="search.orderBy  === '-' + filedToOrder" class="fa fa-arrow-up"></i>

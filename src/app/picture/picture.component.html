@@ -1,0 +1,19 @@
+
+      <div class="form-group prmimg-cnt">
+        <div *ngFor="let singleForm of forms; let i=index;">
+          <img class="imgList" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+          <button *ngIf="deletePicture" type="button" md-button (click)="removePic(i)">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+
+        <div *ngIf="addPicture">
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">
+            Add Picture
+
+            <br>
+            <i class="fa fa-plus"></i>
+          </button>
+          <!-- <app-form (onPassForm)="onPassForm($event)"></app-form> -->
+        </div>
+      </div>

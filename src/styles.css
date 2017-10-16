@@ -1,0 +1,419 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/*@import "fullcalendar/dist/fullcalendar.min.css";*/
+/*@import "~angular-calendar/dist/css/angular-calendar.css";*/
+/*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
+
+.mb2br0 {
+    border-radius: 0px;
+    margin-bottom: 2px;
+}
+
+.btnadr {
+    background: none;
+    border: none;
+    padding-top: 0px;
+}
+
+.alright { text-align: right;
+}
+
+.nopad { padding-left: 0px!important;
+         padding-right: 0px!important;
+}
+
+.sign {
+  width: 250px;
+  height: 200px;
+}
+
+.false {
+    background-color: white;
+    color: black;
+    border: 2px solid #f44336;
+    margin-right: 5px;
+}
+
+.false:hover {
+      background-color: #f44336;
+      color: white;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.valid {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+    margin-right: 5px;
+}
+
+.valid:hover {
+      background-color: #4CAF50;
+      color: white;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+input::placeholder {
+  color: silver!important;
+  font-style: italic;
+}
+
+textarea::placeholder {
+  color: silver!important;
+  font-style: italic;
+}
+
+.container-fluid {
+    padding-right: 0px!important;
+    padding-left: 0px!important;
+  margin-bottom: 60px;
+}
+
+.ac {
+  text-align: center;
+}
+
+.hdform {
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(148, 17, 17, 1);
+}
+
+.fa10 {
+  margin-right: 10px;
+}
+
+.fal {
+  margin-left: 10px;
+}
+
+.card{
+  margin: 0px!important;
+  border-radius: 0px!important;
+}
+
+.noborder {
+      border: none;
+}
+
+.ml {
+  margin-left: 10px;
+
+}
+
+.page {
+  height: 100%;
+
+}
+
+.page1 {
+  font-size: 0.90rem;
+  height: 95%;
+
+}
+
+.bg-goo {
+  background-color: #2b3b4b;
+
+}
+
+.icomarg {
+  margin-right : 20px;
+  color: #ffffff;
+}
+
+
+.example-container {
+margin-top: 50px !important;
+  height: 100%;
+}
+
+.a {
+  color: #464a4c;
+}
+
+.btn-outline-primary {
+margin-top: 20px;
+}
+
+.btn {
+margin-bottom: 8px;
+border-radius: 0px!important;
+}
+
+.form-control {
+margin-bottom: 8px;
+border-radius: 0px!important;
+}
+
+.container {
+  height: 100%;
+margin-bottom: 60px;
+  margin-top: 30px;
+}
+
+.box {
+background-color: #fff; margin: 20px; padding: 20px;
+}
+
+body {
+    background-color: #fff;
+}
+
+H1, H2, H3, H4, H5 {
+
+}
+a {
+font-family: sans-serif;
+}
+
+
+.row-2 {
+margin: 20px;
+}
+
+
+.bg-inverse {
+border-radius: 5px;
+}
+
+
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+    background-color: rgba(204, 204, 204, 1);
+
+}
+
+.nav-link { padding-left: 10px !important;
+  color: #464a4c !important;
+}
+
+.navbar { padding: 0px !important;
+}
+
+
+.active {
+    color: #ffffff !important;
+    background-color: rgba(148, 17, 17, 1);
+  }
+
+.active2 {
+    color: #d0505c !important;
+  }
+
+.header {
+text-align: center;
+background-color: #b5b5b5;
+background-repeat:repeat;
+background-size:auto;
+background-position:left;
+padding-bottom:10px;
+padding-top:0px;
+margin-top:0px;
+width:auto;
+}
+
+.card-header {
+color: #fff;
+text-align: center;
+background-color: rgba(148, 17, 17, 1);
+}
+
+.btn {
+text-align: center;
+font-family: sans-serif;
+}
+
+.card-block {
+text-align: center;
+}
+
+.card {
+margin:10px;
+}
+
+
+.title {
+color: #fff;
+text-align: center;
+background-color: #337ab7;
+border-radius: 5px;
+justify-content: center;
+}
+
+.tdbtn1 {
+text-align: left;
+width: 80%;
+}
+
+.tdbtn2 {
+text-align: right;
+width: 20%;
+}
+
+.tdbtn3 {
+text-align: left;
+width: 15%;
+}
+
+.tdbtn4 {
+text-align: left;
+width: 55%;
+}
+
+.tdbtn5 {
+text-align: left;
+width: 15%;
+}
+
+.tdbtn6 {
+text-align: right;
+width: 15%;
+}
+
+.tdbtn7 {
+text-align: right;
+width: 10%;
+}
+
+.table-responsive {
+      display: table;
+
+}
+
+table {
+width: 100%;
+
+}
+.clienttbl {
+    line-height: 2.5;
+
+}
+.table td{
+    padding: 0rem;
+    vertical-align: bottom;
+    border-top: 0px;
+}
+
+.tdunder {
+
+   border-bottom: 1px;
+    border-bottom-color: #ddd;
+    border-bottom-style: solid;
+}
+
+.ferme {
+border-radius: 8px;
+}
+
+.whtxt {
+color: #fff;
+padding-bottom: 10px;
+}
+
+.spcright {
+margin-right: 5px;
+}
+
+.logo-img {
+height: 50px;
+}
+
+// Mixin itself
+@mixin clearfix() {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+// Usage as a mixin
+.element {
+  @include clearfix;
+}
+
+.table td.centre {
+  text-align: center;
+}
+
+.table th.centre {
+  text-align: center;
+}
+
+.margebasse {
+margin-bottom: 5px;
+}
+
+.table th {
+    border-top: none!important;
+  }
+
+.table-hover {
+  background-color: #fff;
+}
+
+.table-hover-cells > body > tr > td:hover {
+  background-color: #000;
+}
+
+
+
+/*.table-hover2 tbody tr:hover td, .table-hover2 tbody tr:hover th {
+  background-color: rgba(148, 17, 17, 1);
+}*/
+
+.mat-dialog-container {
+    /*box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);*/
+    /*display: unset!important;*/
+    padding: 0px!important;
+    /*border-radius: 2px;
+    box-sizing: border-box;
+    overflow: auto;
+    max-width: 80vw;
+    outline: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    /*overflow:hidden!important;*/
+}
+
+
+.arrowNotifNewDialog {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+
+.positionNotifArrow {
+  right: 230px;
+}
+.positionNewObjArrow {
+  right: 180px;
+}
+
+
+.mat-dialog-container {
+  max-height: 85vh;
+}
+
+/*alan*/
+.has-error {
+  box-shadow: 0 0 5px rgba(209, 0, 86, 1);
+  border: 1px solid rgba(209, 0, 86, 1);
+}
+/*alan*/

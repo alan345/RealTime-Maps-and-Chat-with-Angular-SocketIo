@@ -1,0 +1,35 @@
+.nav-tabs .nav-link.active {
+    background-color: rgba(148, 17, 17, 1);
+
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: -2px;
+    margin-right: 80px;
+}
+
+.gooplusInput {
+  width:100%;
+  padding: .5rem 0rem!important;
+   margin-bottom: 3px;
+}
+
+.btn-outline-primary {
+    margin-top: 0px!important;
+}
+
+/*------------------------- Alan ---------------------*/
+.movingRow {
+  min-height: 100px!important;
+}
+/*------------------------- Alan ---------------------*/
+
+/*------------------------- Guillaume ---------------------*/
+
+.row {
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}
+
+
+/*------------------------- Guillaume ---------------------*/

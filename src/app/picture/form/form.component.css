@@ -1,0 +1,93 @@
+.cho-fil {
+  padding: 15px;
+  max-height: 345px;
+  overflow: auto;
+}
+.cho-filcnt {
+  position:relative;
+  width: 50%;
+}
+.cho-fil button {
+  color: #0A2F87;
+  padding: 0;
+  background: #ccc;
+  border: 1px dashed #0A2F87;
+}
+.cho-fil input {
+  width: 100%;
+  padding: 30px !important;
+  float: left;
+  margin: 0 !important;
+}
+.cho-fil img {
+  width: 100%;
+  height: auto;
+}
+.sbmt-pic {
+  padding: 15px;
+}
+.imgrw {
+  float: left;
+}
+.imgrw-cnt {
+  float: left;
+  overflow: hidden;
+  position: relative;
+  margin: 6px;
+  padding: 0 !important;
+  display: flex;
+  justify-content: center;
+}
+.imgrw td {
+    padding: 0 !important;
+}
+.imgrw-cnt img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  flex: none;
+}
+.dlt-btn {
+  position: absolute;
+  top: 0 !important;
+  right: 0 !important;
+  background-color: #000000 !important;
+  color: #fff !important;
+  border: none !important;
+  outline: none !important;
+  padding: 10px !important
+}
+.rec-sze {
+  font-size: 10px !important;
+  color: #999999 !important;
+}
+.seeallcheck {
+  text-align: left;
+  float: left;
+  width: 100%;
+}
+.upld-mod {
+    overflow-x: hidden;
+}
+
+@media screen and (min-width: 768px) {
+
+.imgrw-cnt {
+  height: 150px;
+  width: 150px;
+}
+.seeallcheck {
+  margin: 5px 5px 0;
+}
+}
+
+@media screen and (max-width: 767px) {
+
+.imgrw-cnt {
+  height: 115px;
+  width: 115px;
+}
+.seeallcheck {
+  margin: 15px 5px 5px;
+}
+}

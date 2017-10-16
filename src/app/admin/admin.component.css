@@ -1,0 +1,41 @@
+.subsubnav-salons {
+  background-color: #0A2F87;
+  padding: 15px 15px 0;
+}
+p.tblnav-cl {
+  float: left;
+  padding: 15px 15px 15px 0;
+}
+.updownbtn {
+    background-color: #ffffff;
+    border: none;
+    padding: 2px 8px;
+    margin: 11px 5px;
+    color: #0a2f87;
+    font-size: 19px;
+    outline: none !important;
+}
+/*.clienttbl td {
+    border-bottom: 2px solid #efe9df !important;
+    border-top: none !important;
+    padding: 20px 15px !important;
+    width: 100% !important;
+    display: block;
+}
+.clienttbl tr {
+    background-color: #fff;
+}
+.clienttbl a {
+    color: inherit !important;
+}*/
+.change-page ul {
+    padding: 20px !important;
+    margin: 0 auto !important;
+    text-align: center;
+}
+.change-page li.current {
+    background-color: #0a2f87 !important;
+}
+.change-page li {
+    font-size: 15px !important;
+}

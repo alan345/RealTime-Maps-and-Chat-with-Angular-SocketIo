@@ -1,0 +1,315 @@
+<div class="container-fluid">
+  <!-- <div *ngIf="fetchedQuote.typeQuote === 'quote'" class="hdform">
+    <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
+  </div> -->
+  <div class="hdform">
+    <h3 *ngIf="fetchedQuote.typeQuote === 'invoice'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Invoice' | translate}}</h3>
+    <h3 *ngIf="fetchedQuote.typeQuote === 'quote'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
+  </div>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+    <div class="row">
+      <div class="col-2">
+      </div>
+
+
+      <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
+
+      <div class="col-8 row nopad">
+        <div class="col-4" *ngIf="fetchedQuote._id">
+          <button type="button" class="btn btn-primary" (click)="downloadPDF()">
+          download PDF
+          </button>
+        </div>
+        <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
+
+          <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
+            {{'Save As Invoice' | translate}}
+            </button>
+          <div *ngFor="let invoice of fetchedQuote.invoices">
+            <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+      </div>
+      <div class="col-3">
+        <div class="row">
+        </div>
+        <!-- <div class="form-group">
+          typeQuote: {{fetchedQuote.typeQuote}}
+        </div> -->
+        <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
+          {{'Number' | translate}}
+          <!-- <input [readonly]="fetchedQuote.signature.isSigned" class="form-control" name="EstimateCode" type="text" value="28" /> -->
+          <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
+        </div>
+
+        <div class="form-group">
+          <app-autocomplete [search]="search" [displayIfContentIsNull]=false [canDelete]=false [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients"
+            (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete>
+        </div>
+        <!-- <div class="form-group">
+          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'companie'" [title]="'Companie'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.companieClients">
+          </app-autocomplete>
+        </div> -->
+        <div class="form-group">
+          <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
+          </app-autocomplete>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="form-group">
+          {{'Quote edit date' | translate}}
+          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
+        </div>
+        <div class="form-group">
+          {{'Quote validity date' | translate}}
+          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
+        </div>
+        <!-- <div class="form-group">
+          {{'Status' | translate}}
+          <select [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+            <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
+          </select>
+        </div> -->
+      </div>
+      <div class="col-3">
+        <div class="form-control" *ngFor="let client of fetchedQuote.clients">
+          <h4>
+            <div>{{client.profile.name}} {{client.profile.lastName}}</div>
+          </h4>
+          <div>{{client.profile.companyName}}</div>
+          <div *ngFor="let singleAddress of client.profile.address">
+            <h5>{{singleAddress.nameAddress}}</h5>
+            <div>{{singleAddress.address}}</div>
+            <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
+            <div>{{client.profile.phoneNumber}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-2">
+      </div>
+      <div class="col-2">
+      </div>
+      <div class="col-8">
+        <div class="form-group">
+          {{'Title' | translate}}
+          <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
+        </div>
+      </div>
+      <div class="col-2">
+      </div>
+      <div class="col-12">
+        <ul *ngIf="!fetchedQuote.signature.isSigned" class="nav nav-tabs justify-content-end">
+          <li class="nav-item dropdown">
+            <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{'Template' | translate}}</a>
+            <div class="dropdown-menu">
+              <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="'Load bucket'" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
+              </app-autocomplete>
+              Save Template
+              <div class="row">
+                <div>
+                  <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
+                </div>
+                <div>
+                  <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value);nameTemplate.value=''"><i class="fa fa-floppy-o"></i></button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="form-control">
+          <div class="row ac">
+            <div class="h6 col-1"></div>
+            <div class="h6 col-md-1">{{'Image' | translate}}</div>
+            <div class="h6 col-6">{{'Item' | translate}}</div>
+            <!-- <div class="h6 col-md-2">{{'Ref' | translate}}</div> -->
+            <div class="h6 col-1">{{'Quantity' | translate}}</div>
+            <div class="h6 col-1">{{'Price excl tax' | translate}}</div>
+            <div class="h6 col-1">{{'VAT(%)' | translate}}</div>
+            <div class="h6 col-1">{{'Total excl tax' | translate}}</div>
+          </div>
+          <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
+            <div class="row">
+              <input [readonly]="fetchedQuote.signature.isSigned" class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
+              <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <div style="min-height: 20px" [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
+              <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
+                <div class="row ac">
+
+                  <div class="col-1">
+                    <div class="row">
+                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
+                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div *ngIf="bucketProduct.typeRow=='product'">
+                      <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
+                        <app-picture [addPicture]=false [deletePicture]=false [forms]="product.forms"></app-picture>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div *ngIf="bucketProduct.typeRow=='product'">
+                      <app-autocomplete [typeAutocomplete]="'product'" [canDelete]="!fetchedQuote.signature.isSigned" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
+                      </app-autocomplete>
+                    </div>
+                    <div *ngIf="bucketProduct.typeRow=='text'">
+                      <div *ngIf="fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode">
+                        <quill-editor [ngModelOptions]="{standalone: true}" [options]="editorOptions" (blur)="onEditorBlured($event, i, j)" (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                        </quill-editor>
+                      </div>
+                      <div (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+                    <div *ngIf="bucketProduct.typeRow=='product'">
+                      <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
+                        {{product.details.unit}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1 ac">
+                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+                  </div>
+                  <div class="col-md-1 ac">
+                    <select [disabled]="fetchedQuote.signature.isSigned" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat">
+                      <option *ngFor="let VAT of VATs" [ngValue]="VAT">
+                        {{VAT}}%
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-1">
+                    <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngFor="let priceQuoteTaxe of fetchedQuote.priceQuote.priceQuoteTaxes">
+            <div class="row ac font-weight-bold">
+              <div class="col-6">
+              </div>
+              <div class="col-2 form-control">
+                TVA: {{priceQuoteTaxe.VAT}}%
+              </div>
+              <div class="col-2 form-control">
+                {{priceQuoteTaxe.TotalVAT | round}} €
+              </div>
+            </div>
+          </div>
+
+          <div class="row ac font-weight-bold">
+            <div *ngIf="!fetchedQuote.signature.isSigned" class="col-3">
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ category</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ text</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ product</button>
+            </div>
+            <div class="col-3">
+            </div>
+            <div class="col-2 form-control fcp">
+              {{'Total' | translate}}
+            </div>
+            <div class="col-2 form-control">
+              {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes | round}} € HT
+            </div>
+            <div class="col-2 form-control">
+              {{fetchedQuote.priceQuote.priceQuoteWithTaxes | round}} € TTC
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
+          </div>
+          <div class="col-5">
+            <div *ngIf="fetchedQuote._id">
+              <div class="FormGroup">
+                <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
+                 <i class="fa fa-calendar" aria-hidden="true"></i>
+                 <span>{{'Show Comments' | translate}}</span>
+                </button>
+                <div *ngIf="showLogs">
+                  <app-comments [search]="search"></app-comments>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="fetchedQuote.typeQuote === 'quote'" style="height:280px" class="col-4">
+            <div class="ac sign">
+              <div class="card ac">
+                <div class="ac" *ngIf="!fetchedQuote.signature.base64">
+                  <div class="row">
+                    <button type="button" class="false" (click)="resetSignature()">
+                        {{'Reset' | translate}}
+                    </button>
+                    <button type="button" class="valid" (click)="validateSignature()">
+                  {{'Validate' | translate}}
+                  </button>
+                    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+                    </signature-pad>
+                  </div>
+                </div>
+                <div class="ac" *ngIf="fetchedQuote.signature.base64">
+                  <img class="img ac" [src]="fetchedQuote.signature.base64" />
+                  <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
+                    {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
+                  </div>
+                </div>
+
+              </div>
+              <button type="button" class="false" (click)="removeSignature()">
+                  {{'Unsign' | translate}}
+                  </button>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div (click)="togglePaiements()">Paiements
+
+            </div>
+            <div *ngIf="showPaiements">
+              <!-- <button class="btn btn-success" type="button" md-button (click)="openDialog()">
+              <i class="fa fa-plus"></i> Add new one
+            </button> -->
+
+              <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
+              </app-paiementQuotes>
+              {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
+              <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
+              <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
+            </app-paiementQuote> -->
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <div>
+              <div *ngIf="!fetchedQuote.signature.isSigned" class="valid-edit">
+                <button type="submit" class="btn valid">{{'Save' | translate}}</button>
+                <button *ngIf="fetchedQuote._id" type="button" class="btn false" (click)="openDialogDelete()">
+                  {{'Delete' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>

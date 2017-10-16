@@ -1,0 +1,61 @@
+.logo-header {
+  width: 100px;
+}
+
+.navbar-toggleable-md2 {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.navbar-nav2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  -webkit-box-direction: normal;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  padding-right: 0;
+  padding-left: 0;
+  padding-right: .5rem;
+  padding-left: .5rem;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.navbar-collapse2 {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100%;
+}
+
+.tdpop {
+  padding: 1rem!important;
+  justify-content: center!important;
+}
+
+.table-hover2 td:hover {
+  background-color: rgba(148, 17, 17, 1);
+}
+
+
+
+.table-bordered {
+  border: 1px solid rgba(255, 255, 255, .87);
+  background-color: #fff;
+}

@@ -1,0 +1,74 @@
+
+<div class="container">
+  <app-header [showBackButton]="true" [nameObject]="'task'" [showCreateButton]="false"></app-header>
+
+  <div>
+    <h4 class="dspl-nn">id: {{fetchedTask._id}}</h4>
+
+
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div>
+
+
+        <app-autocomplete
+          [typeAutocomplete]="'project'"
+          [enableLink]=true
+          [canDelete]="false"
+          [title]="'Project'"
+          [singleChoice]=true
+          [arrayContent]="fetchedTask.projects">
+        </app-autocomplete>
+
+
+        <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedTask.title" placeholder="title">
+
+
+        <select class="form-control" formControlName="status" [(ngModel)]="fetchedTask.status">
+          <option *ngFor="let n of statusTypes" [attr.value]="n.value">{{n.label}}</option>
+        </select>
+
+        <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedTask.description" placeholder="Description">
+        </textarea>
+        <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedTask.users" (getResultAutocomplete)="selectAssignedTo($event[0])">
+        </app-autocomplete>
+        <input type="date" class="form-control" formControlName="startString" [(ngModel)]="fetchedTask.startString">
+        <input type="date" class="form-control" formControlName="endString" [(ngModel)]="fetchedTask.endString">
+
+
+<!--
+        <input type="number" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
+
+        <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiementString" > -->
+
+        <!-- <ngb-datepicker #dp [(ngModel)]="fetchedPaiementQuote.datePaiement" formControlName="datePaiement" (navigate)="date = $event.next"></ngb-datepicker> -->
+
+        <!-- <div class="form-group">
+          <div class="input-group">
+            <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="datePaiement"
+            [(ngModel)]="fetchedPaiementQuote.datePaiement" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-addon" (click)="d.toggle()" >
+              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </div>
+          </div>
+        </div>
+
+{{fetchedPaiementQuote.datePaiement|json}} -->
+        <!-- <div (click)="fetchedPaiementQuote.editModeDate = !fetchedPaiementQuote.editModeDate">{{fetchedPaiementQuote.datePaiement | date:'yyyy-MM-dd' }}</div> -->
+        <!-- <input *ngIf="fetchedPaiementQuote.editModeDate" type="date" (focusout)="fetchedPaiementQuote.editModeDate = !fetchedPaiementQuote.editModeDate" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiement" placeholder="Amount"> -->
+      </div>
+
+
+
+      <div class="valid-edit">
+        <button type="submit" class="sln-edt done">{{'Save' | translate}}</button>
+        <button *ngIf="fetchedTask._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

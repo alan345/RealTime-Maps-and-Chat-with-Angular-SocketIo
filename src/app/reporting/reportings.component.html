@@ -1,0 +1,46 @@
+<!-- <div *ngIf="showHeader" class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button>
+  </div>
+  <div class="col-md-6">
+    <h3 class="title">Paiement</h3></div>
+  <div class="col-md-3"></div>
+</div> -->
+
+<!-- <app-header [nameObject]="'reporting'"></app-header> -->
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div *ngFor="let d of lineChartData; let i= index;">
+        <div *ngIf="i==0">
+          {{d.year}}
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-md-12">
+
+      <canvas baseChart width="400" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+    <div class="col-md-12" style="margin-bottom: 10px">
+      <table class="table table-responsive table-condensed">
+        <tr>
+          <th></th>
+          <th *ngFor="let label of lineChartLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of lineChartData">
+          <td>{{d.label}}</td>
+          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+
+
+
+<md-tab-group>
+  <md-tab label="Load">
+    <app-form (onPassForm)="dialogRef.close($event)" (onUploadFinisedChildToParent)="onUploadFinisedChildToParent()"></app-form>
+  </md-tab>
+  <md-tab label="Medias">
+    <app-user-form
+      (onPassForm)="dialogRef.close($event)"
+      [itemsPerPage]=6
+      [isDialog]=true
+    ></app-user-form>
+  </md-tab>
+</md-tab-group>

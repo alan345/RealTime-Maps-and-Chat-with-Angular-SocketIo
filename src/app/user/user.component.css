@@ -1,0 +1,23 @@
+.selected{
+	border:solid #4CAF50 1px;
+	float:left;
+	margin:2px;
+	padding:2px 15px;
+}
+
+.selected a{
+	cursor:pointer;
+	font-weight:bold;
+}
+.round {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px;
+}
+
+.row {
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}

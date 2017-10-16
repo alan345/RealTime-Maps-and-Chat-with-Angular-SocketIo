@@ -1,0 +1,42 @@
+<!-- <app-navbar *ngIf="isLoggedIn()"></app-navbar>
+<router-outlet></router-outlet>
+<app-error></app-error>
+
+<app-footer *ngIf="isLoggedIn()"></app-footer> -->
+
+<app-navbar></app-navbar>
+
+<mat-sidenav-container class="example-container">
+
+  <mat-sidenav #sidenav mode="side" opened="false">
+    <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <md-icon>Nav</md-icon>
+    </button>
+    test -->
+    <div *ngIf="sidenav.opened">
+      <app-sidebar></app-sidebar>
+    </div>
+  </mat-sidenav>
+
+  <div class="example-scrolling-content">
+
+    <!-- <button *ngIf="!sidenav.opened" type="button" (click)="sidenav.toggle()">
+      Nav
+    </button> -->
+    <!-- -->
+    <!-- <div *ngIf="isLoggedIn" style="height:20px"> -->
+    <div *ngIf="isLoggedIn" class="burger">
+      <i *ngIf="!sidenav.opened" (click)="openSideBar()" class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>
+
+<app-error></app-error>
+
+<app-footer></app-footer>
+
+<div *ngIf="loading">
+    <app-loading></app-loading>
+</div>

@@ -1,0 +1,67 @@
+<div *ngIf="showNavBar">
+  <nav class="navbar fixed-top navbar-toggleable-md2 bg-goo">
+     <!-- <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <div *ngFor="let companie of fetchedUser.ownerCompanies">
+
+      <a href="#">
+        <div *ngFor="let form of companie.forms">
+          <img class="logo-img" src="./uploads/forms/{{form.owner}}/{{form.imagePath}}" onerror="this.src ='assets/images/marker.png'">
+        </div>
+
+        <div *ngIf="!companie.forms.length">
+          <img class="logo-img" src="./assets/images/marker.png">
+        </div>
+      </a>
+    </div>
+
+
+    <div class="navbar-collapse2">
+      <ul class="mr-auto"></ul>
+      <div>
+        <ul class="navbar-nav2 mr-auto" align="right">
+          <li>
+            <a [routerLink]="['/user/list/false']" routerLinkActive="active2">
+              <i class="fa fa-users icomarg fa-lg" aria-hidden="true">
+              </i>
+            </a>
+          </li>
+          <li>
+            <a routerLinkActive="active2" [routerLink]="['/task']">
+                <i class="fa fa-tasks icomarg fa-lg" aria-hidden="true">
+                </i>
+              </a>
+          </li>
+          <li>
+            <a (click)="openNotifDialog()" routerLinkActive="active2">
+                <i class="fa fa-bell icomarg fa-lg" aria-hidden="true">
+                  {{notificationsNotRead}}
+                </i>
+              </a>
+          </li>
+          <li>
+            <a (click)="openNewObejcts()">
+                <i class="fa fa-plus icomarg fa-lg" aria-hidden="true">
+                </i>
+              </a>
+          </li>
+          <li>
+            <a [routerLink]="['/user/' + fetchedUser._id]" routerLinkActive="active2">
+                  <i class="fa fa-user icomarg fa-lg" aria-hidden="true">
+                  </i>
+              </a>
+          </li>
+        </ul>
+      </div>
+
+      <button type="button" class="spcright btn btn-secondary" (click)="logout()">
+          {{'Logout' | translate}}
+        </button>
+
+    </div>
+
+  </nav>
+</div>
+<!-- </div> -->
