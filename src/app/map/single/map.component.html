@@ -1,22 +1,25 @@
-<div class="chat-wrapper"> 
-  <div #readChat class="read-chat" >
+<div class="map-wrapper">
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>  
+  <div #readMap class="read-map" >
     <div *ngIf="!messages.length">
       Write your first message to start the discussion...
     </div>
-    <div *ngFor="let message of messages" class="indiv-chat">
+    <div *ngFor="let message of messages" class="indiv-map">
       <div *ngFor="let user of message.users">
         <div class="pic-container">
           <app-picture [userIdToOpenProfile]="user._id" [addPicture]=false [deletePicture]=false [forms]="user.forms"></app-picture>
         </div>
-        <div class="chat-content">
-          <p>{{message.chatName}}</p>
+        <div class="map-content">
+          <p>{{message.mapName}}</p>
           <h5>{{message.createdAt | date:'yMdjm'}}</h5>
         </div>
       </div>
     </div>
   </div>
-  <div class="write-chat">
-    <textarea [(ngModel)]="message.chatName" (keyup.enter)="sendMessage()"></textarea>
+  <div class="write-map">
+    <textarea [(ngModel)]="message.mapName" (keyup.enter)="sendMessage()"></textarea>
     <button (click)="sendMessage()" class="edit-btn">Send</button>
   </div>
 </div>

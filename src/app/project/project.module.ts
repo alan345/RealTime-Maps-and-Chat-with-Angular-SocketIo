@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 // import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
 import { ProjectsComponent} from './list/projects.component';
 import { ProjectSingleComponent} from './single/projectSingle.component';
-import { ListCategoriesByProjectComponent} from './single/listCategoriesByProject.component';
+// import { ListCategoriesByProjectComponent} from './single/listCategoriesByProject.component';
 import { ProjectTeamComponent} from './single/projectTeam.component';
 import { ProjectContentComponent} from './single/projectContent.component';
 import { ProjectService} from './project.service';
@@ -30,6 +30,7 @@ import {SharedModule } from '../shared/shared.module';
 // import { CommentComponent } from './single/comment/comment.component'
 // import { PictureComponent } from './single/picture/picture.component'
 import {ChatModule} from '../chat/chat.module';
+import {MapModule} from '../map/map.module';
 
 
 
@@ -48,13 +49,14 @@ import {ChatModule} from '../chat/chat.module';
     // CommentModule,
 
     ChatModule,
+    MapModule,
     // AutocompleteModule,
   ],
   declarations: [
     // ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
-    ListCategoriesByProjectComponent,
+    // ListCategoriesByProjectComponent,
     ProjectTeamComponent,
     ProjectContentComponent,
     // TasksComponent,
@@ -66,7 +68,7 @@ import {ChatModule} from '../chat/chat.module';
   ],
   exports:      [
     ProjectSingleComponent,
-    ListCategoriesByProjectComponent,
+    // ListCategoriesByProjectComponent,
     ProjectTeamComponent,
     ProjectsComponent,
     ProjectContentComponent,

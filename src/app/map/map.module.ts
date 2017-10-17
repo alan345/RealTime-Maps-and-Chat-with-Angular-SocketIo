@@ -5,21 +5,22 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
-import { ChatComponent} from './single/chat.component';
-// import { ChatSingleComponent} from './chatSingle/chatSingle.component';
-import { ChatService} from './chat.service';
-import { ChatRouting} from './chatRouting.module';
+import { MapComponent} from './single/map.component';
+// import { MapSingleComponent} from './mapSingle/mapSingle.component';
+import { MapService} from './map.service';
+import { MapRouting} from './mapRouting.module';
 
 import {SharedSmallModule } from '../shared/sharedSmall.module';
 
 
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports:     [
     // UserModule,
     // DragulaModule,
     SharedSmallModule,
-    ChatRouting,
+    MapRouting,
     // CommonModule,
     // FormsModule,
 
@@ -27,27 +28,29 @@ import {SharedSmallModule } from '../shared/sharedSmall.module';
     // PictureModule,
     // QuoteModule,
     // SharedModule
-
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyANerDDERQloD91gWN5WNbe6TPqa07GZXY'
+    })
     // AutocompleteModule,
   ],
   declarations: [
 
-    ChatComponent,
-    // ChatsComponent,
+    MapComponent,
+    // MapsComponent,
 
-    // ChatDialogComponent,
+    // MapDialogComponent,
     // PictureComponent,
-    // ChatSingleComponent,
+    // MapSingleComponent,
     // AutocompleteComponent,
   ],
   exports:      [
-    ChatComponent,
-    // ChatsComponent,
+    MapComponent,
+    // MapsComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ ChatService ],
+  providers:    [ MapService ],
   entryComponents: [
-    // ChatDialogComponent,
+    // MapDialogComponent,
   ]
 })
-export class ChatModule { }
+export class MapModule { }
