@@ -34,7 +34,7 @@ import {SharedModule } from '../shared/shared.module';
     HomeRouting,
     CommonModule,
     FormsModule,
-    
+
     ReactiveFormsModule,
     RouterModule,
     // CategorieModule,

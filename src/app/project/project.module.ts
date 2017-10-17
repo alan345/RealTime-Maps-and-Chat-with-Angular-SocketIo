@@ -29,6 +29,8 @@ import {SharedModule } from '../shared/shared.module';
 
 // import { CommentComponent } from './single/comment/comment.component'
 // import { PictureComponent } from './single/picture/picture.component'
+import {ChatModule} from '../chat/chat.module';
+
 
 
 @NgModule({
@@ -38,14 +40,14 @@ import {SharedModule } from '../shared/shared.module';
     ProjectRouting,
     // CommonModule,
     // FormsModule,
-    
+
     ReactiveFormsModule,
     MissionModule,
     SharedModule,
     StratModule,
     // CommentModule,
 
-
+    ChatModule,
     // AutocompleteModule,
   ],
   declarations: [
