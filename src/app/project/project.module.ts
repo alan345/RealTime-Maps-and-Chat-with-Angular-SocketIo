@@ -17,8 +17,8 @@ import { ProjectRouting} from './projectRouting.module';
 // import { TasksComponent} from './task/tasks/tasks.component';
 
 // //import { TaskService} from '../task/task.service';
-import { StratModule} from '../strat/strat.module';
-import { MissionModule} from '../mission/mission.module';
+// import { StratModule} from '../strat/strat.module';
+// import { MissionModule} from '../mission/mission.module';
 
 // import { DragulaModule } from 'ng2-dragula';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
@@ -42,9 +42,9 @@ import {ChatModule} from '../chat/chat.module';
     // FormsModule,
 
     ReactiveFormsModule,
-    MissionModule,
+    // MissionModule,
     SharedModule,
-    StratModule,
+    // StratModule,
     // CommentModule,
 
     ChatModule,

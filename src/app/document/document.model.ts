@@ -1,8 +1,8 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
-import { Mission } from '../mission/mission.model';
-import { Strat } from '../strat/strat.model';
-import { Brief } from '../brief/brief.model';
+// import { Mission } from '../mission/mission.model';
+// import { Strat } from '../strat/strat.model';
+// import { Brief } from '../brief/brief.model';
 
 
 export class Document {
@@ -14,9 +14,9 @@ export class Document {
     reviewers: User[] = [];
     owners: User[] = [];
     forms: Form[] = [];
-    briefs: Brief[] = [];
-    strats: Strat[] = [];
-    missions: Mission[] = [];
+    // briefs: Brief[] = [];
+    // strats: Strat[] = [];
+    // missions: Mission[] = [];
     categorie: Categorie = new Categorie();
     progressTasks: number = 0;
     dateDocument: DateDocument = new DateDocument()
@@ -30,19 +30,19 @@ export class Document {
 
 export class Status {
     global: string = 'WIP';
-    review: boolean = false;
-    approve: boolean = false;
-    changeRequest: boolean = false;
-    changeSent: boolean = false;
+    review: Boolean = false;
+    approve: Boolean = false;
+    changeRequest: Boolean = false;
+    changeSent: Boolean = false;
     pendingActionFrom: string = 'crew'
 
 
 }
 export class DateDocument {
   start: Date = new Date()
-  startString: string = '';
+  startstring: string = '';
   end: Date = new Date()
-  endString: string = '';
+  endstring: string = '';
   percentageProgress: number = 0;
 }
 
@@ -50,7 +50,7 @@ export class DateDocument {
 // export class Task {
 //   name: string = '';
 //   status: string = '';
-//   editMode: boolean = false;
+//   editMode: Boolean = false;
 //   description: string = '';
 //   assignedTos: User[] = [];
 //   dateTask: DateTask = new DateTask()
@@ -59,9 +59,9 @@ export class DateDocument {
 //
 // export class DateTask {
 //   creationDate: Date = new Date()
-//   creationDateString: string = '';
+//   creationDatestring: string = '';
 //   endDate: Date = new Date()
-//   endDateString: string = '';
+//   endDatestring: string = '';
 // }
 
 

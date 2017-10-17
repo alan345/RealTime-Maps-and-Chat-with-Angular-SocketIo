@@ -15,10 +15,10 @@ import {ShowNavBarData} from '../../home/home.model'
 import {Search} from '../../home/home.model'
 import {GlobalEventsManager} from '../../globalEventsManager';
 import { ProjectService} from '../../project/project.service';
-import { StratService} from '../../strat/strat.service';
-import { BriefService} from '../../brief/brief.service';
-import { MissionService} from '../../mission/mission.service';
-import { CategorieService} from '../../categorie/categorie.service';
+// import { StratService} from '../../strat/strat.service';
+// import { BriefService} from '../../brief/brief.service';
+// import { MissionService} from '../../mission/mission.service';
+// import { CategorieService} from '../../categorie/categorie.service';
 import { DocumentService} from '../../document/document.service';
 import { ToastsManager} from 'ng2-toastr';
 
@@ -41,11 +41,11 @@ export class DeleteConfirmationComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private missionService: MissionService,
+    // private missionService: MissionService,
     private documentService: DocumentService,
-    private stratService: StratService,
-    private categorieService: CategorieService,
-    private briefService: BriefService,
+    // private stratService: StratService,
+    // private categorieService: CategorieService,
+    // private briefService: BriefService,
 
     // private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
@@ -67,7 +67,7 @@ export class DeleteConfirmationComponent implements OnInit {
   }
 
   cancel() {
-    let showNavBarData = new ShowNavBarData()
+    const showNavBarData = new ShowNavBarData()
     showNavBarData.showNavBar = false
     // showNavBarData.search.typeObj = 'project'
     // showNavBarData.search.projectId = this.search.projectId
@@ -78,25 +78,25 @@ export class DeleteConfirmationComponent implements OnInit {
       this.projectService.deleteProject(this.search.projectId)
       .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
 
-    if(this.search.typeObj === 'mission')
-      this.missionService.deleteMission(this.search.missionId)
-      .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
+    // if(this.search.typeObj === 'mission')
+    //   this.missionService.deleteMission(this.search.missionId)
+    //   .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
 
     if(this.search.typeObj === 'document')
       this.documentService.deleteDocument(this.search.documentId)
       .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
 
-    if(this.search.typeObj === 'strat')
-      this.stratService.deleteStrat(this.search.stratId)
-      .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
-
-    if(this.search.typeObj === 'brief')
-      this.briefService.deleteBrief(this.search.briefId)
-      .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
-
-    if(this.search.typeObj === 'categorie')
-      this.categorieService.deleteCategorie(this.search.categorieId)
-      .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
+    // if(this.search.typeObj === 'strat')
+    //   this.stratService.deleteStrat(this.search.stratId)
+    //   .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
+    //
+    // if(this.search.typeObj === 'brief')
+    //   this.briefService.deleteBrief(this.search.briefId)
+    //   .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
+    //
+    // if(this.search.typeObj === 'categorie')
+    //   this.categorieService.deleteCategorie(this.search.categorieId)
+    //   .subscribe( res => { this.successDeleted(res) }, error => { console.log(error) })
   }
 
   successDeleted(res) {

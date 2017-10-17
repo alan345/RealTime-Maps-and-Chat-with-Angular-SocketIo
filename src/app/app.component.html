@@ -1,6 +1,8 @@
 <mat-sidenav-container>
   <app-navbar></app-navbar>
-  <app-sideBarLeft></app-sideBarLeft>
+  <mat-sidenav #sidenav mode="side" class="sidebarleft">
+    <app-sideBarLeft></app-sideBarLeft>
+  </mat-sidenav>
   <app-sideBarRight></app-sideBarRight>
   <router-outlet></router-outlet>
 </mat-sidenav-container>

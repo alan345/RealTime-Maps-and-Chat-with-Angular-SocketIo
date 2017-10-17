@@ -7,9 +7,9 @@ import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 // import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 // import { ChangeDetectionStrategy} from '@angular/core';
-import {GlobalEventsManager} from '../../globalEventsManager';
-import {MatSidenav} from '@angular/material';
-import {ShowNavBarData} from '../../home/home.model'
+// import {GlobalEventsManager} from '../../globalEventsManager';
+// import {MatSidenav} from '@angular/material';
+// import {ShowNavBarData} from '../../home/home.model'
 
 
 @Component({
@@ -19,35 +19,35 @@ import {ShowNavBarData} from '../../home/home.model'
   styleUrls: ['./sideBarLeft.component.css']
 })
 export class SideBarLeftComponent implements OnInit {
-  @ViewChild('sidenav') public sidenav: MatSidenav;
+  // @ViewChild('sidenav') public sidenav: MatSidenav;
   // @Input() sidenav: any;
-  showNavBarData: ShowNavBarData = new ShowNavBarData()
+  // showNavBarData: ShowNavBarData = new ShowNavBarData()
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
 
   constructor(
-    private globalEventsManager: GlobalEventsManager,
+    // private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
     private userService: UserService,
     private router: Router,
   ) {
-    this.globalEventsManager.showNavBarEmitterLeft.subscribe((showNavBarData)=>{
-        if (showNavBarData !== null) {
-          this.showNavBarData = showNavBarData;
-          if(this.showNavBarData.showNavBar) {
-            this.sidenav.open()
-          } else {
-            this.sidenav.close()
-          }
-        }
-    })
+    // this.globalEventsManager.showNavBarEmitterLeft.subscribe((showNavBarData)=>{
+    //     if (showNavBarData !== null) {
+    //       this.showNavBarData = showNavBarData;
+    //       if(this.showNavBarData.showNavBar) {
+    //         this.sidenav.open()
+    //       } else {
+    //         this.sidenav.close()
+    //       }
+    //     }
+    // })
   }
   sideNavAction(side: string, showNavBar: boolean, typeObj: string) {
-    this.showNavBarData.showNavBar = showNavBar
-    this.showNavBarData.search.typeObj = typeObj
-    this.globalEventsManager.showNavBarLeft(this.showNavBarData);
+    // this.showNavBarData.showNavBar = showNavBar
+    // this.showNavBarData.search.typeObj = typeObj
+    // this.globalEventsManager.showNavBarLeft(this.showNavBarData);
   }
   // sidenavOpen(search) {
   //   this.sidenav.open()
@@ -62,9 +62,9 @@ export class SideBarLeftComponent implements OnInit {
   // }
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.showNavBarData.showNavBar = true
-      this.showNavBarData.search.typeObj = 'project'
-      this.globalEventsManager.showNavBarLeft(this.showNavBarData);
+      // this.showNavBarData.showNavBar = true
+      // this.showNavBarData.search.typeObj = 'project'
+      // this.globalEventsManager.showNavBarLeft(this.showNavBarData);
       // this.globalEventsManager.showNavBar(true);
       // this.showNavBar = true;
       //let userId = localStorage.getItem('userId');

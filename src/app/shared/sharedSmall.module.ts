@@ -11,6 +11,7 @@ import {MatInputModule} from '@angular/material';
 // import {CommentModule} from '../comment/comment.module';
 import {MatSidenavModule} from '@angular/material';
 
+import {MatCardModule} from '@angular/material';
 
 
 import { RoundPipe} from './round.pipe';
@@ -36,6 +37,7 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     MatInputModule,
     MatPaginatorModule,
     MatSidenavModule,
+    MatCardModule,
     // CommentModule,
 
     // SideBarObjModule,
@@ -66,6 +68,7 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     MatPaginatorModule,
     MatInputModule,
     MatSidenavModule,
+    MatCardModule,
     // SideBarObjModule,
     // HeaderComponent,
     // newObjDialogComponent,

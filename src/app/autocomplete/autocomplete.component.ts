@@ -1,16 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService} from '../user/user.service';
 import { CompanieService} from '../companie/companie.service';
-import { CategorieService} from '../categorie/categorie.service';
+// import { CategorieService} from '../categorie/categorie.service';
 // import { QuoteService} from '../quote/quote.service';
 // import { TemplateQuoteService} from '../quote/templateQuote.service';
 
 import { RightService} from '../right/right.service';
 import { ProjectService} from '../project/project.service';
-import { StratService} from '../strat/strat.service';
-import { MissionService} from '../mission/mission.service';
+// import { StratService} from '../strat/strat.service';
+// import { MissionService} from '../mission/mission.service';
 import { DocumentService} from '../document/document.service';
-import { BriefService} from '../brief/brief.service';
+// import { BriefService} from '../brief/brief.service';
 import { MatDialog } from '@angular/material';
 import { Search} from '../home/home.model'
 // import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
@@ -31,11 +31,11 @@ export class AutocompleteComponent implements OnInit {
   @Input() typeAutocomplete: string;
   // @Input() showIfNoDataInit: boolean = true;
   @Input() arrayContent = [];
-  @Input() singleChoice: boolean = true;
-  @Input() title: string = '';
+  @Input() singleChoice: Boolean = true;
+  @Input() title: String = '';
   @Input() search: Search = new Search();
-  @Input() canDelete: boolean = true;
-  @Input() enableLink: boolean = true;
+  @Input() canDelete: Boolean = true;
+  @Input() enableLink: Boolean = true;
   // createNewItem: boolean = false;
   autocompleteSearch = ''
   fetchedData: User[] = [];
@@ -48,13 +48,13 @@ export class AutocompleteComponent implements OnInit {
     // public dialog: MatDialog,
     private userService: UserService,
     private documentService: DocumentService,
-    private missionService: MissionService,
+    // private missionService: MissionService,
     private companieService: CompanieService,
-    private briefService: BriefService,
-    private categorieService: CategorieService,
+    // private briefService: BriefService,
+    // private categorieService: CategorieService,
     private toastr: ToastsManager,
     // // private quoteService: QuoteService,
-    private stratService: StratService,
+    // private stratService: StratService,
     private projectService: ProjectService,
     // private templateQuoteService: TemplateQuoteService,
     private rightService: RightService,
@@ -68,32 +68,32 @@ export class AutocompleteComponent implements OnInit {
         .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
           this.arrayContent.push(res) }, error => { console.log(error); });
 
-    if(this.typeAutocomplete ==='categorie' && this.search.categorieId)
-        this.categorieService.getCategorie(this.search.categorieId)
-        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
-          this.arrayContent.push(res) }, error => { console.log(error); });
-
-
-    if(this.typeAutocomplete ==='strat' && this.search.stratId)
-        this.stratService.getStrat(this.search.stratId)
-        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
-          this.arrayContent.push(res) }, error => { console.log(error); });
-
-
-    if(this.typeAutocomplete ==='mission' && this.search.missionId)
-        this.missionService.getMission(this.search.missionId)
-        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
-          this.arrayContent.push(res) }, error => { console.log(error); });
+    // if(this.typeAutocomplete ==='categorie' && this.search.categorieId)
+    //     this.categorieService.getCategorie(this.search.categorieId)
+    //     .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+    //       this.arrayContent.push(res) }, error => { console.log(error); });
+    //
+    //
+    // if(this.typeAutocomplete ==='strat' && this.search.stratId)
+    //     this.stratService.getStrat(this.search.stratId)
+    //     .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+    //       this.arrayContent.push(res) }, error => { console.log(error); });
+    //
+    //
+    // if(this.typeAutocomplete ==='mission' && this.search.missionId)
+    //     this.missionService.getMission(this.search.missionId)
+    //     .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+    //       this.arrayContent.push(res) }, error => { console.log(error); });
 
     if(this.typeAutocomplete ==='document' && this.search.documentId)
         this.documentService.getDocument(this.search.documentId)
         .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
           this.arrayContent.push(res) }, error => { console.log(error); });
 
-    if(this.typeAutocomplete ==='brief' && this.search.briefId)
-        this.briefService.getBrief(this.search.briefId)
-        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
-          this.arrayContent.push(res) }, error => { console.log(error); });
+    // if(this.typeAutocomplete ==='brief' && this.search.briefId)
+    //     this.briefService.getBrief(this.search.briefId)
+    //     .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+    //       this.arrayContent.push(res) }, error => { console.log(error); });
 
 
   }
@@ -108,9 +108,9 @@ export class AutocompleteComponent implements OnInit {
       this.companieService.getCompanies(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
-    if(this.typeAutocomplete ==='categorie')
-      this.categorieService.getCategories(page, search)
-      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+    // if(this.typeAutocomplete ==='categorie')
+    //   this.categorieService.getCategories(page, search)
+    //   .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
     if(this.typeAutocomplete ==='document')
       this.documentService.getDocuments(page, search)
@@ -129,18 +129,18 @@ export class AutocompleteComponent implements OnInit {
       this.rightService.getRights(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
-    if(this.typeAutocomplete ==='strat')
-      this.stratService.getStrats(page, search)
-      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
-
-
-    if(this.typeAutocomplete ==='mission')
-      this.missionService.getMissions(page, search)
-      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
-
-    if(this.typeAutocomplete ==='brief')
-      this.briefService.getBriefs(page, search)
-      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+    // if(this.typeAutocomplete ==='strat')
+    //   this.stratService.getStrats(page, search)
+    //   .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+    //
+    //
+    // if(this.typeAutocomplete ==='mission')
+    //   this.missionService.getMissions(page, search)
+    //   .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+    //
+    // if(this.typeAutocomplete ==='brief')
+    //   this.briefService.getBriefs(page, search)
+    //   .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
 
   }

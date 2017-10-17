@@ -2,12 +2,10 @@ import { Component, OnInit, OnDestroy, Input , ViewChild, ElementRef} from '@ang
 
 import { ChatService } from '../chat.service';
 import { Chat } from '../chat.model';
-import { Search, PaginationData } from '../../home/home.model'
-import { Strat } from '../../strat/strat.model';
-import { Mission } from '../../mission/mission.model';
+import { Search, PaginationData } from '../../home/home.model';
+import { Project } from '../../project/project.model';
 import { AuthService} from '../../auth/auth.service';
 import {Router, ActivatedRoute, Params } from '@angular/router';
-
 
 @Component({
   selector: 'app-chat',
@@ -37,15 +35,20 @@ export class ChatComponent implements OnInit, OnDestroy {
   sendMessage() {
 
     if(this.message.chatName) {
-      if(this.search.stratId) {
-        let newStrat = new Strat()
-        newStrat._id = this.search.stratId
-        this.message.strats = [newStrat]
-      }
-      if(this.search.missionId) {
-        let newMission = new Mission()
-        newMission._id = this.search.missionId
-        this.message.missions = [newMission]
+      // if(this.search.stratId) {
+      //   let newStrat = new Strat()
+      //   newStrat._id = this.search.stratId
+      //   this.message.strats = [newStrat]
+      // }
+      // if(this.search.missionId) {
+      //   let newMission = new Mission()
+      //   newMission._id = this.search.missionId
+      //   this.message.missions = [newMission]
+      // }
+      if(this.search.projectId) {
+        const newProject = new Project()
+        newProject._id = this.search.projectId
+        this.message.projects = [newProject]
       }
       // console.log(this.authService.getCurrentUser())
       this.message.users = [this.authService.getCurrentUser()]

@@ -1,6 +1,5 @@
 import {RouterModule, Routes} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-//import {USER_ROUTES} from './user/user.routes';
 
 import {ADMIN_ROUTES} from './admin/admin.routes';
 // import {FormComponent} from './form/form.component';
@@ -24,11 +23,11 @@ import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {path: '', loadChildren: 'app/home/home.module#HomeModule', canActivate: [AuthGuardService], pathMatch: 'full'},
-  {path: 'log', loadChildren: 'app/log/log.module#LogModule', canActivate: [AuthGuardService]},
-  {path: 'mission', loadChildren: 'app/mission/mission.module#MissionModule', canActivate: [AuthGuardService]},
+  // {path: 'log', loadChildren: 'app/log/log.module#LogModule', canActivate: [AuthGuardService]},
+  // {path: 'mission', loadChildren: 'app/mission/mission.module#MissionModule', canActivate: [AuthGuardService]},
   {path: 'document', loadChildren: 'app/document/document.module#DocumentModule', canActivate: [AuthGuardService]},
-  {path: 'strat', loadChildren: 'app/strat/strat.module#StratModule', canActivate: [AuthGuardService]},
-  {path: 'brief', loadChildren: 'app/brief/brief.module#BriefModule', canActivate: [AuthGuardService]},
+  // {path: 'strat', loadChildren: 'app/strat/strat.module#StratModule', canActivate: [AuthGuardService]},
+  // {path: 'brief', loadChildren: 'app/brief/brief.module#BriefModule', canActivate: [AuthGuardService]},
   // {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService]},
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule', canActivate: [AuthGuardService]},
   {path: 'right', loadChildren: 'app/right/right.module#RightModule', canActivate: [AuthGuardService]},
@@ -36,7 +35,7 @@ export const routes: Routes = [
   // {path: 'paiementQuote', loadChildren: 'app/paiementQuote/paiementQuote.module#PaiementQuoteModule', canActivate: [AuthGuardService]},
   // {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService]},
   // {path: 'reporting', loadChildren: 'app/reporting/reporting.module#ReportingModule', canActivate: [AuthGuardService]},
-  {path: 'categorie', loadChildren: 'app/categorie/categorie.module#CategorieModule', canActivate: [AuthGuardService]},
+  // {path: 'categorie', loadChildren: 'app/categorie/categorie.module#CategorieModule', canActivate: [AuthGuardService]},
   {path: 'chat', loadChildren: 'app/chat/chat.module#ChatModule', canActivate: [AuthGuardService]},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService]},
   // {path: 'task', loadChildren: 'app/task/task.module#TaskModule', canActivate: [AuthGuardService]},

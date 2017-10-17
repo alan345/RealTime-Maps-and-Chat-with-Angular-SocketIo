@@ -22,16 +22,16 @@ import { NavbarModule } from '../nav/navbar/navbar.module';
 import { LoadingInAppComponent } from '../nav/loadingInApp/loadingInApp.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
-import {MissionModule} from '../mission/mission.module';
+
 
 import {SharedModule} from './shared.module';
 import {UserModule} from '../user/user.module';
 import {ProjectModule} from '../project/project.module';
-import {BriefModule} from '../brief/brief.module';
-import {CategorieModule} from '../categorie/categorie.module';
+
+
 // import {NewObjModule} from '../nav/newObj/newObj.module';
 import {DocumentModule} from '../document/document.module';
-import {StratModule} from '../strat/strat.module';
+
 
 
 
@@ -43,11 +43,9 @@ import {StratModule} from '../strat/strat.module';
     // CommonModule,
     // FormsModule,
     ProjectModule,
-    MissionModule,
+
     DocumentModule,
-    StratModule,
-    BriefModule,
-    CategorieModule,
+
     // CommonModule,
     // FormsModule,
     // AutocompleteModule,
@@ -75,26 +73,14 @@ import {StratModule} from '../strat/strat.module';
     // TranslatePipe,
     SharedModule,
     UserModule,
-    BriefModule,
-    CategorieModule,
+
     // NewObjModule,
     // CommonModule,
     // FormsModule,
     ProjectModule,
-    MissionModule,
+
     DocumentModule,
-    StratModule,
-    // RoundPipe,
-    // HeaderComponent,
-    // NavbarModule,
-    // newObjDialogComponent,
-    // LoadingComponent,
-    // LoadingInAppComponent,
-    // LoginInAppComponent,
-    // PictureModule,
-    // CommentModule,
-    // CommentModule,
-    // AutocompleteComponent,
+
   ],
   providers: [
     // TRANSLATION_PROVIDERS,

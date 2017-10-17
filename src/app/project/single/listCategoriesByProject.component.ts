@@ -9,8 +9,8 @@ import { FormBuilder} from '@angular/forms';
 
 
 
-import { Categorie } from '../../categorie/categorie.model';
-import {CategorieService} from '../../categorie/categorie.service';
+// import { Categorie } from '../../categorie/categorie.model';
+// import {CategorieService} from '../../categorie/categorie.service';
 
 import { AuthService} from '../../auth/auth.service';
 import {Search} from '../../home/home.model';
@@ -37,7 +37,7 @@ export class ListCategoriesByProjectComponent implements OnInit {
   searchMissionResearch: Search = new Search();
 
 
-  fetchedCategories: Categorie[] = []
+  // fetchedCategories: Categorie[] = []
   //
   // status = StatusProject
   // categ: string = 'Electricité';
@@ -63,7 +63,7 @@ export class ListCategoriesByProjectComponent implements OnInit {
     private location: Location,
     // private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
-    private categorieService: CategorieService,
+    // private categorieService: CategorieService,
     // // private quoteService: QuoteService,
     private authService: AuthService,
   ) {
@@ -79,7 +79,7 @@ export class ListCategoriesByProjectComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getCategories(1, {})
+    // this.getCategories(1, {})
     // this.myForm = this._fb.group({
     //   status: [''],
     //   name: ['', [Validators.required, Validators.minLength(2)]],
@@ -100,21 +100,6 @@ export class ListCategoriesByProjectComponent implements OnInit {
 
   }
 
-
-  getCategories(page: number, search: any) {
-
-    this.categorieService.getCategories(page, search)
-      .subscribe(
-        res => {
-
-          this.fetchedCategories = res.data
-
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
 
 
   openDetails() {

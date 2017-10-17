@@ -2,7 +2,7 @@ import { Form } from '../picture/form/form.model';
 import { Companie } from '../companie/companie.model';
 import { Right } from '../right/right.model';
 import { Project } from '../project/project.model';
-import { Mission } from '../mission/mission.model';
+// import { Mission } from '../mission/mission.model';
 
 
 
@@ -26,7 +26,7 @@ export class User {
 
 export class UsersToObjects {
   projects: Project[] = [];
-  missions: Mission[] = [];
+  // missions: Mission[] = [];
   rights: Right[] = [];
   users: User[] = [];
 }

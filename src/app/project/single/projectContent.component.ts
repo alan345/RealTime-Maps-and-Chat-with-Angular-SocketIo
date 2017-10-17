@@ -13,9 +13,9 @@ import { UserService} from '../../user/user.service';
 import { DocumentService} from '../../document/document.service';
 
 import { User } from '../../user/user.model';
-import { Categorie } from '../../categorie/categorie.model';
-import { Mission } from '../../mission/mission.model';
-import {CategorieService} from '../../categorie/categorie.service';
+// import { Categorie } from '../../categorie/categorie.model';
+// import { Mission } from '../../mission/mission.model';
+// import {CategorieService} from '../../categorie/categorie.service';
 
 import { AuthService} from '../../auth/auth.service';
 import {Search} from '../../home/home.model';
@@ -41,7 +41,7 @@ export class ProjectContentComponent implements OnInit {
   // searchMissionContent: Search = new Search();
   // searchMissionResearch: Search = new Search();
   // fetchedMissions: Mission[] = []
-  fetchedCategories: Categorie[] = []
+  // fetchedCategories: Categorie[] = []
   // fetchedDocumentsInProject: Document[] = []
   activityPendingTasksInProject: number = 0
   myActivityPendingTasksInProject: number = 0
@@ -72,7 +72,7 @@ export class ProjectContentComponent implements OnInit {
     // private location: Location,
     private activatedRoute: ActivatedRoute,
     // private _fb: FormBuilder,
-    private categorieService: CategorieService,
+    // private categorieService: CategorieService,
     private documentService: DocumentService,
     private authService: AuthService,
   ) {
@@ -89,7 +89,7 @@ export class ProjectContentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getCategories(1, {})
+    // this.getCategories(1, {})
 
 
     this.fetchedProject.dateProject.startString = this.authService.isoDateToHtmlDate(this.fetchedProject.dateProject.start)
@@ -130,18 +130,18 @@ export class ProjectContentComponent implements OnInit {
 
     })
   }
-  getCategories(page: number, search: any) {
-
-    this.categorieService.getCategories(page, search)
-      .subscribe(
-        res => {
-          this.fetchedCategories = res.data
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
+  // getCategories(page: number, search: any) {
+  //
+  //   this.categorieService.getCategories(page, search)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedCategories = res.data
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     );
+  // }
 
 
   openDetails() {
