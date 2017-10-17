@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-// import { MaterialModule } from '@angular/material';
 
 
 
@@ -10,22 +9,11 @@ import { ChatComponent} from './single/chat.component';
 // import { ChatSingleComponent} from './chatSingle/chatSingle.component';
 import { ChatService} from './chat.service';
 import { ChatRouting} from './chatRouting.module';
-// import { ChatsComponent} from './list/chats.component';
 
-// import {PictureModule} from '../picture/picture.module';
-
-// import { QuoteModule} from '../quote/quote.module';
-
-// import { DragulaModule } from 'ng2-dragula';
-// import { ChatDialogComponent } from './single/dialog/chatDialog.component'
-// import { AutocompleteModule } from '../autocomplete/autocomplete.module'
-// import {SharedModule } from '../shared/shared.module';
 import {SharedSmallModule } from '../shared/sharedSmall.module';
-// import {UserModule} from '../user/user.module';
-// import { PictureComponent } from './picture/picture.component'
 
 
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports:     [
@@ -35,12 +23,14 @@ import {SharedSmallModule } from '../shared/sharedSmall.module';
     ChatRouting,
     // CommonModule,
     // FormsModule,
-    // MaterialModule,
+
     ReactiveFormsModule,
     // PictureModule,
     // QuoteModule,
     // SharedModule
-
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyANerDDERQloD91gWN5WNbe6TPqa07GZXY'
+    })
     // AutocompleteModule,
   ],
   declarations: [
@@ -54,6 +44,7 @@ import {SharedSmallModule } from '../shared/sharedSmall.module';
     // AutocompleteComponent,
   ],
   exports:      [
+    ChatComponent,
     // ChatsComponent,
     // AutocompleteComponent,
   ],

@@ -1,0 +1,138 @@
+<div class="container">
+  <div class="">
+    <h3>User</h3>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div class="form-group col-sm-12">
+        isExternalUser: {{fetchedUser.isExternalUser}}
+      </div>
+      <div class="form-group col-sm-12">
+        <label>Code Client:</label> {{fetchedUser._id}}
+      </div>
+
+      <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-12">
+
+        <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
+          <label>Type User</label>
+          <mat-select formControlName="typeUsers" placeholder="typeUser" [(ngModel)]="fetchedUser.typeUsers" name="typeUsers">
+            <mat-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
+              {{typeUser.value}}
+            </mat-option>
+          </mat-select>
+          <button type="button" (click)="fetchedUser.typeUsers = undefined;"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+
+
+
+
+        <!-- <div *ngIf="!fetchedUser.isAdminOfHisCompanie"> -->
+        <label>Rights</label>
+        <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+        </app-autocomplete>
+        <!-- </div> -->
+
+        <div>
+          <label>Couleur Calendrier</label>
+          <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
+          <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+        </div>
+        <!-- <div>
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
+          </app-autocomplete>
+        </div> -->
+      </div>
+      <div class="form-group col-sm-12" *ngIf="fetchedUser.isExternalUser">
+        <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
+        </app-autocomplete>
+      </div>
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
+      </div>
+
+      <!-- <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
+            <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
+          </select>
+      </div> -->
+      <!-- <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
+            <option *ngFor="let n of titleArray" [attr.value]="n">{{n}}</option>
+          </select>
+      </div> -->
+
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
+      </div>
+
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
+      </div>
+      <!-- <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
+            <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
+          </select>
+      </div> -->
+      <!-- <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
+            <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
+          </select>
+      </div> -->
+
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
+      </div>
+
+      <div formGroupName="address">
+        <h5>Address</h5>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="address">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="city">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="state">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="zip">
+        </div>
+      </div>
+
+
+
+
+      <app-picture [forms]="fetchedUser.forms"></app-picture>
+
+      <!-- <div class="form-group prmimg-cnt">
+        <div *ngFor="let singleForm of fetchedUser.profile.profilePicture">
+          <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+          <button type="button" md-button (click)="removePic(i)">
+              <i class="fa fa-times"></i>
+            </button>
+        </div>
+        <div>
+
+          <!-- <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button> -->
+      <!-- </div>
+      </div> -->
+
+      <div class="form-group col-sm-12">
+      </div>
+      <div class="valid-edit">
+        <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+        <!-- <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
+          Save & Create project
+        </button> -->
+        <!-- <div *ngIf="!isUserIsMyself()"> -->
+          <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
+          <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="sendEmailToUserToJoinCompanie()">sendEmailToUserToJoinCompanie</button>
+
+
+
+
+        <!-- </div> -->
+        <br><br><br><br><br>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>

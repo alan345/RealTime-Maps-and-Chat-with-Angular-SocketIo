@@ -14,7 +14,7 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+// import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 
 // import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
@@ -26,7 +26,33 @@ import { User } from '../../user/user.model';
 })
 export class RightComponent implements OnInit {
   fetchedRight: Right = new Right()
+  typesRights = [
+      {name : 'Project', value: 'project', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Categorie', value: 'categorie', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Quote', value: 'quote', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Reporting', value: 'reporting', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Companie', value: 'companie', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'User', value: 'user', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Paiement', value: 'paiementQuote', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Task', value: 'task', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'userCalendar', value: 'userCalendar', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Plan', value: 'plan', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Right', value: 'right', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      {name : 'Expense', value: 'expense', typeAccess:
+        [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
 
+    ]
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
@@ -35,41 +61,13 @@ export class RightComponent implements OnInit {
   myForm: FormGroup;
   seeRights = false;
   seeCategProject = false;
-  seeCategProduct = false;
-  typesRights = [
-    {name : 'Project', value: 'project', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Product', value: 'product', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Quote', value: 'quote', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Reporting', value: 'reporting', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Companie', value: 'companie', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'User', value: 'user', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Paiement', value: 'paiementQuote', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Task', value: 'task', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'userCalendar', value: 'userCalendar', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Plan', value: 'plan', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Right', value: 'right', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Expense', value: 'expense', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Comment', value: 'comment', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'}]},
+  seeCategCategorie = false;
 
-  ]
   constructor(
     private rightService: RightService,
 //    private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MatDialog,
+    // public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -83,7 +81,7 @@ export class RightComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
       categJson: this._fb.group({
-        categProduct: [''],
+        categCategorie: [''],
         categProject: ['']
       }),
       option: this._fb.group({
@@ -126,7 +124,7 @@ export class RightComponent implements OnInit {
     })
   }
   removeRight(level, index1, index2, index3) {
-    // console.log(level)
+    console.log(level)
       if(level === 2)
         this.fetchedRight.detailRight.permissions.splice(index2, 1)
       if(level === 3)
@@ -186,7 +184,7 @@ export class RightComponent implements OnInit {
 
   save() {
 
-    //this.fetchedRight.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedRight.categJson.categProduct))
+    //this.fetchedRight.categJson.categCategorie = JSON.stringify(JSON.parse(this.fetchedRight.categJson.categCategorie))
     if(this.fetchedRight._id) {
       this.rightService.updateRight(this.fetchedRight)
         .subscribe(

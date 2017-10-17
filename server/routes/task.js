@@ -46,7 +46,7 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
-        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
+        if(!shared.isCurentUserHasAccess(doc.rights, 'companie', 'task')) {
           return res.status(404).json({
             title: 'No rights',
             error: {message: 'No rights'}
@@ -65,7 +65,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   Task.findById(({_id: req.params.id}), function (err, item) {
@@ -82,7 +82,7 @@ router.put('/:id', function (req, res, next) {
         item.name = req.body.name
         item.dateTask = req.body.dateTask
         item.status = req.body.status
-        item.title = req.body.title
+
 
         item.save(function (err, result) {
           if (err) {
@@ -102,7 +102,7 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   if(!req.user.ownerCompanies.length) {
@@ -137,13 +137,17 @@ router.post('/', function (req, res, next) {
 
 // get all forms from database
 router.get('/page/:page', function (req, res, next) {
-  var itemsPerPage = 15
+  var itemsPerPage = 10
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
 
-  let searchQuery = {}
-  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  let searchQuery = {
+  //  createdAt:{"$lt": dateRef}
+//    categories: categoriesArray,
+  //  createdAt:{"$gt": dateRef},
+  }
+
 
   if (req.query.myTasks === 'true')
     searchQuery['assignedTos'] = mongoose.Types.ObjectId(req.user._id)
@@ -253,7 +257,7 @@ router.get('/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   Task.findById((req.params.id), function (err, item) {

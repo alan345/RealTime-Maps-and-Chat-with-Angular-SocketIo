@@ -1,6 +1,6 @@
 var mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
-    //Product                    = require('../models/product.model'),
+    //Categorie                    = require('../models/categorie.model'),
   //  Form                    = require('../models/form.model'),
   //  User                    = require('../models/user.model'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
@@ -8,13 +8,10 @@ var mongoose                = require('mongoose'),
 var quote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
-    invoices: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
     // ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    // companieClients: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
-    quoteNumber: {type: Number, default: [0]},
     statusQuote: {type: Number, default: [0]},
     detail: {
       currency: {type: String, default: ['']},
@@ -25,18 +22,18 @@ var quote = new Schema({
       }
     },
 
-    typeQuote: {type: String, default: ['quote']},
+    // typeQuote: {type: String, default: ['salon']},
     // _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     devisDetails: [
       {
-        nameBucketProducts :{type: String},
-        bucketProducts:[
+        nameBucketCategories :{type: String},
+        bucketCategories:[
           {
             typeRow:{type: String},
             title:{type: String, default: ['']},
-            // isProduct: {type: Boolean, default: [true]},
-            // title: {type: String},
+            // isCategorie: {type: Boolean, default: [true]},
+            title: {type: String},
             priceWithoutTaxes: {type: Number},
             priceWithTaxes: {type: Number},
             totalPriceWithoutTaxes: {type: Number},
@@ -44,7 +41,8 @@ var quote = new Schema({
             vat: {type: Number},
             quantity: {type: Number},
             discount: {type: Number},
-            productInit: [{type: Schema.Types.ObjectId, ref: 'User'}],
+            categorieInit: [{type: Schema.Types.ObjectId, ref: 'User'}],
+
           }
         ]
       }
@@ -53,14 +51,9 @@ var quote = new Schema({
     priceQuote: {
       priceQuoteWithoutTaxes: {type: Number, default: [0]},
       priceQuoteWithTaxes: {type: Number, default: [0]},
-      priceQuoteTaxes: [{
-        VAT: {type: Number, default: [0]},
-        TotalVAT: {type: Number, default: [0]},
-      }]
       // paiementQuote: {type: Number, default: [0]},
     },
     signature:{
-      isSigned:{type: Boolean, default: [false]},
       base64:{type: String, default: ['']},
       dateSignature:{type: Date},
       users:[{type: Schema.Types.ObjectId, ref: 'User'}],

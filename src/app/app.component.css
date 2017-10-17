@@ -2,13 +2,3 @@
   box-shadow: none !important;
   bottom: initial !important;
 }*/
-.example-scrolling-content {
-  overflow: auto;
-}
-/*alan*/
-.burger {
-  position: absolute;
-  z-index: 1;
-}
-
-/*alan*/

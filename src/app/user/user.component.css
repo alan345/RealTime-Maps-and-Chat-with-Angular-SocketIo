@@ -1,23 +1,22 @@
-.selected{
-	border:solid #4CAF50 1px;
-	float:left;
-	margin:2px;
-	padding:2px 15px;
+h2.my-name {
+  text-align: center !important;
+  text-transform: none !important;
+	display: block !important;
 }
-
-.selected a{
-	cursor:pointer;
-	font-weight:bold;
+h5 {
+  text-align: center;
+  margin-bottom: 50px;
 }
-.round {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 2px;
+.profile-button {
+  width: 115%;
+  padding: 15px;
+  background-color: #f4f4f4;
+  margin: 0 -15px;
 }
-
-.row {
-    margin-right: 0px!important;
-    margin-left: 0px!important;
+.pic-container {
+	width: 100px;
+	display: flex;
+	margin: 50px auto 10px;
+  padding: 0;
+  float: none;
 }

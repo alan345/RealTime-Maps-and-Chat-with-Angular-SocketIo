@@ -11,9 +11,9 @@ var User = require('../models/user.model');
 
 
  // getting token from email and checking if it's valid
-router.get('/:token', function(req, res) {
+router.get('/:token', function (req, res) {
   var token = req.params.token;
-  User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+  User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
     if(err) {
       return res.status(403).json({
         title: 'An error occured',
@@ -37,11 +37,11 @@ router.get('/:token', function(req, res) {
 // after getting token from email, check if it's still valid and then proceed in password reset by
 // getting the user new password, hashing it and then reset the passwordToken and passwordExpires fields to undefined
 
-router.post('/:token', function(req, res) {
+router.post('/:token', function (req, res) {
   async.waterfall([
-    function(done) {
+    function (done) {
       var token = req.params.token;
-      User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } }, function (err, user) {
         if(err) {
           return res.status(403).json({
             title: 'An error occured',
@@ -58,7 +58,7 @@ router.post('/:token', function(req, res) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
 
-        // user.save(function(err) {
+        // user.save(function (err) {
         //   done(err, user);
         // });
         user.save(function (err, result) {
@@ -77,7 +77,7 @@ router.post('/:token', function(req, res) {
     },
 
     // sending notification email to user that his password has changed
-    function(user, done) {
+    function (user, done) {
       var options = {
         auth: {
           api_user: config.api_user,
@@ -93,14 +93,14 @@ router.post('/:token', function(req, res) {
         text: 'Hello,\n\n' +
         'This email has been sent to you to inform you that the password for the acount ' + user.email + ' has been changed.\n'
       };
-      mailer.sendMail(mailOptions, function(err) {
+      mailer.sendMail(mailOptions, function (err) {
         console.log('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
         return res.status(200).json({
           message: 'Success'
         })
       });
     }
-  ], function(err) {
+  ], function (err) {
     if (err) {
     }
   });

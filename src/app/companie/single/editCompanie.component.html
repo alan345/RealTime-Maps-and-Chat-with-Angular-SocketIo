@@ -1,203 +1,150 @@
-<div class="container-fluid">
-  <div class="hdform">
-    <h3><i class="fa fa10 fa-cog" aria-hidden="true"></i>{{'Company' | translate}}</h3>
-  </div>
+<!-- <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
+  <div class="col-md-6">
+    <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
+  <div class="col-md-3"></div>
+</div> -->
+
+
+<div class="container">
+<!-- <app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header> -->
+
+
+
+  <h4 class="">id: {{fetchedCompanie._id}}</h4>
+
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <div class="row">
-      <div class="col">
-        <h5>{{'Identity' | translate}}</h5>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="nameCompanie" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom de la Société">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedCompanie.email" required minlength="5" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="faxNumber" [(ngModel)]="fetchedCompanie.faxNumber" required minlength="5" placeholder="Numéro de Fax">
-        </div>
+    <div *ngIf="isMyCompanie()">
+      <button type="button" [routerLink]="['/user/paiement']">{{'Plan' }}</button> {{'Plan' }}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
+    </div>
+    <div class="form-group sln-inffrm">
 
-        <!-- <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom interlocuteur">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Prénom interlocuteur">
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Téléphone interlocuteur">
+      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom du fournisseur">
+      <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
+
+      <div formGroupName="address">
+        <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Adresse">
+        <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
+
+        <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
+        <!-- <div class="form-group prmimg-cnt">
+          <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
+            <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+            <button type="button" class="" (click)="removeForm(i)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+          </div>
+          <div>
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">{{'Add a picture' }}<br><i class="fa fa-plus"></i></button>
+          </div>
         </div> -->
-
-        <h5>{{'Contact person' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newContact()">New contact person</button>
-
-        <div *ngFor="let contactPerson of fetchedCompanie.contactsPerson; let k = index;">
-          <div class="row">
-            <h6>{{'Contact person' | translate}}</h6><button class="ml btnadr" type="button" (click)="removeContact(k)"><i class="fa fa-times" aria-hidden="true"></i></button>
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactType" placeholder="Contact type">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactName" placeholder="{{'Lastname' | translate}}">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactFirstName" placeholder="{{'Firstname' | translate}}">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactPhoneNumber" placeholder="{{'Phone number' | translate}}">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactEmail" placeholder="{{'Email' | translate}}">
-          </div>
-        </div>
-
-      </div>
-      <div class="col">
-        <h5>{{'Details' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">New Address</button>
-        <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
-          <div class="row">
-            <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="ml btnadr" type="button" (click)="removeAddress(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
-          </div>
-          <div class="form-group">
-            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
-              <option value="billing">Facturation</option>
-              <option value="shipping">shipping</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="Addresse">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city" placeholder="Ville">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip" placeholder="Code postal">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country" placeholder="Pays">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col">
-        <h5>{{'Divers' | translate}}</h5>
-        <div class="form-group">
-
-
-          <input type="checkBox" formControlName="isSupplier" [(ngModel)]="fetchedCompanie.isSupplier"> {{'Companie' | translate}}
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" formControlName="VAT" [(ngModel)]="fetchedCompanie.VAT" required minlength="5" placeholder="Numéro de TVA">
-        </div>
         <app-picture [forms]="fetchedCompanie.forms" (getPicture)="getPicture($event)"></app-picture>
-        <div *ngIf="isMyCompanie()" class="form-group sln-inffrm">
-          <h4>Options Calendar</h4> timeBegin: '06:00:00' (login => logout is required)
-          <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin"> timeEnd: '19:00:00' (login => logout is required)
-          <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd"> slotDuration: default: '00:30:00' (30 minutes) (login => logout is required)
-          <input type="text" class="form-control" formControlName="slotDuration" [(ngModel)]="fetchedCompanie.option.calendar.slotDuration" placeholder="slotDuration">
-          <input type="text" class="form-control" formControlName="timeBeginbusinessHours" [(ngModel)]="fetchedCompanie.option.calendar.timeBeginbusinessHours" placeholder="timeBeginbusinessHours">
-          <input type="text" class="form-control" formControlName="timeEndbusinessHours" [(ngModel)]="fetchedCompanie.option.calendar.timeEndbusinessHours" placeholder="timeEndbusinessHours">
-
-
-
-        </div>
       </div>
 
+
+
+
+      <div *ngIf="isMyCompanie()" formGroupName="option">
+        <div formGroupName="calendar">
+          <h4>Options Calendar</h4>
+          <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
+          <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd">
+        </div>
+      </div>
     </div>
 
+    <div *ngIf="isMyCompanie()">
+      <h4>type Users</h4>
 
-
-
-
-    <div class="col-12">
-
-      <div *ngIf="isMyCompanie()">
-        <h6>type Users</h6>
-        <div class="btn btn-warning btn-sm" (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
+      <div (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
         <div *ngIf="seeTypeUser">
-          <button type="button" class="valid" (click)="addTypeUser()">addTypeUser</button>
-          <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
-            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.typeUsers[i].value">
-            <button type="button" class="false btn-xs" (click)="removeTypeUser(i)">x</button>
-          </div>
+        <!-- {{fetchedCompanie.typeUsers|json}} -->
+        <button type="button" (click)="addTypeUser()">addTypeUser</button>
+        <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.typeUsers[i].value">
+          <button type="button" (click)="removeTypeUser(i)">X</button>
         </div>
+      </div>
 
 
-        <h6>Categories</h6>
-        <div class="btn btn-warning btn-sm" (click)="seeCategProject=!seeCategProject">See Categs Project</div>
-        <div *ngIf="seeCategProject">
-          <button type="button" class="valid" (click)="addCateg('categProject', 0, 0, 0, 0)">Add Categ Project</button>
-          <div *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
-            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
-            <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].isFlagged">isFlagged
-            <button type="button" class="false" (click)="removeCateg('categProject', 1,i,0,0)">x</button>
-            <button type="button" class="valid" (click)="addCateg('categProject', 1,i,0,0)">+</button>
-            <div *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
-              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ">
-              <button type="button" class="false" (click)="removeCateg('categProject', 2,i,j,0)">x</button>
-              <button type="button" class="valid" (click)="addCateg('categProject', 2,i,j,0)">+</button>
-              <div *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
-                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ">
-                <button type="button" class="false" (click)="removeCateg('categProject', 3,i,j,k)">x</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">See Categs Products</div>
-        <div *ngIf="seeCategProduct">
-          <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">Add Categ Project</button>
-          <div *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
-            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].categ">
-            <button type="button" class="false" (click)="removeCateg('categProduct', 1,i,0,0)">x</button>
-            <button type="button" class="valid" (click)="addCateg('categProduct', 1,i,0,0)">+</button>
-            <div *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
-              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].categ">
-              <button type="button" class="false" class="false" (click)="removeCateg('categProduct', 2,i,j,0)">X</button>
-              <button type="button" class="valid" (click)="addCateg('categProduct', 2,i,j,0)">+</button>
-              <div *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
-                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].subCateg[k].categ">
-                <button type="button" class="false" (click)="removeCateg('categProduct', 3,i,j,k)">x</button>
-              </div>
+      <h4>Categories</h4>
+      <div (click)="seeCategProject=!seeCategProject">See Categs Project</div>
+      <div *ngIf="seeCategProject">
+        <button type="button" (click)="addCateg('categProject', 0, 0, 0, 0)">Add Categ Project</button>
+        <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
+          <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].isFlagged">isFlagged
+          <button type="button" (click)="removeCateg('categProject', 1,i,0,0)">X</button>
+          <button type="button" (click)="addCateg('categProject', 1,i,0,0)">+</button>
+          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ">
+            <button type="button" (click)="removeCateg('categProject', 2,i,j,0)">X</button>
+            <button type="button" (click)="addCateg('categProject', 2,i,j,0)">+</button>
+            <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ">
+              <button type="button" (click)="removeCateg('categProject', 3,i,j,k)">X</button>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="1==2">
-        <div *ngIf="isMyCompanie()">
-          <button type="button" class="valid" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
-        </div>
-        <button type="button" class="false" (click)="initDataToRemove()">Init Data</button>
-        <h4>{{'banck' | translate}}</h4>
-        <h4>{{'Stripe' | translate}}</h4>
-        <!-- <mat-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
-          <mat-radio class="btn btn-warning btn-sm" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
-            {{servicesBank}}
-          </mat-radio>
-        </mat-radio-group> -->
 
-        <input type="text" class="form-control" formControlName="secretKey" [(ngModel)]="fetchedCompanie.banck.stripe.secretKey" placeholder="secretKey">
+
+      <div (click)="seeCategCategorie=!seeCategCategorie">See Categs Categories</div>
+      <div *ngIf="seeCategCategorie">
+        <button type="button" (click)="addCateg('categCategorie', 0, 0, 0, 0)">Add Categ Project</button>
+        <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categCategorie; let i = index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categCategorie[i].categ">
+          <button type="button" (click)="removeCateg('categCategorie', 1,i,0,0)">X</button>
+          <button type="button" (click)="addCateg('categCategorie', 1,i,0,0)">+</button>
+          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categCategorie[i].subCateg[j].categ">
+            <button type="button" (click)="removeCateg('categCategorie', 2,i,j,0)">X</button>
+            <button type="button" (click)="addCateg('categCategorie', 2,i,j,0)">+</button>
+            <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categCategorie[i].subCateg[j].subCateg[k].categ">
+              <button type="button" (click)="removeCateg('categCategorie', 3,i,j,k)">X</button>
+            </div>
+          </div>
+        </div>
       </div>
+      <button type="button" (click)="initDataToRemove()">Init Data</button>
+
+
+
+
+      <h4>{{'banck' }}</h4>
+
+      <h4>{{'Stripe' }}</h4>
+
+      <mat-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
+        <mat-radio-button class="example-radio-button" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
+          {{servicesBank}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+      <input type="text"
+        class="form-control"
+        formControlName="secretKey"
+        [(ngModel)]="fetchedCompanie.banck.stripe.secretKey"
+        placeholder="secretKey">
+
     </div>
 
 
 
-    <div class="valid-edit row col-12">
-      <button type="submit" class="valid">
-          {{'Save' | translate}}
+    <div class="valid-edit">
+      <button type="submit" class="sln-edt done">
+          Enregistrer
         </button>
-      <!-- <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
-            Save my companie
-        </button> -->
 
-      <button *ngIf="fetchedCompanie._id && !isMyCompanie()" type="button" class="false" (click)="onDelete(fetchedCompanie._id)">
-          {{'Delete' | translate}}
+        <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
+            Save my companie
+        </button>
+
+
+      <button *ngIf="fetchedCompanie._id" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
+          Delete
       </button>
     </div>
     <div class="clearfix"></div>

@@ -4,8 +4,7 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0, ContactsPerson} from '../companie.model';
-import {Address} from '../../user/user.model';
+import {Companie, Categorie0} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -14,11 +13,11 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+// import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 
 // import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
-import { PaiementService} from '../../user/paiement/paiement.service';
+// import { PaiementService} from '../../user/paiement/paiement.service';
 
 
 @Component({
@@ -39,8 +38,8 @@ export class EditCompanieComponent implements OnInit {
   myForm: FormGroup;
   // seeRights = false;
   seeCategProject = false;
-  seeCategProduct = false;
-  // isMyCompanyRoute: Boolean = false
+  seeCategCategorie = false;
+  isMyCompanyRoute: Boolean = false
   servicesBancks = ['stripe', 'paypal']
   // typesRights = [
   //   {name : 'Project', value: 'project'},
@@ -51,45 +50,37 @@ export class EditCompanieComponent implements OnInit {
     private companieService: CompanieService,
 //    private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MatDialog,
+    // public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
     private _fb: FormBuilder,
     private authService:AuthService,
     private userService: UserService,
-    private paiementService: PaiementService,
+    // private paiementService: PaiementService,
   ) {}
 
   ngOnInit() {
-    this.getStripeAccountDetails()
+    // this.getStripeAccountDetails()
     this.myForm = this._fb.group({
-      nameCompanie: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: [''],
-      VAT: [''],
-      isSupplier: [''],
-      faxNumber: [''],
-      email: [''],
-      // categJson: this._fb.group({
-      //   categProduct: [''],
-      //   categProject: ['']
-      // }),
-
-
-        timeBegin: ['', [Validators.required, Validators.minLength(1)]],
-        timeEnd: ['', [Validators.required, Validators.minLength(1)]],
-
-        timeBeginbusinessHours: ['', [Validators.required, Validators.minLength(1)]],
-        timeEndbusinessHours: ['', [Validators.required, Validators.minLength(1)]],
-
-        slotDuration: [''],
-
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
+      categJson: this._fb.group({
+        categCategorie: [''],
+        categProject: ['']
+      }),
+      option: this._fb.group({
+        calendar: this._fb.group({
+          timeBegin: ['', [Validators.required, Validators.minLength(1)]],
+          timeEnd: ['', [Validators.required, Validators.minLength(1)]],
+        }),
+      }),
+      address: this._fb.group({
         address: [''],
         city: [''],
         state: [''],
         zip: [''],
-        country: [''],
-
+      }),
       _users: this._fb.array([]),
 
       secretKey:[''],
@@ -97,14 +88,12 @@ export class EditCompanieComponent implements OnInit {
     })
 
 
-
-
     this.getCurrentUser()
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {
         if(params['id'] === 'mine') {
           this.getCompanie('')
-          // this.isMyCompanyRoute = true
+          this.isMyCompanyRoute = true
 
         } else {
           this.getCompanie(params['id'])
@@ -115,31 +104,16 @@ export class EditCompanieComponent implements OnInit {
   addTypeUser() {
     this.fetchedCompanie.typeUsers.push({value: ''})
   }
-  getStripeAccountDetails() {
-    this.paiementService.getStripeCust()
-      .subscribe(
-        res => {
-          console.log(res)
-        },
-        error => { console.log(error) }
-      )
-  }
+  // getStripeAccountDetails() {
+  //   this.paiementService.getStripeCust()
+  //     .subscribe(
+  //       res => {
+  //         console.log(res)
+  //       },
+  //       error => { console.log(error) }
+  //     )
+  // }
 
-
-  newAddress() {
-    let newAddress = new Address()
-    this.fetchedCompanie.address.push(newAddress)
-  }
-  removeAddress(i) {
-    this.fetchedCompanie.address.splice(i, 1);
-  }
-  newContact() {
-    let newContact = new ContactsPerson()
-    this.fetchedCompanie.contactsPerson.push(newContact)
-  }
-  removeContact(i) {
-    this.fetchedCompanie.contactsPerson.splice(i, 1);
-  }
   isMyCompanie() {
     let currentUser = this.authService.getCurrentUser()
     // console.log(currentUser)
@@ -148,9 +122,42 @@ export class EditCompanieComponent implements OnInit {
     })
 
   }
+  //
+  // addRight(level, index1, index2, index3) {
+  //     if(level === 0){
+  //       let newRight = new Rigth()
+  //       this.fetchedCompanie.rights.unshift(newRight)
+  //     }
+  //     if(level === 1){
+  //       let newRight = new Permission()
+  //       this.fetchedCompanie.rights[index1].permissions.unshift(newRight)
+  //     }
+  //     if(level === 2){
+  //
+  //       let newRight = new Access()
+  //       this.fetchedCompanie.rights[index1].permissions[index2].access.unshift(newRight)
+  //     }
+  // }
+
+  // openSection(nameSection) {
+  //   this[nameSection] = !this[nameSection]
+  // }
+  // removeRight(level, index1, index2, index3) {
+  //     if(level === 0)
+  //       this.fetchedCompanie.rights.splice(level, 1)
+  //     if(level === 1)
+  //       this.fetchedCompanie.rights.splice(index1, 1)
+  //     if(level === 2)
+  //       this.fetchedCompanie.rights[index1].permissions.splice(index1, 1)
+  //     if(level === 3)
+  //       this.fetchedCompanie.rights[index1].permissions[index1].access.splice(index2, 1)
+  //     // if(level === 3)
+  //     //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
+  // }
 
 
   addCateg(typeCateg, level, index1, index2, index3) {
+      console.log(typeCateg)
       let newCategorie = new Categorie0()
       if(level === 0)
         this.fetchedCompanie.categories[typeCateg].unshift(newCategorie)
@@ -202,7 +209,7 @@ export class EditCompanieComponent implements OnInit {
   // }
 
   initDataToRemove(){
-        this.fetchedCompanie.categories.categProduct = [
+        this.fetchedCompanie.categories.categCategorie = [
           {
             "categ":"Serrurerie",
             "isFlagged" : false,
@@ -708,9 +715,10 @@ export class EditCompanieComponent implements OnInit {
     this.save()
   }
 
+
   save() {
 
-    //this.fetchedCompanie.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categProduct))
+    //this.fetchedCompanie.categJson.categCategorie = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categCategorie))
     if(this.fetchedCompanie._id) {
       this.companieService.updateCompanie(this.fetchedCompanie)
         .subscribe(
@@ -778,6 +786,9 @@ export class EditCompanieComponent implements OnInit {
           console.log(error);
         }
       )
+  }
+  isAdmin() {
+    return this.authService.isAdmin();
   }
 
 

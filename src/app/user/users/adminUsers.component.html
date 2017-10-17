@@ -1,79 +1,65 @@
+
 <div class="container">
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <h4 *ngIf="search.isExternalUser"> {{'Customers' | translate}}</h4>
-      <h4 *ngIf="!search.isExternalUser"> {{'Team' | translate}}</h4>
-    </div>
-    <div class="p-2">
-      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'user'"></app-newObjDialog>
-    </div>
-  </div>
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
-    </div>
-  </div>
 
-  <div class="row">
+
+    <!-- <app-header [nameObject]="'user'" [option]="'internal'"></app-header> -->
+
+
+<div class="row">
     <div class="col-md-12">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="centre tdunder">Type</th>
-            <th class="centre tdunder">Titre
-              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.title'"></app-sort>
-            </th>
-            <th class="centre tdunder">
-              Nom
-              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.lastName'"></app-sort>
-            </th>
-            <th class="centre tdunder">
-              Société
-            </th>
-            <th class="centre tdunder">Ville
-
-            </th>
-            <th class="centre tdunder">Téléphone
-              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.phoneNumber'"></app-sort>
-            </th>
-            <th class="centre tdunder">Date
-              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
-            </th>
-          </tr>
-        </thead>
-        <tbody class="clienttbl">
-          <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
-            <td class="centre tdunder">
-              {{user.profile.typeClient}}
-              <div *ngFor="let singleType of user.typeUsers">
-                {{singleType}}
-              </div>
-            </td>
-            <td class="centre tdunder">{{user.profile.title}}</td>
-            <td class="centre tdunder">{{user.profile.lastName}} {{user.profile.name}}</td>
-
-
-            <td class="centre tdunder">
-              <div *ngFor="let companie of user.ownerCompanies">
-                {{companie.nameCompanie}}
-              </div>
-            </td>
-            <td class="centre tdunder">
-              <div *ngFor="let singleAddress of user.profile.address">
-
-                {{singleAddress.city}}
-              </div>
-
-            </td>
-            <td class="centre tdunder">{{user.profile.phoneNumber}}</td>
-            <td class="centre tdunder">{{user.createdAt | date:'dd-MM-yyyy' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
-        </mat-paginator>
-        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{ 'List'  }}</h4>
+        </div>
+        <div class="card-block clearfix">
+          <div id="wrapper" class="subsubnav-clients float-left">
+            <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+          </div>
+          <!-- <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
+          <md-tab label="Team" data-isExternalUser="false"></md-tab>
+          <md-tab label="External Contacts" data-isExternalUser="true"></md-tab>
+        </md-tab-group> -->
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class="">Type</th>
+                <th class="">Client</th>
+                <th class="">Nom</th>
+                <th class="">Date</th>
+                <th class="">Company</th>
+                <th class="">Statut</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+                <td class="">
+                  <div *ngFor="let singleType of user.type">
+                    {{singleType}}
+                  </div>
+                </td>
+                <td class="">{{user.profile.name}}</td>
+                <td class="">{{user.profile.lastName}}</td>
+                <td class="">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
+                <td class="">
+                  <div *ngFor="let companie of user.companies">
+                    {{companie.nameCompanie}}
+                  </div>
+                </td>
+                <td class="centre btn btn-outline-info"></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="has-text-centered">
+            <mat-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </mat-paginator>
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>

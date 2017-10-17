@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {UserAuth} from '../../auth/user.model';
 import {GlobalEventsManager} from '../../globalEventsManager';
+import {ShowNavBarData} from '../../home/home.model'
+
 
 
 @Component({
@@ -43,9 +45,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.renderer.invokeElementMethod(this.userEmail.nativeElement, 'focus', []);
-    }, 50);
+    // setTimeout(() => {
+    //   this.renderer.invokeElementMethod(this.userEmail.nativeElement, 'focus', []);
+    // }, 50);
   }
 
   // submit the login form with the user credentials and navigate the user to the index page of our app
@@ -54,9 +56,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this._authService.signin(user)
       .subscribe(
         data => {
-          // this.globalEventsManager.showNavBar(true);
-          // this.globalEventsManager.showTopNavBar(true);
-          // this.globalEventsManager.isLoggedIn(true);
+          let newShowNavBarData = new ShowNavBarData()
+          newShowNavBarData.search.typeObj = 'project'
+          this.globalEventsManager.showNavBarLeft(newShowNavBarData);
+          this.globalEventsManager.showNavBarTop(newShowNavBarData);
           //console.log(data)
           // if the user credentials are correct, set the localStorage token and userId,
           // we need these info in order to do stuff later when the user is signed in and verified
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           // navigate user to index page of our app
 
           //gooplus
-          this._router.navigate(['/home']);
+          this._router.navigate(['/']);
           // location.reload();
 
 

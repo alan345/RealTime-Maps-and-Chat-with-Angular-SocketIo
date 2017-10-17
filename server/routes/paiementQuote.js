@@ -82,8 +82,6 @@ router.put('/:id', function (req, res, next) {
         item.amount = req.body.amount
         item.type = req.body.type
         item.datePaiement = req.body.datePaiement
-        item.userDebiteds = req.body.userDebiteds
-        item.projects = req.body.projects
 
 
 
@@ -140,7 +138,7 @@ router.post('/', function (req, res, next) {
 
 // get all forms from database
 router.get('/page/:page', function (req, res, next) {
-  var itemsPerPage = 15
+  var itemsPerPage = 10
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
@@ -153,8 +151,8 @@ router.get('/page/:page', function (req, res, next) {
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
 
-  if(req.query.quoteId)
-    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.quoteId)
+  if(req.query.idQuote)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
 
 
 // console.log(req.query.isExpense)
@@ -165,7 +163,7 @@ router.get('/page/:page', function (req, res, next) {
   PaiementQuote
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'userDebiteds', model: 'User'})
+  .populate({path: 'quotes', model: 'Quote'})
   .populate({
     path: 'quotes',
     model: 'Quote',

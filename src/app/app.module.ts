@@ -4,8 +4,13 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule, RequestOptions, Http} from '@angular/http';
 import { AppComponent} from './app.component';
 // import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
-// import { MaterialModule } from '@angular/material';
+
 import {MatSidenavModule} from '@angular/material';
+
+
+import { SideBarRightModule} from './nav/sideBarRight/sideBarRight.module';
+import { SideBarLeftModule} from './nav/sideBarLeft/sideBarLeft.module';
+import { NavbarModule} from './nav/navbar/navbar.module';
 
 
 import { GlobalEventsManager } from './globalEventsManager';
@@ -26,8 +31,8 @@ import { CustomOption } from './toast-options';
 
 
 // import { NavbarComponent} from './nav/navbar/navbar.component';
-import { NavbarModule} from './nav/navbar/navbar.module';
-import { SidebarModule} from './nav/sidebar/sidebar.module';
+// import { NavbarModule} from './nav/navbar/navbar.module';
+// import { SideBarModule} from './nav/sideBar/sideBar.module';
 
 import { FooterComponent} from './nav/footer/footer.component';
 
@@ -49,14 +54,14 @@ import { LoadingComponent} from './nav/loading/loading.component';
 // import { SingleUserComponent} from './user/users/singleUser.component';
 // import { AddNoteComponent} from './user/users/addNote.component';
 // import { ChooseDateComponent} from './user/users/chooseDate.component';
-// import { AddProductsToUserComponent} from './user/users/addProductsToUser.component';
-// import { UserProductsHistory} from './user/users/userProductsHistory.component';
+// import { AddCategoriesToUserComponent} from './user/users/addCategoriesToUser.component';
+// import { UserCategoriesHistory} from './user/users/userCategoriesHistory.component';
 //
 
 
 
 
-import { DeleteDialog} from './deleteDialog/deleteDialog.component';
+// import { DeleteDialog} from './deleteDialog/deleteDialog.component';
 // import { SeePictureDialogComponent} from './seePictureDialog/seePictureDialog.component';
 
 
@@ -68,10 +73,10 @@ import { DeleteDialog} from './deleteDialog/deleteDialog.component';
 //
 
 
-//import { ProductModule} from './product/product.module';
+//import { CategorieModule} from './categorie/categorie.module';
 //import { ProjectModule} from './project/project.module';
 import { UserModule} from './user/user.module';
-// import { ProductModule} from './product/product.module';
+// import { CategorieModule} from './categorie/categorie.module';
 //import { CompanieModule} from './companie/companie.module';
 
 //import { QuoteModule} from './quote/quote.module';
@@ -95,9 +100,8 @@ import { ErrorService} from './errorHandler/error.service';
 import { ErrorComponent} from './errorHandler/error.component';
 
 
-import { MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
-import { MainPageHomeService} from './mainPageHome/mainPageHome.service';
-
+import { HomeComponent} from './home/home.component';
+import { HomeService} from './home/home.service';
 
 
 
@@ -116,7 +120,7 @@ import { AdminService} from './admin/services/admin.service';
 
 import { AdminGuardService} from './admin/services/adminGuard';
 import { CompanieGuardService} from './companie/companieGuard.service';
-import { PaiementGuardService} from './user/paiement/paiementGuard.service';
+// import { PaiementGuardService} from './user/paiement/paiementGuard.service';
 
 
 import { AdminComponent} from './admin/admin.component';
@@ -142,12 +146,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   //  CalendarComponent,
 
     // AutocompleteComponent,
-    // ProductComponent,
-    // ProductsComponent,
-    // NewProductComponent,
-    // SingleProductComponent,
+    // CategorieComponent,
+    // CategoriesComponent,
+    // NewCategorieComponent,
+    // SingleCategorieComponent,
 
-    DeleteDialog,
+    // DeleteDialog,
     // SeePictureDialogComponent,
 
 
@@ -164,8 +168,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     // AddNoteComponent,
     // ChooseDateComponent,
     // UserPicturesComponent,
-    // AddProductsToUserComponent,
-    // UserProductsHistory,
+    // AddCategoriesToUserComponent,
+    // UserCategoriesHistory,
     //
     //
     // RegisterComponent,
@@ -176,7 +180,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     ErrorComponent,
 
-    MainPageHomeComponent,
+    // HomeComponent,
 
 
     // CompanieDetailUsersComponent,
@@ -206,6 +210,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   ],
   imports: [
+
+
     BrowserModule,
     CommonModule,
     HttpModule,
@@ -216,9 +222,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ToastModule.forRoot(),
     // ProgressBarModule,
     FormsModule,
-    // MaterialModule,
-    NavbarModule,
-    SidebarModule,
+
+    // NavbarModule,
+    // SidebarModule,
     MatSidenavModule,
     // CKEditorModule,
     // NgbModule.forRoot(),
@@ -226,11 +232,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     // AutocompleteComponent,
 
   //  ProjectModule,
-//    ProductModule,
+//    CategorieModule,
   //  CompanieModule,
   //  QuoteModule,
 
-
+  SideBarRightModule,
+  SideBarLeftModule,
+  NavbarModule,
 
 
   ],
@@ -244,17 +252,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthService,
     ErrorService,
 //    CompanieService,
-    //ProductService,
-    MainPageHomeService,
+    //CategorieService,
+    HomeService,
   //  PressService,
     // FormService,
     AdminService,
   //  UserService,
-  //  ProductService,
+  //  CategorieService,
   //  PromotionService,
     AdminGuardService,
     CompanieGuardService,
-    PaiementGuardService,
+    // PaiementGuardService,
     GlobalEventsManager,
     // TRANSLATION_PROVIDERS,
     // TranslateService,
@@ -268,12 +276,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   entryComponents: [
   //  CompanieAddUserDialog,
-    DeleteDialog,
+    // DeleteDialog,
 
   //  PromotionDeleteDialog,
     // EditOptionsComponentDialog,
-    // ProductDeleteDialog,
-    // ProductWhereDialogComponent,
+    // CategorieDeleteDialog,
+    // CategorieWhereDialogComponent,
 
   ],
 

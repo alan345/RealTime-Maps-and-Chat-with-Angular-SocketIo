@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Strat</h3>
+      <h4>id: {{fetchedStrat._id}}</h4>
+      <md-card>
+        <md-card-content>
+          <h2>Links to documents</h2>
+          <app-documents [search]="search"></app-documents>
+        </md-card-content>
+      </md-card>
+      <br>
+      <md-card>
+        <md-card-content>
+          <h2>Goal</h2>
+          <app-briefs [search]="search"></app-briefs>
+        </md-card-content>
+      </md-card>
+      <br>
+      <md-card>
+        <md-card-content>
+          <h2>Chat</h2>
+          <app-chat [search]="search"></app-chat>
+        </md-card-content>
+      </md-card>
+
+      <md-card>
+        <md-card-content>
+          <h2>Team</h2>
+          <button type="button" (click)="openTeam()" class="edit-btn">Edit</button>
+          <br>
+          <div *ngFor="let user of fetchedStrat.users">
+            <div (click)="openProfile(user._id)">
+              <app-picture [addPicture]=false [deletePicture]=false [forms]="user.forms"></app-picture>
+              <p>{{user.profile.name}}</p>
+            </div>
+            <br>
+          </div>
+        </md-card-content>
+      </md-card>
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="missionbox">
+  <div class="card">
+    <div class="card-header">
+      <i [ngClass]="'fa fa-' + categorie.icone"></i>
+      <h2>{{categorie.name}}</h2>
+      <h3>{{paginationData.totalItems}} missions</h3>
+      <button type="button" (click)="editMode=!editMode" class="edit-btn">Edit</button>
+    </div>
+    <div class="card-block clearfix">
+      <button *ngIf="editMode" type="button" (click)="createNewMission()" class="add-object">Add Mission</button>
+      <table class="table table-hover">
+        <tbody>
+          <tr *ngFor="let mission of fetchedMissions">
+            <td (click)="goTo(mission._id)" routerLinkActive="active">{{mission.title}}</td>
+            <td>
+              <section>
+                <mat-progress-bar  [value]="mission.dateMission.percentageProgress">
+                </mat-progress-bar>
+              </section>
+            </td>
+            <td>
+              <button *ngIf="editMode" type="button" (click)="openDeleteMission(mission._id)" class="delete-x"><i class="fa fa-trash-o"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="paginationData.totalItems > 3" class="has-text-centered">
+        <mat-paginator [length]="paginationData.totalItems" [pageIndex]="paginationData.currentPage-1" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
+    </div>
+  </div>
+</div>

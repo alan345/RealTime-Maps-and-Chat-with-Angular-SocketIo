@@ -1,61 +1,63 @@
-.logo-header {
-  width: 100px;
-}
-
-.navbar-toggleable-md2 {
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.navbar-nav2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  -webkit-box-direction: normal;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-  padding-right: 0;
-  padding-left: 0;
-  padding-right: .5rem;
-  padding-left: .5rem;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.navbar-collapse2 {
-  display: -webkit-box !important;
-  display: -webkit-flex !important;
-  display: -ms-flexbox !important;
-  display: flex !important;
+.nav-container {
+  z-index: 5;
+  position: absolute;
   width: 100%;
 }
-
-.tdpop {
-  padding: 1rem!important;
-  justify-content: center!important;
+.nav.rightmenu {
+  float: right;
+  padding: 15px;
 }
-
-.table-hover2 td:hover {
-  background-color: rgba(148, 17, 17, 1);
+.nav.leftmenu {
+  margin-left: 1.8%;
+  float: left;
+  z-index: 999;
+  padding: 15px;
 }
-
-
-
-.table-bordered {
-  border: 1px solid rgba(255, 255, 255, .87);
-  background-color: #fff;
+.fa-home {
+  color: #ffffff !important;
+  background-color: #330066 !important;
+  padding: 10px !important;
+  border: 1px solid !important;
+  border-radius: 20px !important;}
+a.nav-link {
+  padding: 0 1em !important;
+}
+.fa-bars {
+  background: #4a148c;
+  background: -webkit-linear-gradient(left, #4a148c , #0d47a1);
+  background: -o-linear-gradient(right, #4a148c , #0d47a1);
+  background: -moz-linear-gradient(right, #4a148c , #0d47a1);
+  background: linear-gradient(to right, #4a148c , #0d47a1);
+}
+.navadd .fa.fa-plus, .navnotif button {
+  color: #fff;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  font-weight: 500;
+}
+.navadd .fa.fa-plus {
+  background-color: #330066;
+  border: 1px solid #330066;
+  margin: 10px 20px;
+  padding: 12px;
+}
+.navnotif button {
+  background-color: #f44336;
+  border: 1px solid;
+  margin: 10px 0;
+}
+.adm-btn {
+  color: #ffffff;
+  background-color: #330066;
+  border: 1px solid;
+  margin: 10px 50px;
+  height: 40px;
+}
+.pic-container {
+  border: 1px solid #4a148c;
+  padding: 1px;
+  background-color: #ffffff;
+  border-radius: 100px;
+  width: 65px;
 }

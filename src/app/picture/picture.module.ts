@@ -7,17 +7,17 @@ import { FormsModule }         from '@angular/forms';
 // import {SharedModule } from '../shared/shared.module';
 // import { newObjDialogComponent } from './newObjDialog/newObjDialog.component';
 
+
 import { FormService} from './form/form.service';
-import { UserFormsComponent} from './form/list/userForms.component';
-import { UserFormsUploadAndList} from './form/both/userFormsUploadAndList.component';
+// import { UserFormsComponent} from './form/list/userForms.component';
+// import { UserFormsUploadAndList} from './form/both/userFormsUploadAndList.component';
 // import { SeePictureDialogComponent} from './form/seePictureDialog/seePictureDialog.component';
 
-import { EditOptionsComponentDialog} from './form/single/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog} from './form/single/modalLibrary/modalLibrary.component';
 
 import { FormComponent} from './form/single/form.component';
-// import { MaterialModule } from '@angular/material';
-import { ProgressBarModule} from 'ng2-progress-bar';
-import { MatTabsModule} from '@angular/material';
+
+// import { ProgressBarModule} from 'ng2-progress-bar';
 
 @NgModule({
   imports: [
@@ -25,17 +25,16 @@ import { MatTabsModule} from '@angular/material';
     FormsModule,
     // SharedModule,
     // UserModule,
-    // MaterialModule,
-    MatTabsModule,
-    ProgressBarModule,
+    
+    // ProgressBarModule,
 
   ],
   declarations: [
     PictureComponent,
-    UserFormsComponent,
-    UserFormsUploadAndList,
+    // UserFormsComponent,
+    // UserFormsUploadAndList,
     // SeePictureDialogComponent,
-    EditOptionsComponentDialog,
+    // EditOptionsComponentDialog,
     FormComponent,
     // NewUserComponent
   ],
@@ -48,7 +47,7 @@ import { MatTabsModule} from '@angular/material';
   ],
   entryComponents: [
     // SeePictureDialogComponent,
-    EditOptionsComponentDialog,
+    // EditOptionsComponentDialog,
   ]
 })
 export class PictureModule { }

@@ -12,8 +12,9 @@ var project = new Schema({
       name: {type: String},
       description: {type: String},
     },
-    clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    users: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    
+    // assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
     status: {type: String, default: [0]},
     // logs:[{
     //   comment: {type: String, default: ['']},
@@ -23,7 +24,8 @@ var project = new Schema({
     // }],
     status: {type: Number},
     dateProject:{
-      creationDate: {type: Date, default: [Date()]},
+      start: {type: Date, default: [Date()]},
+      end: {type: Date, default: [Date()]},
     },
     categorie: {
       categ0:[{name: {type: String}}],
@@ -44,7 +46,6 @@ var project = new Schema({
       //     endDate: {type: Date, default: [Date()]},
       //   }
       // }
-      
     ]
     }]
   },

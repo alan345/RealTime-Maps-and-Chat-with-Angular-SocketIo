@@ -5,7 +5,6 @@ import { User} from '../../user/user.model';
 import { ToastsManager} from 'ng2-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Search, PaginationData } from '../../shared/shared.model';
 
 
 
@@ -20,19 +19,16 @@ import { Search, PaginationData } from '../../shared/shared.model';
 export class AdminUsersComponent implements OnInit {
   fetchedUsers: User[] = [];
   loading: boolean;
-  search: Search = new Search()
-  // {
-  //   orderBy : '',
-  //   search: '',
-  //   isExternalUser: true,
-  //   role: ''
-  // };
-  paginationData: PaginationData = new PaginationData()
-  // {
-  //   currentPage: 1,
-  //   itemsPerPage: 0,
-  //   totalItems: 0
-  // };
+  search = {
+    orderBy : '',
+    search: '',
+    isExternalUser: true,
+  };
+  paginationData = {
+    currentPage: 1,
+    itemsPerPage: 0,
+    totalItems: 0
+  };
 
 
   constructor(
@@ -48,9 +44,8 @@ export class AdminUsersComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExternalUser']) {
-        this.search.isExternalUser = (params['isExternalUser'] === 'true')
-        this.search.orderBy = 'profile.lastName';
-        // this.search.role = 'client';
+        this.search.isExternalUser = params['isExternalUser']
+        this.search.orderBy = 'profile.name';
         this.getUsers(this.paginationData.currentPage, this.search);
       }
     })
@@ -80,7 +75,7 @@ export class AdminUsersComponent implements OnInit {
     this.getUsers(this.paginationData.currentPage, this.search);
   }
   orderBy(orderBy: string) {
-    // this.search.orderBy = orderBy;
+    this.search.orderBy = orderBy;
     this.getUsers(this.paginationData.currentPage, this.search);
   }
 

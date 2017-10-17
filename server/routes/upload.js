@@ -150,7 +150,7 @@ router.post('/', upload.single('fileUp'), function (req, res, err) {
       //type: req.file.filename.slice(-3),
       type: req.file.filename.split('.').pop(),
       owner: user._id,
-      ownerCompanies: req.user.ownerCompanies
+      ownerCompanies: req.user.companies
     });
 
     if(!req.user.ownerCompanies.length) {
@@ -167,8 +167,8 @@ router.post('/', upload.single('fileUp'), function (req, res, err) {
           err: err
         });
       }
-      // user.forms.push(result);
-      // user.save();
+      user.forms.push(result);
+      user.save();
       res.status(201).json({
         message: 'Form Saved Successfully',
         obj: result

@@ -1,0 +1,28 @@
+<div>
+  <div class="pic-container"><app-picture [addPicture]=false [deletePicture]=false [forms]="fetchedUser.forms"></app-picture></div>
+  <h2 class="my-name">{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</h2>
+  <h5>{{fetchedUser.profile.title}}</h5>
+  <button (click)="editMode = !editMode" class="profile-button">Edit Profile</button>
+  <div *ngIf="editMode">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <mat-form-field>
+        <input matInput type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="lastName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUser.profile.title" placeholder="title">
+      </mat-form-field>
+      <app-picture [addPicture]=true [deletePicture]=true [forms]="fetchedUser.forms"></app-picture>
+      <div class="valid-edit">
+        <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+        <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
+        <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="sendEmailToUserToJoinCompanie()">sendEmailToUserToJoinCompanie</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+  <button type="button" class="profile-button">Settings</button>
+  <button type="button" (click)="logout()" class="profile-button">Logout</button>
+</div>

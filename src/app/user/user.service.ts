@@ -51,17 +51,6 @@ export class UserService {
         return Observable.throw(error.json());
       })
   }
-  getCityByZip(zip: string) {
-    return this.http.get('http://api.zippopotam.us/fr/' + zip )
-      .timeout(9000)
-      .map((response: Response) => {
-        return response.json();
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      })
-  }
 
 
   // cleanCurrentUserInSession(){
@@ -131,14 +120,41 @@ export class UserService {
   }
 
   saveUser(user: any) {
-    user.profile.parentUser=[]
+    // user.profile.parentUser=[]
   //  console.log(this.authService.currentUser.userId)
-    user.profile.parentUser.push(this.authService.currentUser.userId)
+    // user.profile.parentUser.push(this.authService.currentUser.userId)
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
   //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'profile/',body, {headers: headers})
+    return this.http.post(this.url + 'profile/', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+  saveUsersToObjects(usersToObjects: any) {
+
+    const body = JSON.stringify(usersToObjects);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.post(this.url + 'profile/saveUsersToObjects/', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+  sendEmailToUserToJoinCompanie(user: any) {
+    const body = JSON.stringify(user);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.post(this.url + 'profile/sendEmailToUserToJoinCompanie/', body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());

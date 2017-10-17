@@ -9,10 +9,10 @@ import {ADMIN_ROUTES} from './admin/admin.routes';
 
 
 import { CompanieGuardService} from './companie/companieGuard.service';
-import { PaiementGuardService} from './user/paiement/paiementGuard.service';
+// import { PaiementGuardService} from './user/paiement/paiementGuard.service';
 import { AuthGuardService} from './auth/authguard.service';
 
-import { MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
+import { HomeComponent} from './home/home.component';
 
 import {AdminComponent} from './admin/admin.component';
 import {ErrorPageComponent} from './errorPage/errorPage.component';
@@ -23,28 +23,31 @@ import { NgModule } from '@angular/core';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {path: 'home', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
-  {path: 'comment', loadChildren: 'app/comment/comment.module#CommentModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  // {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: '', loadChildren: 'app/home/home.module#HomeModule', canActivate: [AuthGuardService], pathMatch: 'full'},
+  {path: 'log', loadChildren: 'app/log/log.module#LogModule', canActivate: [AuthGuardService]},
+  {path: 'mission', loadChildren: 'app/mission/mission.module#MissionModule', canActivate: [AuthGuardService]},
+  {path: 'document', loadChildren: 'app/document/document.module#DocumentModule', canActivate: [AuthGuardService]},
+  {path: 'strat', loadChildren: 'app/strat/strat.module#StratModule', canActivate: [AuthGuardService]},
+  {path: 'brief', loadChildren: 'app/brief/brief.module#BriefModule', canActivate: [AuthGuardService]},
+  // {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService]},
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule', canActivate: [AuthGuardService]},
-  {path: 'right', loadChildren: 'app/right/right.module#RightModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule'},
-  {path: 'paiementQuote', loadChildren: 'app/paiementQuote/paiementQuote.module#PaiementQuoteModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'reporting', loadChildren: 'app/reporting/reporting.module#ReportingModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'chat', loadChildren: 'app/chat/chat.module#ChatModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'task', loadChildren: 'app/task/task.module#TaskModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'notification', loadChildren: 'app/notification/notification.module#NotificationModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'right', loadChildren: 'app/right/right.module#RightModule', canActivate: [AuthGuardService]},
+  // {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule'},
+  // {path: 'paiementQuote', loadChildren: 'app/paiementQuote/paiementQuote.module#PaiementQuoteModule', canActivate: [AuthGuardService]},
+  // {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService]},
+  // {path: 'reporting', loadChildren: 'app/reporting/reporting.module#ReportingModule', canActivate: [AuthGuardService]},
+  {path: 'categorie', loadChildren: 'app/categorie/categorie.module#CategorieModule', canActivate: [AuthGuardService]},
+  {path: 'chat', loadChildren: 'app/chat/chat.module#ChatModule', canActivate: [AuthGuardService]},
+  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService]},
+  // {path: 'task', loadChildren: 'app/task/task.module#TaskModule', canActivate: [AuthGuardService]},
+  // {path: 'notification', loadChildren: 'app/notification/notification.module#NotificationModule', canActivate: [AuthGuardService]},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
 
 
   // {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
   // {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},
 
-  {path: 'admin', component: AdminComponent, children: ADMIN_ROUTES},
+  // {path: 'admin', component: AdminComponent, children: ADMIN_ROUTES},
   {path: '404', component: ErrorPageComponent},
   {path: '**', redirectTo: '404'}
 ];

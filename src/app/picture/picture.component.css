@@ -1,4 +1,4 @@
-.imgList{
-  max-height: 50px;
-    max-width: 50px;
+.imgList {
+  max-width: 100%;
+  border-radius: 100px;
 }

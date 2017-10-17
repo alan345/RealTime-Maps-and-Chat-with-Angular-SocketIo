@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import { Location } from '@angular/common';
 import {Router} from '@angular/router';
-import { TranslateService } from '../../translate/translate.service';
+
 
 
 @Component({
@@ -17,7 +17,6 @@ export class LoginInAppComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private location: Location,
-    private translateService: TranslateService,
   ) {}
 
 

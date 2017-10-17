@@ -1,0 +1,32 @@
+<div>
+  <!--<h4 class="">id: {{fetchedMission._id}}</h4>-->
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+    <div>
+      <app-autocomplete [typeAutocomplete]="'project'" [canDelete]=true [search]="search" [title]="'Project'" [singleChoice]=true [arrayContent]="fetchedMission.projects">
+      </app-autocomplete>
+      <app-autocomplete [typeAutocomplete]="'categorie'" [canDelete]=true [search]="search" [title]="'categorie'" [singleChoice]=true [arrayContent]="fetchedMission.categories">
+      </app-autocomplete>
+      <mat-form-field>
+        <input matInput type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedMission.title" placeholder="title">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput class="form-control" formControlName="description" [(ngModel)]="fetchedMission.description" placeholder="Description">
+      </textarea>
+      </mat-form-field>
+      <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedMission.users">
+      </app-autocomplete>
+      <mat-form-field>
+        <input matInput type="date" class="form-control" formControlName="startString" [(ngModel)]="fetchedMission.dateMission.startString">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" class="form-control" formControlName="endString" [(ngModel)]="fetchedMission.dateMission.endString">
+      </mat-form-field>
+      <div class="valid-edit">
+        <button type="submit" class="sln-edt done">{{'Save' }}</button>
+        <button *ngIf="fetchedMission._id" type="button" class="delete" md-button (click)="openDeleteConfirmation()">
+        Delete
+      </button>
+      </div>
+    </div>
+  </form>
+</div>

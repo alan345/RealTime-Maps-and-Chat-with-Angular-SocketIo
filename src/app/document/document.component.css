@@ -1,0 +1,31 @@
+.single-doc {
+  box-shadow: none !important;
+  background-color: #f4f4f4 !important;
+  margin: 15px 0;
+}
+.doc-title {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  float: left;
+}
+.open {
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid;
+  padding: 10px 40px;
+  float: right;
+}
+img.doc-icon {
+  float: left;
+  width: 50px;
+  margin-right: 15px;
+}
+.doc-title p {
+  margin: 0;
+}
+.doc-state-bottom {
+  position: absolute;
+  bottom: -20px;
+}

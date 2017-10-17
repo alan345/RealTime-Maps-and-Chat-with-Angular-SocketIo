@@ -4,49 +4,44 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { Routes, RouterModule} from '@angular/router';
 
-// import { MaterialModule } from '@angular/material';
+
 
 import { NavbarComponent} from './navbar.component';
-// import { ListNewObjComponent} from './newObj/listNewObj.component';
-import {SharedModule } from '../../shared/shared.module';
-import { NotificationService} from '../../notification/notification.service';
-import {NotificationModule} from '../../notification/notification.module';
-import {ListNewObjDialogComponent} from './newObj/dialog/listNewObjDialog.component'
+// import {SharedModule } from '../../shared/shared.module';
+// import { NotificationService} from '../../notification/notification.service';
+import {SharedSmallModule } from '../../shared/sharedSmall.module';
+import {MatMenuModule} from '@angular/material';
 
 
 @NgModule({
   imports:      [
-    // ProductRouting,
+    // CategorieRouting,
     RouterModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
-    NotificationModule,
+    SharedSmallModule,
+    MatMenuModule,
+    // SharedModule,
     //  FormsModule,
-    // MaterialModule,
+
     // ReactiveFormsModule,
 
   ],
   declarations: [
 
     NavbarComponent,
-    // ListNewObjComponent,
-    ListNewObjDialogComponent,
-    // ProductsComponent,
-    // ProductSingleComponent,
+    // CategoriesComponent,
+    // CategorieSingleComponent,
   ],
   exports:      [
-    NavbarComponent,
-    // ListNewObjComponent,
-    // ProductsComponent
+    NavbarComponent
+    // CategoriesComponent
   ],
   providers:    [
-    NotificationService,
-    // ProductService
+    // NotificationService,
+    // CategorieService
   ],
-  entryComponents: [
-  ListNewObjDialogComponent
-  ]
+  entryComponents: [ ]
 })
 export class NavbarModule { }

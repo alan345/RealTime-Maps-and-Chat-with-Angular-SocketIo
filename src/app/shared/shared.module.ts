@@ -10,41 +10,41 @@ import {PictureModule} from '../picture/picture.module';
 
 
 // import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
-import { TranslateModule}   from '../translate/translate.module';
 
 import { RoundPipe} from './round.pipe';
-import { HeaderComponent } from '../nav/header/header.component';
-import { SortComponent } from './sort/sort.component';
+
+import { NavbarModule } from '../nav/navbar/navbar.module';
+
+
 // import { newObjDialogComponent } from '../nav/newObjDialog/newObjDialog.component';
 
 
 import { LoadingInAppComponent } from '../nav/loadingInApp/loadingInApp.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
-import {CommentModule} from '../comment/comment.module';
+// import {CommentModule} from '../comment/comment.module';
 
 import {SharedSmallModule} from './sharedSmall.module'
 @NgModule({
   imports:      [
-
     SharedSmallModule,
     CommonModule,
     FormsModule,
     AutocompleteModule,
     PictureModule,
-    CommentModule,
-    TranslateModule,
+    // CommentModule,
+    NavbarModule,
 
     // CommentModule,
 
 
   ],
   declarations: [
-    SortComponent,
     // RoundPipe,
     // AutocompleteComponent,
     // TranslatePipe,
-    HeaderComponent,
+
+
     // newObjDialogComponent,
     // LoadingInAppComponent,
     // LoginInAppComponent,
@@ -58,14 +58,14 @@ import {SharedSmallModule} from './sharedSmall.module'
     CommonModule,
     FormsModule,
     // RoundPipe,
-    HeaderComponent,
-    SortComponent,
+
+    NavbarModule,
     // newObjDialogComponent,
     // LoadingComponent,
     // LoadingInAppComponent,
     // LoginInAppComponent,
     // PictureModule,
-    CommentModule,
+    // CommentModule,
     // CommentModule,
     // AutocompleteComponent,
   ],

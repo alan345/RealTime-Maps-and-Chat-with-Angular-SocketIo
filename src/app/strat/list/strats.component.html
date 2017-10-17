@@ -1,0 +1,33 @@
+<div class="missionbox">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title"><i class="fa fa-tachometer"></i> Strategy</h2>
+      <h3>{{paginationData.totalItems}} missions</h3>
+      <button type="button" (click)="editMode=!editMode" class="edit-btn">Edit</button>
+    </div>
+    <div class="card-block clearfix">
+      <button *ngIf="editMode" type="button" (click)="createNewStrat()" class="add-object">Add Strategy</button>
+      <table class="table table-hover">
+        <tbody class="">
+          <tr *ngFor="let strat of fetchedStrats">
+            <td (click)="goTo(strat._id)">{{strat.title}}</td>
+            <td>
+              <section class="example-section">
+                <mat-progress-bar class="example-margin" [value]="strat.dateStrat.percentageProgress">
+                </mat-progress-bar>
+              </section>
+            </td>
+            <td>
+              <button *ngIf="editMode" type="button" (click)="openDeleteStrat(strat._id)" class="delete-x"><i class="fa fa-trash-o"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="has-text-centered">
+        <mat-paginator [length]="paginationData.totalItems" [pageIndex]="paginationData.currentPage-1" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
+    </div>
+  </div>
+</div>

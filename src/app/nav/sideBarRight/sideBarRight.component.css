@@ -1,0 +1,26 @@
+@media screen and (min-width: 768px) {
+  .sidebarright-page {
+    width: 100%;
+    background: none;
+    overflow: hidden;
+  }
+  .sidebarright-back {
+    width: 5000px;
+    display: inline-block;
+    background-color: #000000;
+    height: 100%;
+    opacity: 0.5;
+    position: absolute;
+  }
+  .sidebarright {
+    display: inline-block;
+    width: 250px;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    height: 100%;
+  }
+  .sidebarright-content {
+    padding: 100px 15px 15px 15px;
+  }
+}

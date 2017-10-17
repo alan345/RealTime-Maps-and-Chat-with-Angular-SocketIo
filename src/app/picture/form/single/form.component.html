@@ -1,8 +1,7 @@
-<div class="media-mod">
-  <form  (ngSubmit)="onSubmit()" class="imgupl-mod" novalidate>
+
+  <form  (ngSubmit)="onSubmit()" novalidate>
     <fieldset>
-      <div class="form-group">
-        <div class="cho-fil">
+
           <button type="button">
             <input #fileInput name="fileUp" type="file" (change)="onFileSelect($event)">
           </button>
@@ -10,25 +9,30 @@
             <div *ngFor="let file of files" class="cho-filcnt">
               <img *ngIf="!isImagePure(file)" class="img-responsive" src="./assets/images/pdf_icon.png">
               <img [src]="file.objectURL" *ngIf="isImagePure(file)" class="img-responsive" onerror="this.src ='assets/images/no-image-found.jpg'"><br>
-              <button type="button" class="dlt-btn" (click)="remove(i)"><i class="fa fa-trash"></i></button>
+              <button type="button" class="" (click)="remove(i)"><i class="fa fa-trash"></i></button>
             </div>
           </div>
           <!-- <div>
             <i *ngIf="isAdmin()" class="rec-sze">Recommended size for Home Page pictures: 500 x 230 px (width x height)</i>
           </div> -->
-        </div>
-      </div>
+
+
 
 
       <!-- <button type="button" (click)="rotate()">roatate</button>
       <div class="appendTo" #appendToChildEl></div> -->
 
       <div class="form-group">
-        <div class="sbmt-pic">
-          <button type="submit" [disabled]="!myForm.valid || !hasFiles()" id="submitForm" name="sumbitForm" [ngClass]="{'done':hasFiles(),'pas-done':!hasFiles()}">Submit</button>
-          <progress-bar [value]="progress" [max]="100" *ngIf="hasFiles() && submitStarted"></progress-bar>
-        </div>
+
+        <button type="submit" [disabled]="!myForm.valid || !hasFiles()" id="submitForm" name="sumbitForm" [ngClass]="{'done':hasFiles(),'pas-done':!hasFiles()}">Submit</button>
+        <!-- <progress-bar [value]="progress" [max]="100" *ngIf="hasFiles() && submitStarted"></progress-bar> -->
+
+        <!-- <mat-progress-bar
+          *ngIf="hasFiles() && submitStarted"
+          class=""
+          [value]="progress"
+          >
+        </mat-progress-bar> -->
       </div>
     </fieldset>
   </form>
-</div>

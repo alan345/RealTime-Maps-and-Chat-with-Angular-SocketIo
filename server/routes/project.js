@@ -4,6 +4,8 @@ var express = require('express'),
   User = require('../models/user.model'),
   Task = require('../models/task.model'),
   Project = require('../models/project.model'),
+  Categorie = require('../models/categorie.model'),
+  Mission = require('../models/mission.model'),
   Form = require('../models/form.model'),
   fs = require('fs'),
   jwt = require('jsonwebtoken'),
@@ -11,13 +13,13 @@ var express = require('express'),
   nameObject = 'project'
 
 // this process does not hang the nodejs server on error
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.log(err)
 })
 
-router.use('/', function(req, res, next) {
+router.use('/', function (req, res, next) {
   var token = req.headers['authorization']
-  jwt.verify(token, config.secret, function(err, decoded) {
+  jwt.verify(token, config.secret, function (err, decoded) {
     if (err) {
       return res.status(401).json({message: 'Authentication failed', error: err})
     }
@@ -33,7 +35,7 @@ router.use('/', function(req, res, next) {
       User
       .findById(decoded.user._id)
       .populate({path: 'rights', model: 'Right'})
-      .exec(function(err, doc) {
+      .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({message: 'Fetching user failed', err: err})
         }
@@ -63,7 +65,7 @@ router.use('/', function(req, res, next) {
 })
 
 
-router.put('/updateTask/:id', function(req, res, next) {
+router.put('/updateTask/:id', function (req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
@@ -72,7 +74,7 @@ router.put('/updateTask/:id', function(req, res, next) {
       }
     })
   }
-  Project.findById(({_id: req.params.id}), function(err, item) {
+  Project.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({message: '', err: err})
     } else {
@@ -84,7 +86,7 @@ router.put('/updateTask/:id', function(req, res, next) {
       item.bucketTasks[req.body.bucketTaskIndex].tasks.push( task)
       // console.log(item)
 
-      item.save(function(err, result) {
+      item.save(function (err, result) {
         if (err) {
           return res.status(404).json({message: 'There was an error, please try again', err: err})
         }
@@ -96,7 +98,7 @@ router.put('/updateTask/:id', function(req, res, next) {
 })
 
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', function (req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
@@ -105,17 +107,7 @@ router.put('/:id', function(req, res, next) {
       }
     })
   }
-
-
-  if (!req.body.clients.length) {
-    return res.status(404).json({message: 'Select a client', err: ''})
-  }
-  if (!req.body.assignedTos.length) {
-    return res.status(404).json({message: 'Select a User', err: ''})
-  }
-
-
-  Project.findById(({_id: req.params.id}), function(err, item) {
+  Project.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({message: '', err: err})
     } else {
@@ -126,7 +118,7 @@ router.put('/:id', function(req, res, next) {
       item.status = req.body.status
       // item.embed = req.body.embed
       item.categories = req.body.categories
-      item.clients = req.body.clients
+      item.users = req.body.users
       item.quotes = req.body.quotes
       item.categorie = req.body.categorie
       item.assignedTos = req.body.assignedTos
@@ -135,8 +127,7 @@ router.put('/:id', function(req, res, next) {
       item.dateProject = req.body.dateProject
       item.logs = req.body.logs
 
-
-      item.save(function(err, result) {
+      item.save(function (err, result) {
         if (err) {
           return res.status(404).json({message: 'There was an error, please try again', err: err})
         }
@@ -147,7 +138,81 @@ router.put('/:id', function(req, res, next) {
   })
 })
 
-router.post('/', function(req, res, next) {
+
+
+// should not use is
+router.get('/missionsByCategoriesByProject/:id', function(req, res, next) {
+  Project.findById((req.params.id), function(err, obj) {
+    if (err) {
+      return res.status(500).json({message: 'An error occured', err: err})
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {
+          message: 'Obj not found!'
+        }
+      })
+    }
+
+      let searchQuery = {}
+      searchQuery['ownerCompanies'] = req.user.ownerCompanies
+      Categorie
+      .find(searchQuery)
+      .sort('-createdAt')
+      .exec(function (err, categories) {
+        if (err) {
+          return res.status(404).json({
+            message: 'No results',
+            err: err
+          })
+        } else {
+          let itemCategoriesId = []
+          categories.forEach(itemCategorie => itemCategoriesId.push(itemCategorie._id))
+          console.log(itemCategoriesId)
+
+          let searchQueryMission = {
+            categories: {'$in': itemCategoriesId}
+          }
+          searchQueryMission['projects'] = mongoose.Types.ObjectId(req.params.id)
+
+          Mission
+          .find(searchQueryMission)
+          .exec(function (err, missions) {
+            if (err) {
+              return res.status(404).json({
+                message: 'No results',
+                err: err
+              })
+            } else {
+              // console.log(missions)
+              let returnData = []
+              categories.forEach(categorie => {
+                let arrayMission=[]
+                missions.forEach(mission => {
+                  mission.categories.forEach(categorieMission => {
+                    // console.log(categorieMission.toString() , categorie._id.toString())
+                    if(categorieMission.toString() === categorie._id.toString()) {
+                      arrayMission.push(mission)
+                    }
+                  })
+                })
+                returnData.push({
+                  categorie: categorie,
+                  missions: arrayMission
+                })
+              })
+              // console.log(returnData)
+              res.status(200).json({message: 'Successfull', obj: returnData})
+            }
+          })
+        }
+      })
+  })
+})
+
+
+router.post('/', function (req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
@@ -156,18 +221,10 @@ router.post('/', function(req, res, next) {
       }
     })
   }
-
-  if (!req.user.ownerCompanies.length) {
-    return res.status(404).json({message: 'You must belong to a companie', err: ''})
-  }
-
-  if (!req.body.clients.length) {
-    return res.status(404).json({message: 'Select a client', err: ''})
-  }
-  if (!req.body.assignedTos.length) {
-    return res.status(404).json({message: 'Select a User', err: ''})
-  }
-
+  // if (!req.user.companies.length) {
+  //   return res.status(404).json({message: 'You must belong to a companie', err: ''})
+  // }
+  console.log(req.user.companies)
   req.body.ownerCompanies = req.user.ownerCompanies
 
   // project.ownerCompanies = req.user.companies
@@ -187,8 +244,8 @@ router.post('/', function(req, res, next) {
 })
 
 // get all forms from database
-router.get('/page/:page', function(req, res, next) {
-  var itemsPerPage = 15
+router.get('/page/:page', function (req, res, next) {
+  var itemsPerPage = 10
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
@@ -200,13 +257,14 @@ router.get('/page/:page', function(req, res, next) {
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
   if (req.query.userId)
-    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
+    searchQuery['users'] = mongoose.Types.ObjectId(req.query.userId)
 
     // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)
 
   Project.find(searchQuery)
-  .populate({path: 'clients', model: 'User'})
+  .sort('-createdAt')
+  .populate({path: 'users', model: 'User'})
   .populate({path: 'assignedTos', model: 'User'})
   // .populate({path: 'bucketTasks.tasks', model: 'Task'})
   // .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
@@ -224,13 +282,11 @@ router.get('/page/:page', function(req, res, next) {
   //     path: 'bucketTasks.tasks.assignedTos',
   //     model: 'User',
   //   })
-    .limit(itemsPerPage).skip(skip)
-    .sort(req.query.orderBy)
-    .exec(function(err, item) {
+    .limit(itemsPerPage).skip(skip).exec(function (err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
-      Project.find(searchQuery).count().exec(function(err, count) {
+      Project.find(searchQuery).count().exec(function (err, count) {
         res.status(200).json({
           paginationData: {
             totalItems: count,
@@ -244,55 +300,57 @@ router.get('/page/:page', function(req, res, next) {
   })
 })
 
-router.get('/unwind', function(req, res, next) {
-
-  let aggregate = []
-  aggregate.push({
-    $match: {
-      ownerCompanies: req.user.ownerCompanies
-    }
-  })
 
 
-
-  if (req.query.idProject)
-    aggregate.push({
-      $match: {
-        _id: mongoose.Types.ObjectId(req.query.idProject)
-      }
-    })
-
-  aggregate.push({$unwind: "$bucketTasks"})
-  aggregate.push({$unwind: "$bucketTasks.tasks"})
-
-  if (req.query.myTasks === 'true')
-    aggregate.push({
-      $match: {
-        'bucketTasks.tasks.assignedTos': mongoose.Types.ObjectId(req.user._id)
-      }
-    })
-  aggregate.push({
-    $lookup: {
-      from: 'users',
-      localField: 'bucketTasks.tasks.assignedTos',
-      foreignField: '_id',
-      as: 'bucketTasks.tasks.assignedTos'
-    }
-  })
-
-  Project.aggregate(aggregate).exec(function(err, item) {
-    if (err) {
-      return res.status(404).json({message: '', err: err})
-    } else {
-      res.status(200).json({message: 'Success', item: item})
-    }
-  })
-})
+// router.get('/unwind', function (req, res, next) {
+//
+//   let aggregate = []
+//   aggregate.push({
+//     $match: {
+//       ownerCompanies: req.user.ownerCompanies
+//     }
+//   })
+//
+//
+//
+//   if (req.query.idProject)
+//     aggregate.push({
+//       $match: {
+//         _id: mongoose.Types.ObjectId(req.query.idProject)
+//       }
+//     })
+//
+//   aggregate.push({$unwind: "$bucketTasks"})
+//   aggregate.push({$unwind: "$bucketTasks.tasks"})
+//
+//   if (req.query.myTasks === 'true')
+//     aggregate.push({
+//       $match: {
+//         'bucketTasks.tasks.assignedTos': mongoose.Types.ObjectId(req.user._id)
+//       }
+//     })
+//   aggregate.push({
+//     $lookup: {
+//       from: 'users',
+//       localField: 'bucketTasks.tasks.assignedTos',
+//       foreignField: '_id',
+//       as: 'bucketTasks.tasks.assignedTos'
+//     }
+//   })
+//
+//   Project.aggregate(aggregate).exec(function (err, item) {
+//     if (err) {
+//       return res.status(404).json({message: '', err: err})
+//     } else {
+//       res.status(200).json({message: 'Success', item: item})
+//     }
+//   })
+// })
 
 // getting user forms to display them on front end
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function (req, res, next) {
 
-  Project.findById((req.params.id), function(err, obj) {
+  Project.findById((req.params.id), function (err, obj) {
     if (err) {
       return res.status(500).json({message: 'An error occured', err: err})
     }
@@ -306,16 +364,14 @@ router.get('/:id', function(req, res, next) {
     }
 
     Project.findById({_id: req.params.id})
-    .populate({path: 'clients', model: 'User'})
-    .populate({path: 'logs.forms', model: 'Form'})
-    .populate({path: 'logs.by', model: 'User'})
-    .populate({path: 'assignedTos', model: 'User'})
+
+    .populate({path: 'users', model: 'User'})
     .populate({
-      path: 'bucketTasks.tasks',
-      model: 'Task',
+      path: 'users',
+      model: 'User',
       populate: {
-        path: 'users',
-        model: 'User'
+        path: 'forms',
+        model: 'Form'
       },
     })
     .populate({
@@ -327,7 +383,7 @@ router.get('/:id', function(req, res, next) {
       }
     })
 
-    .exec(function(err, item) {
+    .exec(function (err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       } else {
@@ -369,7 +425,7 @@ router.get('/:id', function(req, res, next) {
 //   })
 // })
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', function (req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
@@ -378,7 +434,7 @@ router.delete('/:id', function(req, res, next) {
       }
     })
   }
-  Project.findById((req.params.id), function(err, item) {
+  Project.findById((req.params.id), function (err, item) {
     if (err) {
       return res.status(500).json({message: 'An error occured', err: err})
     }
@@ -392,7 +448,7 @@ router.delete('/:id', function(req, res, next) {
     }
 
     // deleting the form from the database
-    item.remove(function(err, result) {
+    item.remove(function (err, result) {
       if (err) {
         return res.status(500).json({title: 'An error occured', error: err})
       }

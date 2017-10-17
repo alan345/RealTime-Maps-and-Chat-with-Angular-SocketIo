@@ -14,71 +14,55 @@ var companie = new Schema({
         secretKey:{type: String, default: ['']},
       }
     },
-    contactsPerson:[{
-      contactType:{type: String, default: ['']},
-      contactName:{type: String, default: ['']},
-      contactFirstName:{type: String, default: ['']},
-      contactPhoneNumber:{type: String, default: ['']},
-      contactEmail:{type: String, default: ['']},
-    }],
     planDetail:{
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}
     },
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
-    VAT : {type: String, default: ['']},
-    email : {type: String, default: ['']},
-    address: [{
-      nameAddress: {type: String, default: ['']},
-      country : {type: String, default: ['']},
+    address: {
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},
       state : {type: String, default: ['']},
       zip : {type: String, default: ['']},
-    }],
+    },
     option:{
       calendar: {
-        timeBegin: {type: String, default: ['06:00:00']},
-        timeEnd: {type: String, default: ['19:00:00']},
-        slotDuration: {type: String, default: ['00:30:00']},
-        timeBeginbusinessHours: {type: String, default: ['10:30:00']},
-        timeEndbusinessHours: {type: String, default: ['17:00:00']},
+        timeBegin: {type: Number, default: [8]},
+        timeEnd: {type: Number, default: [19]},
       }
     },
-    faxNumber: {type: String, default: ['']},
     phoneNumber: {type: String, default: ['']},
     nameCompanie: {type: String, default: ['']},
-    // typeCompanie: {type: String, default: ['salon']},
-    isSupplier: {type: Boolean, default: [false]},
+    typeCompanie: {type: String, default: ['salon']},
     //users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     // categJson: {
-    //   categProduct:{type: String, default: ['']},
+    //   categCategorie:{type: String, default: ['']},
     //   categProject:{type: String, default: ['']}
     // },
     typeUsers:[{value:{type: String}}],
-    // categories: {
-    //   categProduct:[{
-    //     categ: {type: String, default: ['']},
-    //     isFlagged: {type: Boolean, default: [false]},
-    //     subCateg:[{
-    //       categ: {type: String, default: ['']},
-    //       subCateg:[{
-    //         categ: {type: String, default: ['']},
-    //       }]
-    //     }]
-    //   }],
-    //   categProject:[{
-    //     categ: {type: String, default: ['']},
-    //     isFlagged: {type: Boolean, default: [false]},
-    //     subCateg:[{
-    //       categ: {type: String, default: ['']},
-    //       subCateg:[{
-    //         categ: {type: String, default: ['']},
-    //       }]
-    //     }]
-    //   }]
-    // }
+    categories: {
+      categCategorie:[{
+        categ: {type: String, default: ['']},
+        isFlagged: {type: Boolean, default: [false]},
+        subCateg:[{
+          categ: {type: String, default: ['']},
+          subCateg:[{
+            categ: {type: String, default: ['']},
+          }]
+        }]
+      }],
+      categProject:[{
+        categ: {type: String, default: ['']},
+        isFlagged: {type: Boolean, default: [false]},
+        subCateg:[{
+          categ: {type: String, default: ['']},
+          subCateg:[{
+            categ: {type: String, default: ['']},
+          }]
+        }]
+      }]
+    }
 
 
   },

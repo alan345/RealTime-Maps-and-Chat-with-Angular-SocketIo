@@ -1,0 +1,55 @@
+<div class="djoa-container">
+  <!--<h4 class="">id: {{fetchedMission._id}}</h4>-->
+  <div *ngFor="let project of fetchedMission.projects">
+    <h1>{{project.details.name}}</h1>
+  </div>
+
+  <div class="mission-nav">
+    <div *ngIf="buttonDataMission.left._id" (click)="goTo('mission', buttonDataMission.left._id)" class="previous">
+      <i class="fa fa-chevron-left"></i> {{buttonDataMission.left.title}}
+    </div>
+    <div *ngIf="buttonDataMission.right._id" (click)="goTo('mission', buttonDataMission.right._id)" class="next">
+      {{buttonDataMission.right.title}} <i class="fa fa-chevron-right"></i>
+    </div>
+  </div>
+  <div class="col-md-6 lineback">
+    <md-card class="card-margin">
+      <md-card-content>
+        <h4>{{fetchedMission.title}}</h4>
+        <button type="button" (click)="openDetails()" class="edit-btn">Edit</button>
+        <p>{{fetchedMission.description}}</p>
+        <!--Start Date {{fetchedMission.dateMission.start | date:'yyyy-MM-dd' }} / End Date {{fetchedMission.dateMission.end | date:'yyyy-MM-dd' }} /-->
+        <section>
+          <mat-progress-bar  [value]="fetchedMission.dateMission.percentageProgress"></mat-progress-bar>
+          <p class="percent">{{fetchedMission.dateMission.percentageProgress}}%</p>
+        </section>
+      </md-card-content>
+    </md-card>
+    <md-card class="card-margin">
+      <md-card-content>
+        <h2>Documents for This Mission</h2>
+        <app-documents [search]="search"></app-documents>
+      </md-card-content>
+    </md-card>
+    <md-card>
+      <md-card-content>
+        <h2>Crew Members for This Mission</h2>
+        <button type="button" (click)="openTeam()" class="edit-btn">Edit</button>
+        <div *ngFor="let user of fetchedMission.users" class="indiv-team">
+          <div (click)="openProfile(user._id)">
+            <div class="pic-container"><app-picture [addPicture]=false [deletePicture]=false [forms]="user.forms"></app-picture></div>
+          </div>
+          <p>{{user.profile.name}}</p>
+        </div>
+      </md-card-content>
+    </md-card>
+    <div class="bottom-shadow"></div>
+  </div>
+  <div class="col-md-6">
+    <md-card class="chat">
+      <md-card-content>
+        <app-chat [search]="search"></app-chat>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

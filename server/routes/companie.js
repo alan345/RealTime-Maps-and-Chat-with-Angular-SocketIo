@@ -50,12 +50,12 @@ router.use('/', function (req, res, next) {
           })
         }
 
-        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
-          return res.status(404).json({
-            title: 'No rights',
-            error: {message: 'No rights'}
-          })
-        }
+        // if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
+        //   return res.status(404).json({
+        //     title: 'No rights',
+        //     error: {message: 'No rights'}
+        //   })
+        // }
 
         if (doc) {
           req.user = doc;
@@ -89,11 +89,8 @@ router.put('/:id', function (req, res, next) {
     item.address = req.body.address
     item.option = req.body.option
     item.phoneNumber = req.body.phoneNumber
-    item.faxNumber = req.body.faxNumber
     item.nameCompanie = req.body.nameCompanie
     item.typeUsers = req.body.typeUsers
-    item.email = req.body.email
-    item.VAT = req.body.VAT
 
     item.typeCompanie = req.body.typeCompanie
     item.forms = req.body.forms
@@ -101,7 +98,6 @@ router.put('/:id', function (req, res, next) {
     item.categJson = req.body.categJson
     item.categories = req.body.categories
     item.banck = req.body.banck
-    item.contactsPerson = req.body.contactsPerson
 
 
 
@@ -199,17 +195,18 @@ router.post('/saveMyCompanie/', function (req, res, next) {
 
 
 
+
 router.get('/page/:page', function (req, res, next) {
-  var itemsPerPage = 15
+  var itemsPerPage = 5
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
 
 
-  // let nameQuery = {}
-  // let cityQuery = {}
+  let nameQuery = {}
+  let cityQuery = {}
   let searchQuery = {}
-  // let arrObj = []
+  let arrObj = []
   searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
 
   if(req.query.search)

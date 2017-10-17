@@ -5,8 +5,8 @@ var express = require('express'),
     Companie= require('../models/companie.model'),
     PaiementQuote=require('../models/paiementQuote.model'),
     fs      = require('fs'),
-    jwt     = require('jsonwebtoken'),
-    stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
+    jwt     = require('jsonwebtoken')
+    // stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
 
 router.use('/', function (req, res, next) {
   var token = req.headers['authorization'];
@@ -60,48 +60,48 @@ router.use('/', function (req, res, next) {
   });
 });
 
-
-router.get('/getStripeCust/:paiementQuoteId', function (req, res, next) {
-
-
-    PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-      if (err) {
-        return res.status(500).json({
-          message: 'An error occured',
-          err: err
-        })
-      }
-      if (!obj) {
-        return res.status(404).json({
-          title: 'No obj found',
-          error: {message: 'Obj not found!'}
-        })
-      }
-
-
-                stripe.customers.retrieve(obj.stripe.cusId,
-                  function(err, customer) {
-                    if(err) {
-                      return res.status(404).json({
-                        title: 'No data in stripe',
-                        error: 'noData'
-                      });
-                    } else {
-                      if(customer.deleted) {
-                        return res.status(404).json({
-                          title: 'Deleted',
-                          error: customer
-                        });
-                      }
-                      return res.status(200).json({
-                        customer: customer
-                      })
-                    }
-                  }
-                );
-          })
-
-})
+//
+// router.get('/getStripeCust/:paiementQuoteId', function (req, res, next) {
+//
+//
+//     PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+//       if (err) {
+//         return res.status(500).json({
+//           message: 'An error occured',
+//           err: err
+//         })
+//       }
+//       if (!obj) {
+//         return res.status(404).json({
+//           title: 'No obj found',
+//           error: {message: 'Obj not found!'}
+//         })
+//       }
+//
+//
+//                 stripe.customers.retrieve(obj.stripe.cusId,
+//                   function (err, customer) {
+//                     if(err) {
+//                       return res.status(404).json({
+//                         title: 'No data in stripe',
+//                         error: 'noData'
+//                       });
+//                     } else {
+//                       if(customer.deleted) {
+//                         return res.status(404).json({
+//                           title: 'Deleted',
+//                           error: customer
+//                         });
+//                       }
+//                       return res.status(200).json({
+//                         customer: customer
+//                       })
+//                     }
+//                   }
+//                 );
+//           })
+//
+// })
 
 
 router.get('/getStripeAccountDetails', function (req, res, next) {
@@ -116,7 +116,7 @@ router.get('/getStripeAccountDetails', function (req, res, next) {
     stripe.accounts.retrieve(
       // req.user.paiement.stripe.cusId,
       '',
-      function(err, customer) {
+      function (err, customer) {
         if(err) {
           return res.status(404).json({
             title: 'No data in stripe',
@@ -140,8 +140,8 @@ router.get('/getStripeAccountDetails', function (req, res, next) {
 
 
 router.post('/saveCustInStripe/', function (req, res, next) {
-    createCustomerInStripe(req).then(function(customer){
-      updateStripeCustomerIdToDb(req, customer).then(function(item){
+    createCustomerInStripe(req).then(function (customer){
+      updateStripeCustomerIdToDb(req, customer).then(function (item){
         if(item) {
           return res.status(200).json({
             customer: customer
@@ -225,7 +225,7 @@ router.post('/payInStripe/:paiementQuoteId', function (req, res, next) {
         currency: "usd",
         // source: "tok_visa", // obtained with Stripe.js
         description: 'quote'
-      }, function(err, charge) {
+      }, function (err, charge) {
         if(charge) {
 
 
@@ -277,7 +277,7 @@ router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, ne
 
 
     createSubInStripe(req, obj)
-    .then(function(subscription){
+    .then(function (subscription){
       // console.log('ssssss')
       updateCurrent_period_endInDb(req, subscription.current_period_end, subscription.plan.id)
       .then(item => { console.log(item) })
@@ -309,7 +309,7 @@ router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, ne
   router.delete('/deleteSub/:idSub', function (req, res, next) {
     stripe.subscriptions.del(
       req.params.idSub,
-      function(err, confirmation) {
+      function (err, confirmation) {
         if(confirmation) {
 
             updateCurrent_period_endInDb(req, '', 'free')
@@ -357,7 +357,7 @@ router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, ne
         stripe.customers.deleteCard(
           obj.stripe.cusId,
           req.params.idCard,
-          function(err, confirmation) {
+          function (err, confirmation) {
             if(confirmation) {
               return res.status(200).json({
                 message: confirmation
@@ -391,7 +391,7 @@ router.delete('/deleteCustInStripe/:paiementQuoteId', function (req, res, next) 
 
 
     stripe.customers.del(obj.stripe.cusId,
-      function(err, confirmation) {
+      function (err, confirmation) {
         if(confirmation) {
           return res.status(200).json({
             message: confirmation
@@ -410,7 +410,7 @@ router.delete('/deleteCustInStripe/:paiementQuoteId', function (req, res, next) 
 
 
 function updateCurrent_period_endInDb(req, current_period_end, plan){
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     resolve()
   })
   // let paiement = req.user.paiement
@@ -422,7 +422,7 @@ function updateCurrent_period_endInDb(req, current_period_end, plan){
   //   current_period_end: current_period_end*1000,
   //   plan: plan
   // }
-  // return new Promise(function(resolve, reject) {
+  // return new Promise(function (resolve, reject) {
   //   User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
   //     if (item) {
   //       Companie.update({ _id: req.user.ownerCompanies[0] }, { $set: { planDetail: planDetail}}, function (err, item) {
@@ -438,7 +438,7 @@ function updateCurrent_period_endInDb(req, current_period_end, plan){
 
 
 function updateStripeCustomerIdToDb(req, customer) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     PaiementQuote.update({ _id: req.body._id }, { $set: { stripe: {cusId : customer.id}}}, function (err, item) {
       if (item) { resolve(item) } else { reject(err) }
     });
@@ -447,11 +447,11 @@ function updateStripeCustomerIdToDb(req, customer) {
 
 
 function createCustomerInStripe(req) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     stripe.customers.create({
       description: 'Customer for' + req.user.email,
       email: req.user.email
-    }, function(err, customer) {
+    }, function (err, customer) {
       if(customer){
         console.log("customer Created in Stripe")
         // console.log(customer)
@@ -472,11 +472,11 @@ function createSubInStripe(req, obj){
 
     // let cusId = req.user.paiement.stripe.cusId
     // console.log(req.body)
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       stripe.subscriptions.create({
         customer: obj.stripe.cusId,
         plan: req.body.plan
-      }, function(err, subscription) {
+      }, function (err, subscription) {
         if(subscription) {
           // console.log(subscription)
           resolve(subscription)
@@ -499,7 +499,7 @@ function createCardInStripe(req, obj){
   delete card.country
   delete card.funding
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
       stripe.customers.createSource(
         cusId,
         {
@@ -520,7 +520,7 @@ function createCardInStripe(req, obj){
           //   // "name": null,
           // }
          },
-        function(err, card) {
+        function (err, card) {
           if(card) {
             resolve(card)
           } else {

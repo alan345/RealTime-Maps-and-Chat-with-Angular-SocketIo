@@ -1,53 +1,86 @@
+<!-- <div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
+  <div class="col-md-6">
+    <h3 class="title">Fournisseurs</h3></div>
+  <div class="col-md-3"></div>
+</div>
+
+
+
+<div class="clearfix col-md-10">
+  <button class="btn btn-success float-right" [routerLink]="['/companie/new']" routerLinkActive="active"><i class=""></i>Nouveau Fournisseur</button>
+</div> -->
+
 <div class="container">
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <h4>{{'Companies' | translate}}</h4>
+  <!-- <div class="row">
+    <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'companie'"></app-newObjDialog>
+</div> -->
+<div class="row">
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{'List' }}</h4>
+        </div>
+        <div class="card-block clearfix">
+          <div id="wrapper" class="subsubnav-clients float-left">
+            <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchCompanies()">
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <!--
+              <th class="tbl-left">
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
+              </th>
+               -->
+                <th class="">{{'Logo' }}</th>
+                <th class="">{{'Name' }}</th>
+                <th class="">{{'City' }}</th>
+                <th class="">{{'Date' }}</th>
+
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr *ngFor="let companie of fetchedCompanies" [routerLink]="['/companie/' + companie._id]" routerLinkActive="active">
+                <td class="">
+                  <div *ngFor="let singleForm of companie.forms; let i=index">
+                    <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                  </div>
+                </td>
+                <td class="">{{companie.nameCompanie}}</td>
+                <td class="">{{companie.address.city}}</td>
+                <td class="">{{companie.createdAt | date:'yyyy-MM-dd' }}</td>
+
+
+                <!-- <td class="">{{companie.details.referenceName}}</td>
+              <td class="">{{companie.name}}</td>
+              <td class="">{{companie.details.price.costPrice}}</td>
+              <td class="">{{companie.details.referenceName}}</td>
+              <td class="">{{companie.details.price.costPrice}}</td>
+              <td class="">{{companie.details.price.costPrice}}</td> -->
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="has-text-centered">
+            <mat-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </mat-paginator>
+            <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
+          </div>
+        </div>
+
+      </div>
+
     </div>
-    <div class="p-2">
-      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'companie'"></app-newObjDialog>
-    </div>
-  </div>
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchCompanies()">
-    </div>
+
   </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th class="centre tdunder">{{'Logo' | translate}}</th>
-            <th class="centre tdunder">{{'Name' | translate}}</th>
-            <th class="centre tdunder">{{'City' | translate}}</th>
-            <th class="centre tdunder">{{'Phone' | translate}}</th>
-            <th class="centre tdunder">{{'Date' | translate}}</th>
-          </tr>
-        </thead>
-        <tbody class="clienttbl">
-          <tr *ngFor="let companie of fetchedCompanies" [routerLink]="['/companie/' + companie._id]" routerLinkActive="active">
-            <td class="centre tdunder">
-              <div *ngFor="let singleForm of companie.forms; let i=index">
-                <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-              </div>
-            </td>
-            <td class="centre tdunder">{{companie.nameCompanie}}</td>
-            <td class="centre tdunder">
-              <div *ngFor="let singleAddress of companie.address">
-                {{singleAddress.city}}
-              </div>
-            </td>
-            <td class="centre tdunder">{{companie.phoneNumber}}</td>
-            <td class="centre tdunder">{{companie.createdAt | date:'dd-MM-yyyy' }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div>
-        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
-        </mat-paginator>
-        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
-      </div>
-    </div>
-  </div>
 </div>

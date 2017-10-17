@@ -5,28 +5,26 @@ import { FormsModule }         from '@angular/forms';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {PictureModule} from '../picture/picture.module';
-
+import {MatProgressBarModule} from '@angular/material';
+import {MatPaginatorModule} from '@angular/material';
+import {MatInputModule} from '@angular/material';
 // import {CommentModule} from '../comment/comment.module';
+import {MatSidenavModule} from '@angular/material';
 
 
-// import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
 
 import { RoundPipe} from './round.pipe';
-import { HeaderComponent } from '../nav/header/header.component';
+
 // import { newObjDialogComponent } from '../nav/newObjDialog/newObjDialog.component';
 
-// import { MaterialModule } from '@angular/material';
+
 
 import { LoadingInAppComponent } from '../nav/loadingInApp/loadingInApp.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
-
-import {CommentModule} from '../comment/comment.module';
-import { TranslateModule}   from '../translate/translate.module';
-import { MatPaginatorModule} from '@angular/material';
-import {MatDialogModule} from '@angular/material';
+// import { SideBarObjModule } from '../nav/sideBarObj/sideBarObj.module';
 
 
-
+// import {CommentModule} from '../comment/comment.module';
 
 @NgModule({
   imports:      [
@@ -34,11 +32,13 @@ import {MatDialogModule} from '@angular/material';
     FormsModule,
     // AutocompleteModule,
     PictureModule,
-    // CommentModule,
-    // MaterialModule,
+    MatProgressBarModule,
+    MatInputModule,
     MatPaginatorModule,
-    MatDialogModule,
-    TranslateModule,
+    MatSidenavModule,
+    // CommentModule,
+
+    // SideBarObjModule,
 
 
 
@@ -51,25 +51,30 @@ import {MatDialogModule} from '@angular/material';
     // newObjDialogComponent,
     LoadingInAppComponent,
     LoginInAppComponent,
+    // SideBarObjComponent,
 
 
   ],
   exports: [
+
     // TranslatePipe,
     // AutocompleteModule,
     CommonModule,
     FormsModule,
     RoundPipe,
-    MatDialogModule,
+    MatProgressBarModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatSidenavModule,
+    // SideBarObjModule,
     // HeaderComponent,
     // newObjDialogComponent,
     // LoadingComponent,
     LoadingInAppComponent,
     LoginInAppComponent,
+    // SideBarObjComponent,
     PictureModule,
-    // MaterialModule,
-    MatPaginatorModule,
-    TranslateModule,
+
     // CommentModule,
     // CommentModule,
     // AutocompleteComponent,

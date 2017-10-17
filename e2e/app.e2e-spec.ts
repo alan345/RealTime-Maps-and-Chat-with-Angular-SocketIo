@@ -1,14 +1,14 @@
-import { Ng2FormsDemoPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('ng2-forms-demo App', function() {
-  let page: Ng2FormsDemoPage;
+describe('anglir-cli132 App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new Ng2FormsDemoPage();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

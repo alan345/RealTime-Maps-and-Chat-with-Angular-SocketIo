@@ -5,29 +5,32 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class GlobalEventsManager {
 
-    private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-    public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
+    private _showNavBarLeft: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    public showNavBarEmitterLeft: Observable<any> = this._showNavBarLeft.asObservable();
 
-    private _showTopNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-    public showTopNavBarEmitter: Observable<boolean> = this._showTopNavBar.asObservable();
+    private _showNavBarTop: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    public showNavBarEmitterTop: Observable<any> = this._showNavBarTop.asObservable();
 
+    private _showNavBarRight: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    public showNavBarEmitterRight: Observable<any> = this._showNavBarRight.asObservable();
 
-    private _isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
-    public isLoggedInEmitter: Observable<boolean> = this._isLoggedIn.asObservable();
-
-
+    private _refreshCenter: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    public refreshCenterEmitter: Observable<any> = this._refreshCenter.asObservable();
 
     constructor() {}
 
-    showNavBar(ifShow: boolean) {
-        this._showNavBar.next(ifShow);
+    showNavBarLeft(ifShow: any) {
+        this._showNavBarLeft.next(ifShow);
     }
-    showTopNavBar(ifShow: boolean) {
-        this._showTopNavBar.next(ifShow);
+    showNavBarTop(ifShow: any) {
+        this._showNavBarTop.next(ifShow);
     }
-    isLoggedIn(ifShow: boolean) {
-        this._isLoggedIn.next(ifShow);
+    showNavBarRight(ifShow: any) {
+      // console.log(ifShow.showNavBar)
+        this._showNavBarRight.next(ifShow);
+        // return ifShow.showNavBar
     }
-
-
+    refreshCenter(ifShow: boolean) {
+        this._refreshCenter.next(ifShow);
+    }
 }

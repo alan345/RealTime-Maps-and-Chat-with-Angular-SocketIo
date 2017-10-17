@@ -1,12 +1,12 @@
-var http = require('http');
-var server = http.createServer(function(request, response) {
-  response.writeHead(200,{"Content-Type":"text/plain"});
-  response.end('hello');
 
+var express = require('express');
+var app = express();
+
+app.get('/', function (req, res) {
+  res.send('Hello World!');
 });
-server.listen(80);
-console.log('server running');
-//https://www.youtube.com/watch?v=N3vgozk66dI
 
-//https://howtonode.org/how-to-install-nodejs
-//https://www.youtube.com/watch?v=N3vgozk66d
+
+app.listen(80, function () {
+  console.log('Example app listening on port 80!');
+});

@@ -1,11 +1,10 @@
 <div class="log-scrn beigeback">
   <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
-    <img src="./assets/images/BELMARD-pin.png" />
-    <h3>Bienvenue sur l'outil de Gestion de Belmard Rénovation !</h3>
+
+    <h3>Djoa Welcome !</h3>
     <div class="input-group">
       <input #userEmail type="text" formControlName="email" placeholder="Email" class="form-control">
     </div>
-    
     <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Please enter a valid email format</div>
     <div class="input-group">
       <input type="password" formControlName="password" placeholder="Password" class="form-control">
@@ -13,6 +12,6 @@
     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password must contain 6 or more characters</div>
     <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Login</button>
     <p class="message"><a [routerLink]="'/user/reset'">Forgot Your Password?</a></p>
-    <p class="message"><a [routerLink]="'/user/register'">Don't have an Account? Register</a></p>
+    <!-- <p class="message"><a [routerLink]="'/user/register'">Don't have an Account? Register</a></p> -->
   </form>
 </div>

@@ -11,7 +11,6 @@ var task = new Schema({
     status: {type: String},
     description: {type: String},
     users: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // dateTask:{
     start: {type: Date, default: [Date()]},
     end: {type: Date, default: [Date()]},

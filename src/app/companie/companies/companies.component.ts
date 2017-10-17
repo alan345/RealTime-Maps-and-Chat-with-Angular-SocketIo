@@ -34,7 +34,7 @@ export class CompaniesComponent implements OnInit {
     private authService: AuthService,
   //  private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MatDialog,
+    // public dialog: MatDialog,
     private router: Router,
     private location: Location,
   ) {}

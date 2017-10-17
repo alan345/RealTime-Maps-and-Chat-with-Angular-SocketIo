@@ -1,0 +1,46 @@
+<h4>Chat</h4>
+<div *ngFor="let notifChat of notifChatsInStrats">
+  {{notifChat.mission.title}}
+  <div (click)="goTo('mission', notifChat.mission._id)" class="sidebar-notif">
+    {{notifChat.countUnread}} New Messages
+  </div>
+</div>
+<br>
+<div *ngFor="let notifChat of notifChatsInMissions">
+  {{notifChat.mission.title}}
+  <div (click)="goTo('mission', notifChat.mission._id)" class="sidebar-notif">
+    {{notifChat.countUnread}} New Messages
+  </div>
+</div>
+<br>
+<h4>Documents</h4>
+
+<div *ngFor="let documentsByMission of documentsByMissions">
+  Mission: {{documentsByMission.mission.title}}
+  <div (click)="goTo('mission', documentsByMission.mission._id)" class="sidebar-notif">
+
+    <div *ngFor="let document of documentsByMission.documents">
+      {{document.details.name}}: {{document.status.global}}
+      <div>{{document.myActivityPendingTasks}} pendingTasks</div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let document of myDocuments">
+
+
+  <!-- <div *ngFor="let mission of document.missions">
+    Mission: {{mission.title}}
+    <div (click)="goTo('mission', mission._id)" class="sidebar-notif">
+      {{document.details.name}}: {{document.status.global}}
+      <div>{{document.myActivityPendingTasks}} pendingTasks</div>
+    </div>
+  </div> -->
+  <div *ngFor="let strat of document.strats">
+    Strategy: {{strat.title}}
+    <div (click)="goTo('strat', strat._id)" class="sidebar-notif">
+      {{document.details.name}}: {{document.status.global}}
+      <div>{{document.myActivityPendingTasks}} pendingTasks</div>
+    </div>
+  </div>
+</div>

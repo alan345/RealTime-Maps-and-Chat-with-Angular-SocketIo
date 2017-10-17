@@ -5,24 +5,27 @@ import { FormsModule }         from '@angular/forms';
 // import { UserModule} from '../user/user.module'
 // import {NewUserComponent} from '../user/singleUser/newUser.component'
 // import {SharedModule } from '../shared/shared.module';
-import { newObjDialogComponent } from './newObjDialog/newObjDialog.component';
+// import { newObjDialogComponent } from './newObjDialog/newObjDialog.component';
+import {SharedSmallModule } from '../shared/sharedSmall.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    SharedSmallModule,
+
     // SharedModule,
     // UserModule,
 
   ],
   declarations: [
     AutocompleteComponent,
-    newObjDialogComponent,
+    // newObjDialogComponent,
     // NewUserComponent
   ],
   exports: [
     AutocompleteComponent,
-    newObjDialogComponent,
+    // newObjDialogComponent,
   ],
   providers: [
 

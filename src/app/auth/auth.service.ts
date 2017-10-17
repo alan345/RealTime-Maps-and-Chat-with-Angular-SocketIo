@@ -16,8 +16,8 @@ import {Router} from '@angular/router';
 import {JwtHelper} from 'angular2-jwt';
 // import {UserService} from '../user/user.service'
 import {User} from '../user/user.model'
-import {GlobalEventsManager} from '../globalEventsManager';
-
+import {ShowNavBarData} from '../home/home.model'
+import { GlobalEventsManager} from '../globalEventsManager';
 
 @Injectable()
 
@@ -40,7 +40,7 @@ export class AuthService {
     private errorService: ErrorService,
     private toastr: ToastsManager,
     private router: Router,
-    private globalEventsManager: GlobalEventsManager,
+    private globalEventsManager: GlobalEventsManager
     // private userService: UserService,
   ) {
 
@@ -86,7 +86,7 @@ export class AuthService {
           this.token = token
           this.currentUser = currentUser
           this.user = this.jwtHelper.decodeToken(token).user
-          this.globalEventsManager.showNavBar(true);
+
         //  console.log(this.currentUser)
           localStorage.setItem('currentUser', JSON.stringify(currentUser))
         }
@@ -105,48 +105,18 @@ export class AuthService {
         return Observable.throw(error.json());
       });
   }
-  //
-  // refreshCookiesOfCurrentUser() {
-  //   console.log('refreshCookiesOfCurrentUser')
-  //
-  //
-  //   this.getUser('')
-  //     .subscribe(
-  //       res => {
-  //         this.user = res
-  //          console.log(res)
-  //        },
-  //       error => { console.log(error) }
-  //     )
-  //
-  //
-  // }
-
-
-  //
-  // getUser(id: string) {
-  //   let headers = new Headers({'Content-Type': 'application/json'});
-  //   headers.append('Authorization', '' + this.currentUser.token);
-  //   return this.http.get(this.url + 'profile/' + id, {headers: headers})
-  //     .map((response: Response) => {
-  //       return response.json().user;
-  //     })
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     });
-  // }
 
 
 
   isAdmin() {
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (this.user) {
-      if (this.user.role[0] === 'admin') {
-        return true;
-      }
-    }
-    return false;
+
+    // if (this.user) {
+    //   if (this.user.role[0] === 'admin') {
+    //     return true;
+    //   }
+    // }
+    // return false;
   }
 
 
@@ -186,15 +156,14 @@ export class AuthService {
   }
   isCurrentUserIsInSubPeriod() {
     // console.log(this.user)
-    return true
 
-    // let itemFounded = false
-    // this.user.ownerCompanies.forEach(companie => {
-    //   if (new Date(companie.planDetail.current_period_end) > new Date())
-    //     itemFounded = true
-    // });
-    //
-    // return itemFounded
+    let itemFounded = false
+    this.user.ownerCompanies.forEach(companie => {
+      if (new Date(companie.planDetail.current_period_end) > new Date())
+        itemFounded = true
+    });
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    return itemFounded
   }
   isCurrentUserHasCompanie(){
     // console.log(this.user)
@@ -223,8 +192,8 @@ export class AuthService {
     })
   }
 
-  showObjHTML(nameObject, typeAccess) {
-    // let typeAccess = 'read'
+  showObjHTML(nameObject) {
+    let typeAccess = 'read'
     // console.log(this.isCurentUserHasAccess(nameObject, typeAccess))
     // console.log(this.isCurrentUserIsInSubPeriod())
     // console.log(this.isCurrentUserHasCompanie())
@@ -235,47 +204,6 @@ export class AuthService {
     )
     return true
   }
-
-  // isCurrentUserIsInSubPeriod(){
-  //   if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
-  //     return true;
-  //   return false
-  //
-  // }
-  // isCurrentUserHasCompanie(){
-  //   if(this.currentUser.companies.length)
-  //     return true
-  //   return false
-  // }
-
-  // isStylist() {
-  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-  //   if (userInfo) {
-  //     if (userInfo.user.role[0] === 'stylist') {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-  // isSalesRep() {
-  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-  //   if (userInfo) {
-  //     if (userInfo.user.role[0] === 'salesRep') {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-  //
-  // isManager(){
-  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-  //   if (userInfo) {
-  //     if (userInfo.user.role[0] === 'manager') {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
 
   // sending request for password reset
   forget(reset: Reset) {
@@ -301,12 +229,14 @@ export class AuthService {
       });
   }
 
+
   // logout function to be used in html file of both pages (login/register) in order to clear the localStorage from token and user id.
   logout() {
-    this.globalEventsManager.isLoggedIn(false);
-    this.globalEventsManager.showNavBar(false);
-    this.globalEventsManager.showTopNavBar(false);
-
+    let newShowNavBarData = new ShowNavBarData()
+    newShowNavBarData.showNavBar = false
+    this.globalEventsManager.showNavBarLeft(newShowNavBarData);
+    this.globalEventsManager.showNavBarRight(newShowNavBarData);
+    this.globalEventsManager.showNavBarTop(newShowNavBarData);
 
     localStorage.clear();
     this.token = null;
@@ -320,14 +250,8 @@ export class AuthService {
 
   // check if the user is logged in or not, if token is expired, token is deleted from localstorage
   isLoggedIn() {
-    // console.log(tokenNotExpired())
-
     if (!tokenNotExpired()) {
       localStorage.clear();
-    } else {
-      this.globalEventsManager.isLoggedIn(true);
-      // this.globalEventsManager.showNavBar(true);
-      this.globalEventsManager.showTopNavBar(true);
     }
     return tokenNotExpired();
   }
@@ -354,6 +278,12 @@ export class AuthService {
         monthString = String(date.getMonth()+1);
       }
       return date.getFullYear()+'-' + monthString + '-'+dtString
+    }
+
+    getPourcentageProgress(start: Date, end: Date) {
+      let durationProject = +new Date(end) - +new Date(start)
+      let timeSpent = +new Date() - +new Date(start)
+      return Math.round((timeSpent / durationProject) * 100)
     }
 
 }

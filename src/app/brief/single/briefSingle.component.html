@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Brief</h3>
+      <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
+        <div>
+          <div>
+            <label>Id</label> {{fetchedBrief._id}}
+          </div>
+        </div>
+
+        <br>
+
+        <app-autocomplete
+          [typeAutocomplete]="'strat'"
+          [search]="search"
+          [canDelete]=true
+          [title]="'strat'"
+          [singleChoice]=true
+          [arrayContent]="fetchedBrief.strats">
+        </app-autocomplete>
+
+
+        <div class="form-group">
+
+          <div class="">
+            <label>{{'Name' }}</label>
+            <input class="form-control col-md-4" type="text" formControlName="name" [(ngModel)]="fetchedBrief.details.name" placeholder="Ref">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>{{'Description' }}</label>
+          <input class="form-control col-md-4" type="text" formControlName="description" placeholder="description" [(ngModel)]="fetchedBrief.details.description">
+        </div>
+
+        <div class="valid-edit">
+          <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' }}</button>
+          <button *ngIf="fetchedBrief._id" type="button" class="delete" md-button (click)="openDeleteConfirmation()">
+        {{'Delete' }}
+      </button>
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+</div>

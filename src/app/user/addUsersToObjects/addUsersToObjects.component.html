@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="">
+    <h3>addUsersToObjects</h3>
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+
+
+
+
+        <app-autocomplete [typeAutocomplete]="'project'" [canDelete]=true [title]="" [singleChoice]=true [arrayContent]="fetchedUsersToObjects.projects">
+        </app-autocomplete>
+
+
+        <app-autocomplete [typeAutocomplete]="'mission'" [canDelete]=true [title]="" [singleChoice]=true [arrayContent]="fetchedUsersToObjects.missions">
+        </app-autocomplete>
+
+
+        Alan:Right? this is for new user? What if user is created below and no right selected? what is user already exist anf have right. Rights will be changed for all app?I reocment to set a default right for all new users.
+        <app-autocomplete [typeAutocomplete]="'right'" [canDelete]=true [title]="" [singleChoice]=true [arrayContent]="fetchedUsersToObjects.rights">
+        </app-autocomplete>
+
+        <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=true [title]="" [singleChoice]=false [arrayContent]="fetchedUsersToObjects.users">
+        </app-autocomplete>
+
+
+
+
+      <div class="valid-edit">
+        <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+
+
+
+
+
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>

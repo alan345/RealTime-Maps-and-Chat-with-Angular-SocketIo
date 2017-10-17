@@ -1,18 +1,12 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
-import { Address } from '../user/user.model';
-
 
 export class Companie {
   _id: string = '';
   nameCompanie: string = '';
-  // typeCompanie: string = '';
-  isSupplier: boolean = false;
+  typeCompanie: string = '';
   phoneNumber: string= '';
-  faxNumber: string= '';
-  email: string= '';
-  VAT: string= '';
-  address: Address[] = [];
+  address: Address = new Address();
   option: Option = new Option();
   users: User[] = [];
   forms: Form[] = [];
@@ -22,19 +16,7 @@ export class Companie {
   planDetail = new PlanDetail()
   rights: Rigth[] = [];
   banck: Banck = new Banck()
-  contactsPerson: ContactsPerson[] = []
 }
-
-
-export class ContactsPerson {
-  contactType: string = '';
-  contactName: string = '';
-  contactFirstName: string = '';
-  contactPhoneNumber: string = '';
-  contactEmail: string = '';
-}
-
-
 export class TypeUsers {
   value: string = '';
 }
@@ -69,7 +51,7 @@ export class PlanDetail {
 }
 
 export class Categorie {
-  categProduct: Categorie0[] = []
+  categCategorie: Categorie0[] = []
   categProject: Categorie0[] = []
 }
 
@@ -91,28 +73,20 @@ export class Categorie2 {
 }
 
 // export class CategJson {
-//   categProduct: string= '';
+//   categCategorie: string= '';
 //   categProject: string= '';
 // }
 export class Option {
   calendar: Calendar = new Calendar();
 }
-
 export class Calendar {
-  timeBegin: string = '06:00:00';
-  timeEnd: string = '19:00:00';
-  slotDuration: string = '00:30:00';
-
-  timeBeginbusinessHours: string = '10:00:00';
-  timeEndbusinessHours: string = '17:00:00';
+  timeBegin: number = 8;
+  timeEnd: number = 19;
 }
-//
-// export class Address {
-//   nameAddress: string = '';
-//   address: string = '';
-//   city: string = '';
-//   state: string = '';
-//   zip: string = '';
-//   country: string = '';
-//
-// }
+
+export class Address {
+  address: string = '';
+  city: string = '';
+  state: string = '';
+  zip: string = '';
+}

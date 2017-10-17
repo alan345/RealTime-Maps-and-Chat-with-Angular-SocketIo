@@ -1,21 +1,21 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
-import { Quote } from '../quote/quote.model';
-import { Task } from '../task/task.model';
+// import { Quote } from '../quote/quote.model';
+// import { Task } from '../task/task.model';
 
 
 export class Project {
     _id: string = '';
     details: Details = new Details()
     status: number = 0;
-    clients: User[] = [];
+    users: User[] = [];
     assignedTos: User[] = [];
     // forms: Form[] = [];
     logs: Log[] = [];
     categorie: Categorie = new Categorie();
-    bucketTasks: BucketTasks[] = []
+    // bucketTasks: BucketTasks[] = []
     progressTasks: number = 0;
-    dateProject: DateProject = new DateProject()
+    dateProject: DateDjoa = new DateDjoa()
 }
 
 export class Log {
@@ -24,15 +24,18 @@ export class Log {
   forms: Form[] = [];
   date: Date = new Date()
 }
-export class DateProject {
-  creationDate: Date = new Date()
-  creationDateString: string = '';
+export class DateDjoa {
+  start: Date = new Date()
+  startString: string = '';
+  end: Date = new Date()
+  endString: string = '';
+  percentageProgress: number = 0;
 }
-export class BucketTasks {
-  bucketName: string = '';
-  openNewTask: boolean = false;
-  tasks: Task[] = []
-}
+// export class BucketTasks {
+//   bucketName: string = '';
+//   openNewTask: boolean = false;
+//   tasks: Task[] = []
+// }
 //
 // export class Task {
 //   name: string = '';

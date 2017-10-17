@@ -1,26 +1,34 @@
 import { Form } from '../picture/form/form.model';
 import { Companie } from '../companie/companie.model';
 import { Right } from '../right/right.model';
+import { Project } from '../project/project.model';
+import { Mission } from '../mission/mission.model';
 
 
-export const TypeUser = ['plombier', 'serrurier']
 
 export class User {
   _id: string = '';
-  canBeSeenByCompanies: Companie[] = [];
+  // canBeSeenByCompanies: Companie[] = [];
   ownerCompanies: Companie[] = [];
-  dateSeeLatestNotif: Date= new Date()
+  // dateSeeLatestNotif: Date= new Date()
   // isAdminOfHisCompanie: Boolean = false;
-  isExternalUser: Boolean = true;
+  isExternalUser: Boolean = false;
   email: string = '';
-  role: string[] = [];
+  // role: string[] = [];
   typeUsers: string[] = [];
   forms: Form[] = [];
   rights: Right[] = []
   profile: Profile = new Profile();
   password: string = '';
-  salesMan: User[] = [];
-  paiement: Paiement= new Paiement()
+
+  // paiement: Paiement= new Paiement()
+}
+
+export class UsersToObjects {
+  projects: Project[] = [];
+  missions: Mission[] = [];
+  rights: Right[] = [];
+  users: User[] = [];
 }
 
 export class Paiement{
@@ -30,25 +38,21 @@ export class Stripe {
   current_period_end: Date= new Date()
 }
 
-
 export class Profile {
   name: string = '';
   lastName: string = '';
   phoneNumber: string = '';
-  otherData: string = '';
-  companyName: string = '';
-
-  parentUser: User[] = [];
+  // otherData: string = '';
+  // parentUser: User[] = [];
   profilePicture: Form[] = [];
   colorCalendar: string = '';
   fax: string = '';
   title: string = '';
-  typeClient: string = '';
-  statusHouse: string = '';
-  sourceContact: string = '';
-  detailHouse: DetailHouse = new DetailHouse();
-  address: Address[] = [];
-  language: string = 'en';
+  // typeClient: string = '';
+  // statusHouse: string = '';
+  // detailHouse: DetailHouse = new DetailHouse();
+  address: Address = new Address();
+  language: string = '';
 }
 
 
@@ -56,7 +60,7 @@ export class Profile {
 
 export class DetailHouse {
   typeHouse: string = '';
-  surface: number;
+  surface: number = 0;
   accesCode: string = '';
   floor: string = '';
   accessType: string = '';
@@ -66,14 +70,10 @@ export class DetailHouse {
 
 
 export class Address {
-    nameAddress: string = 'shipping';
-    address: string = '';
-    address2: string = '';
-    city: string = '';
-    cities: string[] = [];
+    address : string = '';
+    city : string = '';
     state : string = '';
     zip : string = '';
-    country : string = '';
 }
 
 

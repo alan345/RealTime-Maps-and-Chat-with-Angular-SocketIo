@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Brief</h3>
+
+        <div>
+          <div>
+            <label>Id</label> {{fetchedBrief._id}}
+          </div>
+        </div>
+        <br>
+
+
+        <br>
+        <md-card>
+          <md-card-content>
+            <h2></h2>
+            <div class="">
+              <label>{{'Name' }}</label>
+              {{fetchedBrief.details.name}}
+            </div>
+            <div class="form-group">
+              <label>{{'Description' }}</label>
+              {{fetchedBrief.details.description}}
+            </div>
+            <button type="button" (click)="openDetails(fetchedBrief._id)">Edit Brief</button>
+
+
+          </md-card-content>
+        </md-card>
+
+
+        <br>
+        <md-card>
+          <md-card-content>
+            <h2>Documents Relevant to project</h2>
+            <app-documents [search]="search"></app-documents>
+          </md-card-content>
+        </md-card>
+  <br>  <br>  <br>  <br>  <br>  <br>
+
+
+
+    </div>
+  </div>
+</div>

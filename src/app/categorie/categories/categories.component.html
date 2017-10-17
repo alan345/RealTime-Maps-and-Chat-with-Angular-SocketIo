@@ -1,0 +1,9 @@
+<div *ngFor="let categorie of fetchedCategories" [routerLink]="['/categorie/' + categorie._id]" routerLinkActive="active">
+  <div *ngFor="let singleForm of categorie.forms; let i = index;">
+    <img *ngIf="i<=0" height="50px" class="img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+  </div>
+
+  <div>
+    {{categorie.name}}
+  </div>
+</div>

@@ -1,130 +1,30 @@
-<div class="container">
-      <div class="hdform">
-      <h3><i class="fa fa10 fa-folder-open" aria-hidden="true"></i>{{'Project' | translate}}</h3>
-
+<div class="col-md-12">
+  <h2>Project</h2>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
+    <!-- <div>{{fetchedProject._id}}</div> -->
+    <div class="form-group">
+      <mat-form-field>
+        <input [maxlength]="30" matInput class="form-control" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="Title">
+      </mat-form-field>
     </div>
-  <!-- <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]=false [openInDialog]=true></app-header> -->
-  <div class="col-12">
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
-      <div *ngIf="fetchedProject._id">
-          <label>Id</label> {{fetchedProject._id}}
-      </div>
-
-      <div>
-        <div>
-          <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
-          {{itemStep.categ}}
-        </button>
-        </div>
-        <br>
-        <div *ngIf="selectedIndex0>=0">
-          <button (click)="changeCascade(selectedIndex0, i, -1)" *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex1, '': i!=selectedIndex1}">
-          {{itemStep.categ}}
-        </button>
-        </div>
-        <br>
-        <div *ngIf="selectedIndex1>=0">
-          <button (click)="changeCascade(selectedIndex0, selectedIndex1, i)" *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg[selectedIndex1].subCateg;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex2, '': i!=selectedIndex2}">
-          {{itemStep.categ}}
-        </button>
-        </div>
-      </div>
-
-
-      <br>
-
-
-
-      <div class="form-group">
-
-        <div class="form-group">
-          <label>{{'Name Project' | translate}}</label>
-          <input class="form-control col-md-4" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="{{'Ref' | translate}}">
-        </div>
-      </div>
-      <!-- <div class="form-group">
-        <label>{{'Description' | translate}}</label>
-        <input class="form-control col-md-4" type="text" formControlName="description" placeholder="{{'Description' | translate}}" [(ngModel)]="fetchedProject.details.description">
-      </div> -->
-
-      <div class="form-group">
-      <!-- <app-autocomplete class="col-md-4" [typeAutocomplete]="'user'" [search]="{isExternalUser:false, userId:search.userId}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])"> -->
-      <app-autocomplete class="form-control col-md-4 bn" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
-      </app-autocomplete>
-      <div *ngFor="let client of fetchedProject.clients">
-        <div *ngFor="let singleAddress of client.profile.address">
-          Ville: {{singleAddress.city}}
-          <br>
-          Zip: {{singleAddress.zip}}
-        </div>
-      </div>
-
-      </div>
-      <br>
-      <div *ngIf="fetchedProject._id">
-
-        <div *ngIf="search.projectId.length && search.userId.length">
-        <!-- <div *ngFor="let user of fetchedProject.clients"> -->
-          <label>{{'Quote' | translate}}</label>
-          <app-quotes [showHeader]=false [search]="search" [showBackButton]=false>
-          </app-quotes>
-        </div>
-      </div>
-
-
-
-
-
-
-      <div class="form-group">
-        {{'Status' | translate}}
-        <select class="form-control col-md-3" formControlName="status" [(ngModel)]="fetchedProject.status">
-          <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false, userId:search.assignedToId}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])"> -->
-        <app-autocomplete class="form-control col-md-4 bn" [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
-        </app-autocomplete>
-      </div>
-
-      <div *ngIf="fetchedProject._id">
-        <div class="FormGroup">
-          <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
-           <i class="fa fa-calendar" aria-hidden="true"></i>
-           <span>{{'Show Comments' | translate}}</span>
-          </button>
-
-          <div *ngIf="showLogs">
-            <app-comments [search]="search"></app-comments>
-          </div>
-        </div>
-
-        <div class="FormGroup whtxt">
-          <a class="btn btn-warning" [routerLink]="['/task/project/' + fetchedProject._id]">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'Tasks' | translate}}</span>
-        </a>
-        </div>
-        <div class="FormGroup whtxt">
-          <button type="button" class="btn btn-warning" (click)="seeCalendar()">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'See calendar' | translate}}</span>
-       </button>
-        </div>
-      </div>
-
-
-
-
-      <div class="valid-edit row col-12">
-        <button type="submit" class="valid" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedProject._id" type="button" class="false" (click)="openDialogDelete()">
-        {{'Delete' | translate}}
-      </button>
-      </div>
-      <div class="clearfix"></div>
-    </form>
-  </div>
+    <!--<div class="form-group">
+      <label>{{'Description' }}</label>
+      <input class="form-control col-md-4" type="text" formControlName="description" placeholder="description" [(ngModel)]="fetchedProject.details.description">
+    </div>-->
+    <mat-form-field>
+      <input matInput type="date" class="form-control" formControlName="start" [(ngModel)]="fetchedProject.dateProject.startString">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" class="form-control" formControlName="end" [(ngModel)]="fetchedProject.dateProject.endString">
+    </mat-form-field>
+    <div class="form-group">
+      <label>Project Owners</label>
+      <app-autocomplete [typeAutocomplete]="'user'" [title]="" [search]="{isExternalUser:false}" [singleChoice]=false [arrayContent]="fetchedProject.users"></app-autocomplete>
+    </div>
+    <div class="valid-edit">
+      <button type="submit" class="save" [disabled]="!myForm.valid">{{'Save' }}</button>
+      <button *ngIf="fetchedProject._id" type="button" class="delete" md-button (click)="openDeleteConfirmation()">{{'Delete' }}</button>
+    </div>
+    <div class="clearfix"></div>
+  </form>
 </div>
