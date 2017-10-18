@@ -3,11 +3,12 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.4.7.
 
 ## this stack is made with:
-* MongoDb
-* SocketIo
-* ExpressJs
+* MongoDb https://www.mongodb.com/
+* SocketIo https://socket.io/
+* ExpressJs http://expressjs.com/
 * google maps with AGM https://angular-maps.com/
-* angular4
+* Angular Material https://material.angular.io/
+* angular4 https://angular.io/
 
 ## Installing Dependecies
 1. Clone this repo from Git
