@@ -3,7 +3,8 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.4.7.
 
 ## this stack is made with:
-* [MongoDb] https://www.mongodb.com/
+* MongoDb No SQL database https://www.mongodb.com/
+* JWT for Auth https://jwt.io/ & https://github.com/auth0/angular2-jwt
 * SocketIo https://socket.io/
 * ExpressJs http://expressjs.com/
 * google maps with AGM https://angular-maps.com/
@@ -61,8 +62,8 @@ Enjoy!
 install mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
 ## Tool in production
-We recommand https://github.com/Unitech/pm2
-run `pm2 start npm -- start`
+* We recommand https://github.com/Unitech/pm2
+* run `pm2 start npm -- start`
 
 
 
