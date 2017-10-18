@@ -1,41 +1,52 @@
-# Ales by Gooplus
+# RealTime Maps and Chat with Angular SocketIo by Stern
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.5.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.4.7.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-
-
+## this stack is made with:
+MongoDb
+SocketIo
+ExpressJs
+google maps with AGM https://angular-maps.com/
+angular4
 
 ## Installing Dependecies
 1. Clone this repo from Git
 2. Run `npm install` in your command line.
 3. Edit `config.js` in `/server/config` folder.
-4. Run `node seed.js` to insert the admin user into database and create uploads folder. Admin email is `test@test.com` and password is `testpass`.  Make sure mongod is running.
-5. After login navigate to `localhost:3000/#/admin` to access admin panel.
-=======
+4. Login navigate to `localhost:3000/`
+
+
+## Development server
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+
+## Help with angular-cli
+To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+
+## Build. FrontEnd
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Use `ng build --watch` to avoid re-loading page when you change code
+
+
+## Backend
+Use `nodemon npm start` to avoid re-loading page when you change code
+
+
+
+## Running unit tests
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+
+
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
-
-## Deploying to GitHub Pages
-
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
-
 
 
 ## Viewing the App
@@ -44,20 +55,14 @@ Open your favourite web browser and point to `http://localhost:3000`
 Enjoy!
 
 
-## Summary
-1. `ng build --watch`
-2. `nodemon npm start`
-3. `http://localhost:3000`
 
+## install mongodb
 install mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
 
-stop apache service apache2 stop
+## Tool in production
+We recommand https://github.com/Unitech/pm2
+run `pm2 start npm -- start`
 
-pm2 start npm -- start
-
-
-## Help with angular-cli
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
 # Preview of the app
