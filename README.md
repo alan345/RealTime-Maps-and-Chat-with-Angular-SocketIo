@@ -3,7 +3,7 @@
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.4.7.
 
 ## this stack is made with:
-* MongoDb https://www.mongodb.com/
+* [MongoDb] https://www.mongodb.com/
 * SocketIo https://socket.io/
 * ExpressJs http://expressjs.com/
 * google maps with AGM https://angular-maps.com/
@@ -68,8 +68,6 @@ run `pm2 start npm -- start`
 
 # Preview of the app
 ### Video
-[linkname](https://youtu.be/vTPTPhKjSR8)
-
 [![RealTime Maps and Chat with Angular SocketIo Video](https://img.youtube.com/vi/vTPTPhKjSR8/0.jpg)](https://www.youtube.com/watch?v=vTPTPhKjSR8)
 
 
