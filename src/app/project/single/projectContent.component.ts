@@ -80,9 +80,7 @@ export class ProjectContentComponent implements OnInit {
         if(isRefresh) {
           this.getProject(this.fetchedProject._id)
           this.globalEventsManager.refreshCenter(false);
-
         }
-
     })
   }
 
@@ -98,18 +96,18 @@ export class ProjectContentComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       // this.fetchedMissions = []
-      this.activityMissionsInProject = 0
-      this.activityPendingTasksInProject = 0
-      this.myActivityMissionsInProject = 0
-      this.myActivityPendingTasksInProject = 0
-
+      // this.activityMissionsInProject = 0
+      // this.activityPendingTasksInProject = 0
+      // this.myActivityMissionsInProject = 0
+      // this.myActivityPendingTasksInProject = 0
+      //
 
 
       if(params['id']) {
         this.search.projectId = params['id']
         this.getProject(this.search.projectId)
-        this.getDocumentsByMissions(this.search)
-        this.getDocumentsInStrats(this.search)
+        // this.getDocumentsByMissions(this.search)
+        // this.getDocumentsInStrats(this.search)
         // this.getMissionsByCategoriesByProject(params['id'])
 
 
@@ -119,17 +117,17 @@ export class ProjectContentComponent implements OnInit {
 
   }
 
-  getResultMissions(missions) {
-    missions.forEach(mission => {
-      // console.log(mission)
-      this.activityMissionsInProject++
-
-      if(mission.users.some(user => user._id === this.authService.getCurrentUser()._id))
-        this.myActivityMissionsInProject++
-
-
-    })
-  }
+  // getResultMissions(missions) {
+  //   missions.forEach(mission => {
+  //     // console.log(mission)
+  //     this.activityMissionsInProject++
+  //
+  //     if(mission.users.some(user => user._id === this.authService.getCurrentUser()._id))
+  //       this.myActivityMissionsInProject++
+  //
+  //
+  //   })
+  // }
   // getCategories(page: number, search: any) {
   //
   //   this.categorieService.getCategories(page, search)

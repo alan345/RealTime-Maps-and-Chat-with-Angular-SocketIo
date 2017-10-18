@@ -8,7 +8,7 @@ export class Map {
     _id: String = '';
 
 
-    mapName: String = '';
+    chatName: String = '';
     writtenBy: User[] = [];
     forms: Form[] = [];
     users: User[] = [];

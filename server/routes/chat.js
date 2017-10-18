@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
   // io.emit('message', { type: 'new-message', text: 'alan' });
   // io.emit('message', { type: 'new-message', text: 'alan' });
 
-  socket.on('disconnect', function () {
+  socket.on('disconnect', function() {
     socket.leave(room)
     console.log('user disconnected');
   });
@@ -54,14 +54,14 @@ http.listen(5000, () => {
 // SOCKET.io
 
 // this process does not hang the nodejs server on error
-process.on('uncaughtException', function (err) {
+process.on('uncaughtException', function(err) {
   console.log(err)
 })
 
 // Checking if user is authenticated or not, security middleware
-router.use('/', function (req, res, next) {
+router.use('/', function(req, res, next) {
   var token = req.headers['authorization']
-  jwt.verify(token, config.secret, function (err, decoded) {
+  jwt.verify(token, config.secret, function(err, decoded) {
     if (err) {
       return res.status(401).json({message: 'Authentication failed', error: err})
     }
@@ -74,7 +74,7 @@ router.use('/', function (req, res, next) {
       })
     }
     if (decoded) {
-      User.findById(decoded.user._id).populate({path: 'rights', model: 'Right'}).exec(function (err, doc) {
+      User.findById(decoded.user._id).populate({path: 'rights', model: 'Right'}).exec(function(err, doc) {
         if (err) {
           return res.status(500).json({message: 'Fetching user failed', err: err})
         }
@@ -174,7 +174,7 @@ router.use('/', function (req, res, next) {
 //
 
 // get all forms from database
-router.get('/page/:page', function (req, res, next) {
+router.get('/page/:page', function(req, res, next) {
   var itemsPerPage = 10
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
@@ -188,11 +188,9 @@ router.get('/page/:page', function (req, res, next) {
   //   searchQuery['details.name'] = new RegExp(req.query.search, 'i')
   //
   //
-  if (req.query.missionId)
-    searchQuery['missions'] = mongoose.Types.ObjectId(req.query.missionId)
+  if (req.query.projectId)
+    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  if (req.query.stratId)
-    searchQuery['strats'] = mongoose.Types.ObjectId(req.query.stratId)
 
   Chat.find(searchQuery).sort('-createdAt')
   // .populate({path: 'quotes', model: 'Quote'})
@@ -217,11 +215,11 @@ router.get('/page/:page', function (req, res, next) {
   //     path: 'bucketTasks.tasks.assignedTos',
   //     model: 'User',
   //   })
-    .limit(itemsPerPage).skip(skip).exec(function (err, item) {
+    .limit(itemsPerPage).skip(skip).exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
-      Chat.find(searchQuery).count().exec(function (err, count) {
+      Chat.find(searchQuery).count().exec(function(err, count) {
         item.sort()
         res.status(200).json({
           paginationData: {
@@ -236,22 +234,20 @@ router.get('/page/:page', function (req, res, next) {
   })
 })
 
-
-
-router.get('/unreadChatInMissions', function (req, res, next) {
+router.get('/unreadChatInMissions', function(req, res, next) {
   let searchQuery = {}
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
   searchQuery['users'] = mongoose.Types.ObjectId(req.user._id)
   let returnData = []
-  Mission.find(searchQuery).sort('-createdAt').exec(function (err, itemMissions) {
+  Mission.find(searchQuery).sort('-createdAt').exec(function(err, itemMissions) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
       let requests = itemMissions.map((singleMission) => {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
           let searchQueryLog = {}
           searchQueryLog['missions'] = mongoose.Types.ObjectId(singleMission._id)
-          Log.findOne(searchQueryLog).sort('-createdAt').exec(function (err, itemLog) {
+          Log.findOne(searchQueryLog).sort('-createdAt').exec(function(err, itemLog) {
             if (err) {
               console.log(err)
             } else {
@@ -263,7 +259,7 @@ router.get('/unreadChatInMissions', function (req, res, next) {
                   '$gte': itemLog.createdAt
                 }
               }
-              Chat.find(searchQueryChat).count().exec(function (err, CountItemChat) {
+              Chat.find(searchQueryChat).count().exec(function(err, CountItemChat) {
                 if (err) {
                   console.log(err)
                 } else {
@@ -282,23 +278,22 @@ router.get('/unreadChatInMissions', function (req, res, next) {
   })
 })
 
-
 // ALAN QUi sont les personnes qui peucent voir les notifs du chat
 
-router.get('/unreadChatInStrats', function (req, res, next) {
+router.get('/unreadChatInStrats', function(req, res, next) {
   let searchQuery = {}
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
   searchQuery['users'] = mongoose.Types.ObjectId(req.user._id)
   let returnData = []
-  Strat.find(searchQuery).sort('-createdAt').exec(function (err, itemStrats) {
+  Strat.find(searchQuery).sort('-createdAt').exec(function(err, itemStrats) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
       let requests = itemStrats.map((singleStrat) => {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
           let searchQueryLog = {}
           searchQueryLog['missions'] = mongoose.Types.ObjectId(singleStrat._id)
-          Log.findOne(searchQueryLog).sort('-createdAt').exec(function (err, itemLog) {
+          Log.findOne(searchQueryLog).sort('-createdAt').exec(function(err, itemLog) {
             if (err) {
               console.log(err)
             } else {
@@ -310,7 +305,7 @@ router.get('/unreadChatInStrats', function (req, res, next) {
                   '$gte': itemLog.createdAt
                 }
               }
-              Chat.find(searchQueryChat).count().exec(function (err, CountItemChat) {
+              Chat.find(searchQueryChat).count().exec(function(err, CountItemChat) {
                 if (err) {
                   console.log(err)
                 } else {
@@ -417,10 +412,9 @@ function saveChat(message) {
   var chat = new Chat()
   chat.chatName = message.chatName
   chat.users = message.users
-  chat.strats = message.strats
-  chat.missions = message.missions
+  chat.projects = message.projects
   chat.ownerCompanies = message.ownerCompanies
-  chat.save(function (err, result) {
+  chat.save(function(err, result) {
     if (err) {
       console.log(err)
     }

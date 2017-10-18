@@ -7,9 +7,9 @@ import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 // import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 // import { ChangeDetectionStrategy} from '@angular/core';
-// import {GlobalEventsManager} from '../../globalEventsManager';
+import {GlobalEventsManager} from '../../globalEventsManager';
 // import {MatSidenav} from '@angular/material';
-// import {ShowNavBarData} from '../../home/home.model'
+import {ShowNavBarData} from '../../home/home.model'
 
 
 @Component({
@@ -21,13 +21,13 @@ import { CompanieGuardService} from '../../companie/companieGuard.service'
 export class SideBarLeftComponent implements OnInit {
   // @ViewChild('sidenav') public sidenav: MatSidenav;
   // @Input() sidenav: any;
-  // showNavBarData: ShowNavBarData = new ShowNavBarData()
+  showNavBarData: ShowNavBarData = new ShowNavBarData()
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
 
   constructor(
-    // private globalEventsManager: GlobalEventsManager,
+    private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
     private userService: UserService,
@@ -45,9 +45,9 @@ export class SideBarLeftComponent implements OnInit {
     // })
   }
   sideNavAction(side: string, showNavBar: boolean, typeObj: string) {
-    // this.showNavBarData.showNavBar = showNavBar
-    // this.showNavBarData.search.typeObj = typeObj
-    // this.globalEventsManager.showNavBarLeft(this.showNavBarData);
+    this.showNavBarData.showNavBar = showNavBar
+    this.showNavBarData.search.typeObj = typeObj
+    this.globalEventsManager.showNavBarLeft(this.showNavBarData);
   }
   // sidenavOpen(search) {
   //   this.sidenav.open()

@@ -8,6 +8,7 @@ var chat = new Schema({
     // projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     strats: [{type: Schema.Types.ObjectId, ref: 'Strat'}],
     missions: [{type: Schema.Types.ObjectId, ref: 'Mission'}],
+    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     // userCalendars: [{type: Schema.Types.ObjectId, ref: 'UserCalendar'}],
     users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     // isRead: {type: Boolean, default: [false]},

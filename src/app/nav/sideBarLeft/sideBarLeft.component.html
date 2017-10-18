@@ -1,7 +1,8 @@
 <!-- <mat-sidenav #sidenav mode="side" class="sidebarleft"> -->
   <i (click)="sideNavAction('leftSideBar', false, '')" class="fa fa-times dspl-nn-dsktp" aria-hidden="true"></i>
   <!-- <div *ngIf="showNavBarData.search.typeScreen == 'object'"> -->
-    <!-- <app-projects *ngIf="showNavBarData.search.typeObj == 'project'" [search]="showNavBarData.search" ></app-projects> -->
+
+    <app-projects [search]="showNavBarData.search" ></app-projects>
     <!-- <div *ngIf="showNavBarData.search.typeObj == 'categorie'">
       <app-lightStrats [search]="showNavBarData.search"></app-lightStrats>
       <app-listCategoriesByProject [search]="showNavBarData.search"></app-listCategoriesByProject>

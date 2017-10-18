@@ -9,18 +9,15 @@
       </li>
     </ul>
     <ul class="nav rightmenu">
-      <!-- <button md-button [matMenuTriggerFor]="menu" class="adm-btn">Admin</button> -->
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">Admin</button>
       <!-- <button md-button class="adm-btn">Admin</button> -->
-      <!-- <mat-menu #menu="mdMenu"> -->
-      <mat-menu>
-        <button md-menu-item routerLinkActive="active" [routerLink]="['/user/list/false']">Users</button>
-        <button md-menu-item routerLinkActive="active" [routerLink]="['/categorie']">Categories</button>
-        <button md-menu-item routerLinkActive="active" [routerLink]="['/right']">Rights</button>
-        <button md-menu-item routerLinkActive="active" [routerLink]="['/log']">Logs</button>
+      <mat-menu #appMenu="matMenu">
+      <!-- <mat-menu> -->
+        <button mat-menu-item routerLinkActive="active" [routerLink]="['/user/list/false']">Users</button>
+        <button mat-menu-item routerLinkActive="active" [routerLink]="['/right']">Rights</button>
+
       </mat-menu>
-      <li class="nav-item navnotif">
-        <button type="button" (click)="notif()">4</button>
-      </li>
+
       <li class="nav-item navadd">
         <button type="button" (click)="newObj()"><i class="fa fa-plus"></i></button>
       </li>
