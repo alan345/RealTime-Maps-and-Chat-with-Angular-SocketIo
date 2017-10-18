@@ -16,7 +16,6 @@ var chat = new Schema({
     chatName: {type: String, default: ['']},
 
 
-
   },
   {
     timestamps: true
