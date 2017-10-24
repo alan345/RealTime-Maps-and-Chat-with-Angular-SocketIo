@@ -15,7 +15,8 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 1. Clone this repo from Git
 2. Run `npm install` in your command line.
 3. Rename file `example_config.js` to `config.js` in `/server/config` folder and edit it. This file will be included in `.gitignore`
-4. Login navigate to `localhost:3000/`
+4.
+Login navigate to `localhost:3000/`
 
 
 ## Prerequisites
@@ -78,25 +79,5 @@ install mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubun
 [![RealTime Maps and Chat with Angular SocketIo Video](https://img.youtube.com/vi/vTPTPhKjSR8/0.jpg)](https://www.youtube.com/watch?v=vTPTPhKjSR8)
 
 
-### Login Form
-![Login Form](https://cloud.githubusercontent.com/assets/717975/20486222/8dddb670-b007-11e6-861a-18f2123f70f4.png)
-### Password Reset Form
-![forgot_password](https://cloud.githubusercontent.com/assets/717975/20642267/6a60daf0-b413-11e6-960d-2b12ec98a839.png)
-### Form
-![Form](https://cloud.githubusercontent.com/assets/717975/20486257/abfd4166-b007-11e6-8e2e-24d2afd746a0.png)
-### Server Response in console logs
-![Server response after submitting form](https://cloud.githubusercontent.com/assets/717975/20238428/053e95ec-a8f4-11e6-93ab-04258e359e13.png)
-### User Forms
-![form_table](https://cloud.githubusercontent.com/assets/717975/20667369/936c703a-b571-11e6-9e60-164d858c5793.png)
-### Edit Form
-![edit_form](https://cloud.githubusercontent.com/assets/717975/20598422/ce519cde-b251-11e6-919d-898855445f20.png)
-### Admin Page
-![admin_page](https://cloud.githubusercontent.com/assets/717975/20824439/80fa30da-b865-11e6-9af2-a7c6c2f1d7d3.png)
-### Profile Page
-![profile_page](https://cloud.githubusercontent.com/assets/717975/20858250/54bfe52e-b94a-11e6-863d-9b0139c89263.png)
-### Users document in MongoDB with forms array ref
-![Users document in MongoDB](https://cloud.githubusercontent.com/assets/717975/20486315/eaa5b452-b007-11e6-9080-b1c8186bf404.png)
-### Forms Document in MongoDB with ref to the user._id (owner field)
-![User submitted forms page](https://cloud.githubusercontent.com/assets/717975/20486402/411bbf20-b008-11e6-9170-05f44d610cd8.png)
 =======
 To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
