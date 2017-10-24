@@ -77,9 +77,5 @@ install mongodb https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubun
 # Preview of the app
 ### Video
 [![RealTime Maps and Chat with Angular SocketIo Video](https://img.youtube.com/vi/vTPTPhKjSR8/0.jpg)](https://www.youtube.com/watch?v=vTPTPhKjSR8)
-
-
 =======
 To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-# Pull requests are welcome !
