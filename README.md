@@ -14,9 +14,15 @@ This project was generated with [angular-cli](https://github.com/angular/angular
 ## Installing Dependecies
 1. Clone this repo from Git
 2. Run `npm install` in your command line.
-3. Edit `config.js` in `/server/config` folder.
+3. Rename file `example_config.js` to `config.js` in `/server/config` folder and edit it. This file will be included in `.gitignore`
 4. Login navigate to `localhost:3000/`
 
+
+## Prerequisites
+1. MongoDB installed and running (http://mongodb.org)
+2. Node.js and NPM installed (http://nodejs.org)
+3. [ImageMagick](http://www.imagemagick.org/script/index.php) or [GraphicsMagick](http://www.graphicsmagick.org/) installed,
+more info in [gm](https://github.com/aheckmann/gm) page on how to install depending your Operating System. If installing ImageMagick on Windows, please check "Install Legacy Utitities (e.g. convert") during installation otherwise node will report errors.
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
